@@ -79,7 +79,9 @@ git push -u origin main
 | Production branch | `main` |
 | Framework preset | **None** |
 | Build command | 留空 |
-| Build output directory | `/`（根目录） |
+| Build output directory | `.`（根目录，注意不是 `/`） |
+
+> 注意：填 `/` 会导致 Cloudflare 执行 `/` 命令并报 `Permission denied`，必须填 `.`。
 
 5. 点击 **Save and Deploy**
 
