@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.log
+.cache/
+dist/
+.wrangler/
+scripts/.feishu-image-cache.json
+.vscode/
+.idea/

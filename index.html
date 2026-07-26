@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>法考学习站 · 测试</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: "Noto Sans SC", system-ui, sans-serif; }
+    .option-btn.selected { outline: 2px solid #2563eb; background: #eff6ff; }
+    .option-btn.correct { outline: 2px solid #16a34a; background: #f0fdf4; }
+    .option-btn.wrong { outline: 2px solid #dc2626; background: #fef2f2; }
+    .tab-active { color: #1d4ed8; border-bottom: 2px solid #2563eb; font-weight: 600; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+  <!-- 登录层 -->
+  <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
+      <h1 class="text-xl font-semibold mb-1">法考学习站</h1>
+      <p class="text-sm text-slate-500 mb-6">本地测试 · 默认密码 2026</p>
+      <input id="pwd-input" type="password" placeholder="请输入访问密码"
+        class="w-full border rounded-lg px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button id="pwd-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2">进入</button>
+      <p id="pwd-error" class="text-red-500 text-sm mt-2 hidden">密码错误</p>
+    </div>
+  </div>
+
+  <header class="bg-white border-b sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div>
+        <div class="font-semibold">法考学习站 · 测试</div>
+        <div id="sync-status" class="text-xs text-slate-500">尚未加载数据</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm">
+          <option value="">全部科目</option>
+          <option value="民法">民法</option>
+          <option value="刑法">刑法</option>
+          <option value="民诉">民诉</option>
+          <option value="刑诉">刑诉</option>
+        </select>
+        <button id="reload-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">刷新</button>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 flex gap-6 text-sm">
+      <button id="tab-practice" class="tab-active py-2">刷题</button>
+      <button id="tab-wrong" class="py-2 text-slate-500 hover:text-slate-800">
+        错题本 <span id="wrong-badge" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6">
+    <!-- 刷题 -->
+    <section id="view-practice">
+      <div id="empty-state" class="hidden bg-white border rounded-xl p-8 text-center text-slate-500">
+        暂无题目。请导入飞书表，或确认 data/questions.sample.json 存在。
+      </div>
+
+      <div id="quiz-panel" class="hidden">
+        <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+          <div class="text-sm text-slate-500">
+            第 <span id="q-index">1</span> / <span id="q-total">0</span> 题
+            <span id="q-meta" class="ml-2"></span>
+            <span id="practice-mode-tag" class="hidden ml-2 text-xs px-2 py-0.5 rounded bg-red-50 text-red-600">错题重练</span>
+          </div>
+          <div class="flex gap-2">
+            <button id="prev-btn" class="px-3 py-1 border rounded-lg text-sm">上一题</button>
+            <button id="next-btn" class="px-3 py-1 border rounded-lg text-sm">下一题</button>
+          </div>
+        </div>
+
+        <div class="bg-white border rounded-xl p-5 shadow-sm">
+          <div class="flex flex-wrap gap-2 text-xs mb-3">
+            <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700"></span>
+            <span id="badge-diff" class="px-2 py-0.5 rounded bg-amber-50 text-amber-700"></span>
+            <span id="badge-chapter" class="px-2 py-0.5 rounded bg-slate-100 text-slate-600"></span>
+          </div>
+          <div id="stem" class="text-base leading-7 mb-4"></div>
+          <div id="options" class="space-y-2"></div>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button id="submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">提交本题</button>
+            <button id="reset-btn" class="border px-4 py-2 rounded-lg text-sm">重做本题</button>
+            <button id="add-wrong-btn" class="hidden border border-red-200 text-red-600 px-4 py-2 rounded-lg text-sm hover:bg-red-50">加入错题本</button>
+            <button id="remove-wrong-btn" class="hidden border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50">移出错题本</button>
+          </div>
+          <div id="result-box" class="hidden mt-4 border-t pt-4">
+            <div id="result-line" class="font-medium mb-2"></div>
+            <div class="text-sm text-slate-600 mb-1">考点：<span id="result-point"></span></div>
+            <div class="text-sm leading-6 whitespace-pre-wrap bg-slate-50 rounded-lg p-3" id="result-explain"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 错题本 -->
+    <section id="view-wrong" class="hidden">
+      <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+        <div>
+          <h2 class="font-semibold">错题本</h2>
+          <p class="text-xs text-slate-500 mt-0.5">保存在本机浏览器（localStorage），换设备不同步</p>
+        </div>
+        <div class="flex gap-2">
+          <button id="wrong-practice-all" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-sm">全部重练</button>
+          <button id="wrong-clear" class="border px-3 py-1.5 rounded-lg text-sm text-red-600 hover:bg-red-50">清空错题</button>
+        </div>
+      </div>
+
+      <div id="wrong-empty" class="bg-white border rounded-xl p-8 text-center text-slate-500">
+        暂无错题。刷题答错后会自动收录。
+      </div>
+
+      <div id="wrong-list" class="space-y-3"></div>
+    </section>
+  </main>
+
+  <footer class="text-center text-xs text-slate-400 py-8">
+    本地项目骨架 · GitHub + Cloudflare + 飞书 · 仅供学习测试
+  </footer>
+
+  <script>
+    const CORRECT_PASSWORD = "2026";
+    const API_BASE = "/api";
+    const WRONG_KEY = "law_wrong_book_v1";
+
+    let allQuestions = [];   // 当前科目下题库
+    let questions = [];      // 当前练习队列
+    let idx = 0;
+    let selected = new Set();
+    let submitted = false;
+    let practiceMode = "all"; // all | wrong
+    let currentView = "practice"; // practice | wrong
+
+    // ---------- 错题本存储 ----------
+    function loadWrongBook() {
+      try {
+        return JSON.parse(localStorage.getItem(WRONG_KEY) || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    function saveWrongBook(book) {
+      localStorage.setItem(WRONG_KEY, JSON.stringify(book));
+      updateWrongBadge();
+    }
+
+    function wrongCount() {
+      return Object.keys(loadWrongBook()).length;
+    }
+
+    function isInWrongBook(id) {
+      return Boolean(id && loadWrongBook()[id]);
+    }
+
+    function addToWrongBook(q, userAnswer) {
+      if (!q || !q.题目ID) return;
+      const book = loadWrongBook();
+      const prev = book[q.题目ID] || {};
+      book[q.题目ID] = {
+        题目ID: q.题目ID,
+        科目: q.科目 || "",
+        编章: q.编章 || "",
+        章节: q.章节 || "",
+        题型: q.题型 || "",
+        题干: q.题干 || "",
+        选项A: q.选项A || "",
+        选项B: q.选项B || "",
+        选项C: q.选项C || "",
+        选项D: q.选项D || "",
+        选项E: q.选项E || "",
+        答案: q.答案 || "",
+        解析: q.解析 || "",
+        考点: q.考点 || "",
+        难度: q.难度 || "",
+        来源: q.来源 || "",
+        wrongCount: (prev.wrongCount || 0) + 1,
+        lastWrongAt: new Date().toISOString(),
+        lastUserAnswer: userAnswer || "",
+      };
+      saveWrongBook(book);
+    }
+
+    function removeFromWrongBook(id) {
+      if (!id) return;
+      const book = loadWrongBook();
+      delete book[id];
+      saveWrongBook(book);
+    }
+
+    function clearWrongBook() {
+      localStorage.removeItem(WRONG_KEY);
+      updateWrongBadge();
+    }
+
+    function updateWrongBadge() {
+      const n = wrongCount();
+      const el = document.getElementById("wrong-badge");
+      el.textContent = String(n);
+      el.classList.toggle("bg-red-100", n > 0);
+      el.classList.toggle("text-red-700", n > 0);
+      el.classList.toggle("bg-slate-100", n === 0);
+      el.classList.toggle("text-slate-500", n === 0);
+    }
+
+    function wrongBookList() {
+      return Object.values(loadWrongBook()).sort((a, b) =>
+        String(b.lastWrongAt || "").localeCompare(String(a.lastWrongAt || ""))
+      );
+    }
+
+    // ---------- 登录 ----------
+    function checkAuth() {
+      if (sessionStorage.getItem("law_auth") === "1") {
+        document.getElementById("login-layer").classList.add("hidden");
+      }
+    }
+
+    document.getElementById("pwd-btn").onclick = () => {
+      const v = document.getElementById("pwd-input").value.trim();
+      if (v === CORRECT_PASSWORD) {
+        sessionStorage.setItem("law_auth", "1");
+        document.getElementById("login-layer").classList.add("hidden");
+      } else {
+        document.getElementById("pwd-error").classList.remove("hidden");
+      }
+    };
+    document.getElementById("pwd-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("pwd-btn").click();
+    });
+
+    // ---------- 工具 ----------
+    function normalizeAnswer(ans) {
+      return String(ans || "").replace(/[^A-Ea-e]/g, "").toUpperCase().split("").sort().join("");
+    }
+
+    function optionList(q) {
+      return ["A", "B", "C", "D", "E"]
+        .map((k) => ({ key: k, text: q["选项" + k] }))
+        .filter((x) => x.text);
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function switchView(view) {
+      currentView = view;
+      document.getElementById("view-practice").classList.toggle("hidden", view !== "practice");
+      document.getElementById("view-wrong").classList.toggle("hidden", view !== "wrong");
+      document.getElementById("tab-practice").className =
+        view === "practice" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800";
+      document.getElementById("tab-wrong").className =
+        (view === "wrong" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800");
+      if (view === "wrong") renderWrongList();
+    }
+
+    // ---------- 刷题渲染 ----------
+    function render() {
+      if (!questions.length) {
+        document.getElementById("quiz-panel").classList.add("hidden");
+        document.getElementById("empty-state").classList.remove("hidden");
+        document.getElementById("empty-state").textContent =
+          practiceMode === "wrong"
+            ? "错题本为空，或当前科目下没有对应错题。"
+            : "暂无题目。请导入飞书表，或确认 data/questions.sample.json 存在。";
+        return;
+      }
+      document.getElementById("empty-state").classList.add("hidden");
+      document.getElementById("quiz-panel").classList.remove("hidden");
+
+      const q = questions[idx];
+      document.getElementById("q-index").textContent = String(idx + 1);
+      document.getElementById("q-total").textContent = String(questions.length);
+      document.getElementById("q-meta").textContent = q.题目ID || "";
+      document.getElementById("practice-mode-tag").classList.toggle("hidden", practiceMode !== "wrong");
+      document.getElementById("badge-type").textContent = q.题型 || "";
+      document.getElementById("badge-diff").textContent = "难度 " + (q.难度 || "-");
+      document.getElementById("badge-chapter").textContent = [q.编章, q.章节].filter(Boolean).join(" · ");
+      document.getElementById("stem").textContent = q.题干 || "";
+
+      const box = document.getElementById("options");
+      box.innerHTML = "";
+      for (const opt of optionList(q)) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn w-full text-left border rounded-lg px-3 py-2 text-sm hover:bg-slate-50";
+        btn.dataset.key = opt.key;
+        btn.innerHTML = `<span class="font-medium mr-2">${opt.key}.</span>${escapeHtml(opt.text)}`;
+        if (selected.has(opt.key)) btn.classList.add("selected");
+        btn.onclick = () => onPick(opt.key, q.题型);
+        box.appendChild(btn);
+      }
+
+      const inBook = isInWrongBook(q.题目ID);
+      document.getElementById("add-wrong-btn").classList.toggle("hidden", !submitted || inBook);
+      document.getElementById("remove-wrong-btn").classList.toggle("hidden", !inBook);
+
+      document.getElementById("result-box").classList.add("hidden");
+      if (submitted) showResult(q, false);
+    }
+
+    function onPick(key, type) {
+      if (submitted) return;
+      if (type === "多选") {
+        if (selected.has(key)) selected.delete(key);
+        else selected.add(key);
+      } else {
+        selected = new Set([key]);
+      }
+      document.querySelectorAll(".option-btn").forEach((el) => {
+        el.classList.toggle("selected", selected.has(el.dataset.key));
+        el.classList.remove("correct", "wrong");
+      });
+    }
+
+    function showResult(q, autoSaveWrong) {
+      const user = normalizeAnswer([...selected].join(""));
+      const right = normalizeAnswer(q.答案);
+      const ok = user && user === right;
+
+      document.getElementById("result-box").classList.remove("hidden");
+      document.getElementById("result-line").textContent = ok
+        ? `✓ 正确（答案 ${right}）`
+        : `✗ 错误（你的答案 ${user || "未选"}，正确答案 ${right}）`;
+      document.getElementById("result-line").className =
+        "font-medium mb-2 " + (ok ? "text-green-700" : "text-red-600");
+      document.getElementById("result-point").textContent = q.考点 || "-";
+      document.getElementById("result-explain").textContent = q.解析 || "暂无解析";
+
+      document.querySelectorAll(".option-btn").forEach((el) => {
+        const k = el.dataset.key;
+        el.classList.remove("selected", "correct", "wrong");
+        if (right.includes(k)) el.classList.add("correct");
+        else if (user.includes(k)) el.classList.add("wrong");
+      });
+
+      if (autoSaveWrong && !ok) {
+        addToWrongBook(q, user);
+        // 错题重练中答对可选：自动移出（更符合刷题习惯，这里先保留，由用户手动移除）
+      }
+
+      const inBook = isInWrongBook(q.题目ID);
+      document.getElementById("add-wrong-btn").classList.toggle("hidden", ok || inBook);
+      document.getElementById("remove-wrong-btn").classList.toggle("hidden", !inBook);
+
+      if (currentView === "wrong") renderWrongList();
+    }
+
+    // ---------- 错题列表 ----------
+    function renderWrongList() {
+      const list = wrongBookList();
+      const subject = document.getElementById("subject-select").value;
+      const filtered = subject ? list.filter((x) => x.科目 === subject) : list;
+
+      updateWrongBadge();
+      const wrap = document.getElementById("wrong-list");
+      const empty = document.getElementById("wrong-empty");
+
+      if (!filtered.length) {
+        empty.classList.remove("hidden");
+        wrap.innerHTML = "";
+        return;
+      }
+      empty.classList.add("hidden");
+      wrap.innerHTML = filtered
+        .map((q) => {
+          const when = q.lastWrongAt ? new Date(q.lastWrongAt).toLocaleString() : "-";
+          return `
+          <div class="bg-white border rounded-xl p-4 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <div class="text-xs text-slate-500 mb-1">
+                  ${escapeHtml(q.题目ID || "")}
+                  · 错 ${q.wrongCount || 1} 次
+                  · 最近 ${escapeHtml(when)}
+                </div>
+                <div class="text-sm leading-6 line-clamp-2">${escapeHtml(q.题干 || "")}</div>
+                <div class="text-xs text-slate-500 mt-1">${escapeHtml([q.科目, q.章节, q.考点].filter(Boolean).join(" · "))}</div>
+              </div>
+              <div class="flex flex-col gap-2 shrink-0">
+                <button data-act="practice" data-id="${escapeHtml(q.题目ID)}" class="text-xs px-3 py-1.5 rounded-lg bg-blue-600 text-white">重练</button>
+                <button data-act="remove" data-id="${escapeHtml(q.题目ID)}" class="text-xs px-3 py-1.5 rounded-lg border">移除</button>
+              </div>
+            </div>
+          </div>`;
+        })
+        .join("");
+
+      wrap.querySelectorAll("button[data-act]").forEach((btn) => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          if (btn.dataset.act === "remove") {
+            removeFromWrongBook(id);
+            renderWrongList();
+            return;
+          }
+          startWrongPractice([id]);
+        };
+      });
+    }
+
+    function startWrongPractice(onlyIds) {
+      const book = loadWrongBook();
+      let list;
+      if (onlyIds && onlyIds.length) {
+        list = onlyIds.map((id) => book[id]).filter(Boolean);
+      } else {
+        const subject = document.getElementById("subject-select").value;
+        list = wrongBookList().filter((x) => !subject || x.科目 === subject);
+      }
+      if (!list.length) {
+        alert("没有可重练的错题");
+        return;
+      }
+      practiceMode = "wrong";
+      questions = list;
+      idx = 0;
+      selected = new Set();
+      submitted = false;
+      switchView("practice");
+      render();
+    }
+
+    // ---------- 事件 ----------
+    document.getElementById("tab-practice").onclick = () => {
+      practiceMode = "all";
+      questions = allQuestions.slice();
+      idx = 0;
+      selected = new Set();
+      submitted = false;
+      switchView("practice");
+      render();
+    };
+    document.getElementById("tab-wrong").onclick = () => switchView("wrong");
+
+    document.getElementById("submit-btn").onclick = () => {
+      if (!questions.length) return;
+      if (!selected.size) {
+        alert("请先选择选项");
+        return;
+      }
+      submitted = true;
+      showResult(questions[idx], true);
+    };
+    document.getElementById("reset-btn").onclick = () => {
+      selected = new Set();
+      submitted = false;
+      render();
+    };
+    document.getElementById("add-wrong-btn").onclick = () => {
+      const q = questions[idx];
+      if (!q) return;
+      addToWrongBook(q, normalizeAnswer([...selected].join("")));
+      render();
+      if (currentView === "wrong") renderWrongList();
+    };
+    document.getElementById("remove-wrong-btn").onclick = () => {
+      const q = questions[idx];
+      if (!q) return;
+      removeFromWrongBook(q.题目ID);
+      // 若正在错题重练队列，移出后从队列删除
+      if (practiceMode === "wrong") {
+        questions = questions.filter((x) => x.题目ID !== q.题目ID);
+        if (idx >= questions.length) idx = Math.max(0, questions.length - 1);
+      }
+      selected = new Set();
+      submitted = false;
+      render();
+      if (currentView === "wrong") renderWrongList();
+    };
+    document.getElementById("prev-btn").onclick = () => {
+      if (idx > 0) {
+        idx -= 1;
+        selected = new Set();
+        submitted = false;
+        render();
+      }
+    };
+    document.getElementById("next-btn").onclick = () => {
+      if (idx < questions.length - 1) {
+        idx += 1;
+        selected = new Set();
+        submitted = false;
+        render();
+      }
+    };
+    document.getElementById("reload-btn").onclick = () => loadQuestions();
+    document.getElementById("subject-select").onchange = () => {
+      if (currentView === "wrong") renderWrongList();
+      else loadQuestions();
+    };
+
+    document.getElementById("wrong-practice-all").onclick = () => startWrongPractice();
+    document.getElementById("wrong-clear").onclick = () => {
+      if (!wrongCount()) return;
+      if (confirm("确定清空全部错题？此操作不可恢复。")) {
+        clearWrongBook();
+        renderWrongList();
+        if (practiceMode === "wrong") {
+          questions = [];
+          render();
+        }
+      }
+    };
+
+    async function loadQuestions() {
+      const subject = document.getElementById("subject-select").value;
+      const qs = subject ? `?subject=${encodeURIComponent(subject)}` : "";
+      document.getElementById("sync-status").textContent = "加载中…";
+      try {
+        const res = await fetch(`${API_BASE}/questions${qs}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "加载失败");
+        allQuestions = data.questions || [];
+        practiceMode = "all";
+        questions = allQuestions.slice();
+        idx = 0;
+        selected = new Set();
+        submitted = false;
+        document.getElementById("sync-status").textContent =
+          `✓ 已同步 ${questions.length} 题 · 来源 ${data.source || "unknown"} · 错题 ${wrongCount()}`;
+        if (currentView === "practice") render();
+        else renderWrongList();
+      } catch (err) {
+        document.getElementById("sync-status").textContent = "加载失败: " + err.message;
+        allQuestions = [];
+        questions = [];
+        render();
+      }
+    }
+
+    checkAuth();
+    updateWrongBadge();
+    loadQuestions();
+  </script>
+</body>
+</html>

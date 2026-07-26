@@ -1,0 +1,14 @@
+{
+  "name": "law-exam-test",
+  "version": "0.1.0",
+  "private": true,
+  "description": "法考学习站本地项目骨架（GitHub + Cloudflare + 飞书多维表格）",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "start": "node scripts/dev-server.js",
+    "check:feishu": "node scripts/check-feishu.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
