@@ -64,10 +64,6 @@
             <span id="q-meta" class="ml-2"></span>
             <span id="practice-mode-tag" class="hidden ml-2 text-xs px-2 py-0.5 rounded bg-red-50 text-red-600">错题重练</span>
           </div>
-          <div class="flex gap-2">
-            <button id="prev-btn" class="px-3 py-1 border rounded-lg text-sm">上一题</button>
-            <button id="next-btn" class="px-3 py-1 border rounded-lg text-sm">下一题</button>
-          </div>
         </div>
 
         <div class="bg-white border rounded-xl p-5 shadow-sm">
@@ -80,7 +76,8 @@
           <div id="options" class="space-y-2"></div>
           <div class="mt-4 flex flex-wrap gap-2">
             <button id="submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">提交本题</button>
-            <button id="reset-btn" class="border px-4 py-2 rounded-lg text-sm">重做本题</button>
+            <button id="prev-btn" class="px-4 py-2 border rounded-lg text-sm">上一题</button>
+            <button id="next-btn" class="px-4 py-2 border rounded-lg text-sm">下一题</button>
             <button id="add-wrong-btn" class="hidden border border-red-200 text-red-600 px-4 py-2 rounded-lg text-sm hover:bg-red-50">加入错题本</button>
             <button id="remove-wrong-btn" class="hidden border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50">移出错题本</button>
           </div>
@@ -113,10 +110,6 @@
       <div id="wrong-list" class="space-y-3"></div>
     </section>
   </main>
-
-  <footer class="text-center text-xs text-slate-400 py-8">
-    本地项目骨架 · GitHub + Cloudflare + 飞书 · 仅供学习测试
-  </footer>
 
   <script>
     const CORRECT_PASSWORD = "2026";
@@ -445,11 +438,6 @@
       }
       submitted = true;
       showResult(questions[idx], true);
-    };
-    document.getElementById("reset-btn").onclick = () => {
-      selected = new Set();
-      submitted = false;
-      render();
     };
     document.getElementById("add-wrong-btn").onclick = () => {
       const q = questions[idx];
