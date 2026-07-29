@@ -13,9 +13,11 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { URL } = require("url");
+const { spawn } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const PORT = Number(process.env.PORT || 8080);
+const GARMIN_BACKEND_PORT = Number(process.env.GARMIN_BACKEND_PORT || 8787);
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -228,10 +230,83 @@ async function handleApi(req, res, url) {
   }
 }
 
+// ─── Garmin AI 教练后端 ───────────────────────────────────────────
+const GARMIN_BACKEND_PY = path.join(ROOT, "garmin_chat_backend.py");
+const GARMIN_VENV_PYTHON = "C:/Users/mushr/WorkBuddy/2026-07-29-08-59-10/garmin-cn-mcp/.venv/Scripts/python.exe";
+let garminBackendProcess = null;
+
+function startGarminBackend() {
+  if (!fs.existsSync(GARMIN_BACKEND_PY)) {
+    console.log("[dev-server] 未找到 garmin_chat_backend.py，跳过 Garmin 后端");
+    return;
+  }
+  if (!fs.existsSync(GARMIN_VENV_PYTHON)) {
+    console.log("[dev-server] 未找到 Garmin MCP 虚拟环境 Python，跳过 Garmin 后端");
+    return;
+  }
+  const env = { ...process.env, GARMIN_BACKEND_PORT: String(GARMIN_BACKEND_PORT), GARMIN_BACKEND_HOST: "127.0.0.1" };
+  garminBackendProcess = spawn(GARMIN_VENV_PYTHON, [GARMIN_BACKEND_PY], { env, windowsHide: true });
+  garminBackendProcess.stdout.on("data", (data) => {
+    process.stdout.write(`[garmin-backend] ${data}`);
+  });
+  garminBackendProcess.stderr.on("data", (data) => {
+    process.stderr.write(`[garmin-backend] ${data}`);
+  });
+  garminBackendProcess.on("exit", (code) => {
+    console.log(`[dev-server] Garmin 后端已退出 (code ${code})`);
+    garminBackendProcess = null;
+  });
+}
+
+async function proxyGarminApi(req, res, url) {
+  const targetPath = url.pathname.replace("/api/garmin", "") || "/";
+  const targetUrl = new URL(targetPath + url.search, `http://127.0.0.1:${GARMIN_BACKEND_PORT}`);
+
+  // 先完整读取请求体再转发（避免编码/分片问题）
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(chunk);
+  }
+  const body = Buffer.concat(chunks);
+
+  const options = {
+    method: req.method,
+    headers: {
+      "Content-Type": req.headers["content-type"] || "application/json",
+      "Accept": "application/json",
+      "Content-Length": String(body.length),
+    },
+  };
+
+  return new Promise((resolve) => {
+    const proxyReq = http.request(targetUrl, options, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, {
+        "Content-Type": proxyRes.headers["content-type"] || "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      });
+      proxyRes.pipe(res);
+      proxyRes.on("end", resolve);
+    });
+    proxyReq.on("error", (err) => {
+      console.error("[dev-server] Garmin 后端代理失败:", err.message);
+      sendJson(res, { ok: false, error: "Garmin 后端未启动或不可用：" + err.message }, 502);
+      resolve();
+    });
+    proxyReq.write(body);
+    proxyReq.end();
+  });
+}
+
 loadEnvFile();
+startGarminBackend();
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
+  if (url.pathname.startsWith("/api/garmin/")) {
+    return proxyGarminApi(req, res, url);
+  }
   if (url.pathname.startsWith("/api/")) {
     return handleApi(req, res, url);
   }
@@ -241,6 +316,15 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log(`法考学习站开发服务器已启动`);
   console.log(`  本地地址: http://localhost:${PORT}`);
+  console.log(`  Garmin 后端: http://127.0.0.1:${GARMIN_BACKEND_PORT}`);
   console.log(`  数据模式: ${hasFeishuConfig() ? "飞书多维表格" : "本地 sample JSON"}`);
   console.log(`  项目目录: ${ROOT}`);
+});
+
+process.on("exit", () => {
+  if (garminBackendProcess) garminBackendProcess.kill();
+});
+process.on("SIGINT", () => {
+  if (garminBackendProcess) garminBackendProcess.kill();
+  process.exit();
 });
