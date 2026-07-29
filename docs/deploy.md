@@ -99,7 +99,15 @@ git push -u origin main
 | `FEISHU_BASE_ID` | 多维表格 Base ID |
 | `FEISHU_QUESTION_TABLE_ID` | 题目表 Table ID |
 
-3. 保存后，回到 **Deployments** → 找到最新部署 → 点击 **Retry deployment**（重新部署，让环境变量生效）
+3. 如需启用线上「追风计划」聊天，再添加：
+
+| 变量名 | 值 |
+|--------|------|
+| `GARMIN_BACKEND_URL` | 受保护的公网 Garmin 教练后端地址（不能填 `localhost`） |
+
+> `GARMIN_BACKEND_URL` 只应指向你自己控制的、带鉴权和 HTTPS 的后端服务。Garmin 邮箱、密码和 MCP 配置不能放进前端或 GitHub。
+
+4. 保存后，回到 **Deployments** → 找到最新部署 → 点击 **Retry deployment**（重新部署，让环境变量生效）
 
 ### 3.3 拿到访问域名
 

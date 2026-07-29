@@ -7,6 +7,7 @@
  *
  * 环境变量（Cloudflare Pages Settings）：
  *   FEISHU_APP_ID / FEISHU_APP_SECRET / FEISHU_BASE_ID / FEISHU_QUESTION_TABLE_ID
+ *   GARMIN_BACKEND_URL（可选：受保护的 Garmin 教练后端地址，不要填写 localhost）
  */
 
 const CORS = {
@@ -109,6 +110,52 @@ async function listAllRecords(env, token) {
   return items;
 }
 
+async function proxyGarmin(request, env, action) {
+  const backend = String(env.GARMIN_BACKEND_URL || "").trim().replace(/\/$/, "");
+  if (!backend) {
+    return json(
+      {
+        ok: false,
+        error: "线上 Garmin 教练服务尚未配置。请在 Cloudflare Pages 的 Production 环境变量中设置 GARMIN_BACKEND_URL。",
+        code: "GARMIN_BACKEND_NOT_CONFIGURED",
+      },
+      503
+    );
+  }
+
+  let backendUrl;
+  try {
+    backendUrl = new URL(`${backend}/${action || "health"}`);
+    if (!["http:", "https:"].includes(backendUrl.protocol)) throw new Error("协议不安全");
+  } catch {
+    return json({ ok: false, error: "GARMIN_BACKEND_URL 配置无效。", code: "GARMIN_BACKEND_URL_INVALID" }, 500);
+  }
+
+  const headers = new Headers();
+  const contentType = request.headers.get("content-type");
+  if (contentType) headers.set("content-type", contentType);
+  headers.set("accept", "application/json");
+
+  try {
+    const upstream = await fetch(backendUrl, {
+      method: request.method,
+      headers,
+      body: request.method === "GET" || request.method === "HEAD" ? undefined : request.body,
+    });
+    const responseHeaders = new Headers(upstream.headers);
+    responseHeaders.set("Access-Control-Allow-Origin", "*");
+    responseHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    responseHeaders.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    return new Response(upstream.body, {
+      status: upstream.status,
+      statusText: upstream.statusText,
+      headers: responseHeaders,
+    });
+  } catch (err) {
+    return json({ ok: false, error: `Garmin 教练服务连接失败：${err.message}`, code: "GARMIN_BACKEND_UNREACHABLE" }, 502);
+  }
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -177,6 +224,14 @@ export async function onRequest(context) {
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
 
       return json({ total: list.length, questions: list, source: "feishu" });
+    }
+
+    if (action === "garmin") {
+      const garminAction = parts[1] || "health";
+      if (!["health", "chat"].includes(garminAction)) {
+        return json({ ok: false, error: "Garmin 接口不存在", path: garminAction }, 404);
+      }
+      return proxyGarmin(request, env, garminAction);
     }
 
     return json({ error: "Not Found", path: action }, 404);
