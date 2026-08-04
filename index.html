@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>追风计划｜个人跑步教练</title>
+  <title>法考学习站</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: "Noto Sans SC", system-ui, sans-serif; }
@@ -17,8 +17,8 @@
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
     <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
-      <h1 class="text-xl font-semibold mb-2">追风计划</h1>
-      <p class="text-sm text-slate-500 mb-6">你的个人 AI 跑步教练</p>
+      <h1 class="text-xl font-semibold mb-2">法考学习站</h1>
+      <p class="text-sm text-slate-500 mb-6">刷题与错题复习</p>
       <input id="pwd-input" type="password" placeholder="请输入访问密码"
         class="w-full border rounded-lg px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       <button id="pwd-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2">进入</button>
@@ -29,8 +29,8 @@
   <header class="bg-white border-b sticky top-0 z-10">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
       <div>
-        <div class="font-semibold">追风计划</div>
-        <div id="sync-status" class="text-xs text-slate-500">Garmin 数据与训练计划</div>
+        <div class="font-semibold">法考学习站</div>
+        <div id="sync-status" class="text-xs text-slate-500">题库同步中…</div>
       </div>
       <div class="flex items-center gap-2">
         <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm">
@@ -44,8 +44,7 @@
       </div>
     </div>
     <div class="max-w-4xl mx-auto px-4 flex gap-6 text-sm">
-      <button id="tab-zhuifeng" class="tab-active py-2">追风计划</button>
-      <button id="tab-practice" class="py-2 text-slate-500 hover:text-slate-800">刷题</button>
+      <button id="tab-practice" class="tab-active py-2">刷题</button>
       <button id="tab-wrong" class="py-2 text-slate-500 hover:text-slate-800">
         错题本 <span id="wrong-badge" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs">0</span>
       </button>
@@ -112,226 +111,6 @@
       <div id="wrong-list" class="space-y-3"></div>
     </section>
 
-    <!-- 追风计划 -->
-    <section id="view-zhuifeng" class="hidden">
-      <div class="max-w-3xl mx-auto">
-<div class="space-y-6">
-  <!-- 头部介绍 -->
-  <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-xl p-6">
-    <div class="flex items-start gap-4">
-      <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xl shrink-0">
-        🏃
-      </div>
-      <div>
-        <h1 class="text-2xl font-bold text-emerald-900 mb-2">追风计划</h1>
-        <p class="text-emerald-800 leading-relaxed">
-          你的 AI 跑步教练。连接 Garmin 中国区数据后，直接在网页里帮你分析训练负荷、睡眠质量、恢复状态，并给出个性化跑步建议。
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span class="px-2.5 py-1 rounded-full bg-white text-emerald-700 text-xs border border-emerald-200">Garmin 中国区</span>
-          <span class="px-2.5 py-1 rounded-full bg-white text-emerald-700 text-xs border border-emerald-200">训练负荷分析</span>
-          <span class="px-2.5 py-1 rounded-full bg-white text-emerald-700 text-xs border border-emerald-200">睡眠恢复</span>
-          <span class="px-2.5 py-1 rounded-full bg-white text-emerald-700 text-xs border border-emerald-200">MCP 连接器</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 能做什么 -->
-  <div class="grid md:grid-cols-3 gap-4">
-    <div class="bg-white border rounded-lg p-4">
-      <div class="text-2xl mb-2">📊</div>
-      <h3 class="font-semibold mb-1">训练分析</h3>
-      <p class="text-sm text-slate-600">读取最近活动、心率区间、配速、步频，评估训练效果与负荷趋势。</p>
-    </div>
-    <div class="bg-white border rounded-lg p-4">
-      <div class="text-2xl mb-2">😴</div>
-      <h3 class="font-semibold mb-1">睡眠与恢复</h3>
-      <p class="text-sm text-slate-600">分析睡眠时长、深度睡眠、HRV、压力，判断今天是否适合高强度训练。</p>
-    </div>
-    <div class="bg-white border rounded-lg p-4">
-      <div class="text-2xl mb-2">🎯</div>
-      <h3 class="font-semibold mb-1">训练建议</h3>
-      <p class="text-sm text-slate-600">基于近期数据推荐今日课表：慢跑、间歇、休息或长距离。</p>
-    </div>
-  </div>
-
-  <!-- 使用方法 -->
-  <div class="bg-white border rounded-xl p-5">
-    <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
-      <span>⚙️</span> 如何启用
-    </h2>
-    <ol class="space-y-4 text-sm">
-      <li class="flex gap-3">
-        <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 text-xs font-medium">1</span>
-        <div>
-          <p class="font-medium">确认 Garmin 凭据</p>
-          <p class="text-slate-600 mt-0.5">检查 <code class="bg-slate-100 px-1 rounded">C:/Users/mushr/.workbuddy/mcp.json</code> 中已有 <code class="bg-slate-100 px-1 rounded">garmin-cn</code> 服务器，并填写了你的 Garmin 中国区邮箱与密码。</p>
-        </div>
-      </li>
-      <li class="flex gap-3">
-        <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 text-xs font-medium">2</span>
-        <div>
-          <p class="font-medium">启动开发服务器</p>
-          <p class="text-slate-600 mt-0.5">运行 <code class="bg-slate-100 px-1 rounded">npm run dev</code>，Node 会自动启动 Garmin 数据后端（<code class="bg-slate-100 px-1 rounded">garmin_chat_backend.py</code>）。</p>
-        </div>
-      </li>
-      <li class="flex gap-3">
-        <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 text-xs font-medium">3</span>
-        <div>
-          <p class="font-medium">开始对话</p>
-          <p class="text-slate-600 mt-0.5">在下方对话框输入问题，AI 教练会直接调用 Garmin 数据并在此页面回复你。</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-
-  <!-- AI 教练对话 -->
-  <div class="bg-white border rounded-xl p-5 flex flex-col" style="min-height: 360px;">
-    <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
-      <span>💬</span> 和 AI 教练对话
-    </h2>
-
-    <!-- 快捷问题 -->
-    <div id="zhuifeng-chips" class="flex flex-wrap gap-2 mb-4">
-      <button class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs text-slate-700 transition" onclick="sendChip('分析我过去 7 天的训练负荷和恢复情况')">分析最近训练负荷</button>
-      <button class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs text-slate-700 transition" onclick="sendChip('我昨天睡得怎么样？')">昨天睡眠</button>
-      <button class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs text-slate-700 transition" onclick="sendChip('根据本周训练量，今天我该怎么跑？')">今日训练建议</button>
-      <button class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs text-slate-700 transition" onclick="sendChip('查看我最近的跑步活动和平均配速')">最近跑步活动</button>
-      <button class="px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-xs text-emerald-700 transition" onclick="sendChip('帮我制定一个 12 周半马训练计划')">制定半马计划</button>
-      <button class="px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-xs text-emerald-700 transition" onclick="sendChip('查看当前训练计划和未来课表')">查看当前课表</button>
-      <button class="px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-xs text-amber-700 transition" onclick="sendChip('根据我最新的 Garmin 数据调整训练计划')">调整训练计划</button>
-    </div>
-
-    <!-- 消息区 -->
-    <div id="zhuifeng-messages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-1" style="max-height: 300px;">
-      <div class="flex gap-3">
-        <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0">🏃</div>
-        <div class="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-2 text-sm leading-relaxed max-w-[85%]">
-          你好！我是追风计划 AI 教练。我不仅能读取 Garmin 数据，还能制定训练计划、查看未来课表，并根据睡眠、恢复和训练负荷动态调整计划。点击下方快捷问题，或直接输入你的目标。
-        </div>
-      </div>
-    </div>
-
-    <!-- 输入区 -->
-    <div class="mt-auto">
-      <div class="flex gap-2">
-        <input id="zhuifeng-input" type="text" placeholder="输入问题，例如：我上周跑量多少？" class="flex-1 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" onkeydown="if(event.key==='Enter') sendZhuifengMessage()">
-        <button onclick="sendZhuifengMessage()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition">发送</button>
-      </div>
-      <p class="text-xs text-slate-400 mt-2 text-center">由本地 garmin-cn-mcp 后端读取数据；训练计划保存在本机 data/training_plan.json</p>
-    </div>
-  </div>
-
-  <!-- 隐私提醒 -->
-  <div class="bg-amber-50 border border-amber-100 rounded-lg p-4 text-sm text-amber-800">
-    <strong>安全提醒：</strong>Garmin 凭据保存在本地 <code class="bg-amber-100 px-1 rounded">mcp.json</code> 中，请勿截图或共享该文件。如果怀疑密码泄露，请及时修改 Garmin 密码。
-  </div>
-</div>
-
-<script>
-  function copyToClipboard(text) {
-    if (navigator.clipboard) {
-      return navigator.clipboard.writeText(text);
-    }
-    return new Promise((resolve) => {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      resolve();
-    });
-  }
-
-  function appendUserMessage(text) {
-    const box = document.getElementById('zhuifeng-messages');
-    const div = document.createElement('div');
-    div.className = 'flex gap-3 justify-end';
-    div.innerHTML = `<div class="bg-emerald-600 text-white rounded-2xl rounded-tr-none px-4 py-2 text-sm leading-relaxed max-w-[85%]">${escapeHtml(text)}</div><div class="w-8 h-8 rounded-full bg-slate-300 text-white flex items-center justify-center text-xs shrink-0">我</div>`;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function appendCoachMessage(text) {
-    const box = document.getElementById('zhuifeng-messages');
-    const div = document.createElement('div');
-    div.className = 'flex gap-3';
-    div.innerHTML = `<div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0">🏃</div><div class="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-2 text-sm leading-relaxed max-w-[85%]">${text}</div>`;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function showCopiedTip() {
-    const tip = document.getElementById('zhuifeng-tip');
-    tip.classList.remove('hidden');
-    setTimeout(() => tip.classList.add('hidden'), 2500);
-  }
-
-  async function sendZhuifengMessage() {
-    const input = document.getElementById('zhuifeng-input');
-    const text = input.value.trim();
-    if (!text) return;
-    appendUserMessage(text);
-    input.value = '';
-    await askBackend(text);
-  }
-
-  async function sendChip(text) {
-    appendUserMessage(text);
-    await askBackend(text);
-  }
-
-  async function askBackend(text) {
-    const loadingId = showLoading();
-    try {
-      const res = await fetch('/api/garmin/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
-      });
-      hideLoading(loadingId);
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: '请求失败' }));
-        appendCoachMessage('⚠️ ' + (err.error || 'AI 教练后端暂时不可用，请确认 Garmin 后端已启动。'));
-        return;
-      }
-      const data = await res.json();
-      if (data.ok && data.reply) {
-        appendCoachMessage(escapeHtml(data.reply).replace(/\n/g, '<br>'));
-      } else {
-        appendCoachMessage('⚠️ ' + (data.error || '未知错误'));
-      }
-    } catch (e) {
-      hideLoading(loadingId);
-      appendCoachMessage('⚠️ 网络错误：' + e.message + '<br>请确认开发服务器已启动（npm run dev）。');
-    }
-  }
-
-  function showLoading() {
-    const box = document.getElementById('zhuifeng-messages');
-    const id = 'loading-' + Date.now();
-    const div = document.createElement('div');
-    div.id = id;
-    div.className = 'flex gap-3';
-    div.innerHTML = `<div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0">🏃</div><div class="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-2 text-sm text-slate-500">正在读取 Garmin 数据…</div>`;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-    return id;
-  }
-
-  function hideLoading(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  }
-</script>
-      </div>
-    </section>
   </main>
 
   <script>
@@ -345,7 +124,7 @@
     let selected = new Set();
     let submitted = false;
     let practiceMode = "all"; // all | wrong
-    let currentView = "zhuifeng"; // zhuifeng | practice | wrong
+    let currentView = "practice"; // practice | wrong
 
     // ---------- 错题本存储 ----------
     function loadWrongBook() {
@@ -467,13 +246,10 @@
       currentView = view;
       document.getElementById("view-practice").classList.toggle("hidden", view !== "practice");
       document.getElementById("view-wrong").classList.toggle("hidden", view !== "wrong");
-      document.getElementById("view-zhuifeng").classList.toggle("hidden", view !== "zhuifeng");
       document.getElementById("tab-practice").className =
         view === "practice" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800";
       document.getElementById("tab-wrong").className =
         (view === "wrong" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800");
-      document.getElementById("tab-zhuifeng").className =
-        (view === "zhuifeng" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800");
       if (view === "wrong") renderWrongList();
     }
 
@@ -655,7 +431,6 @@
       render();
     };
     document.getElementById("tab-wrong").onclick = () => switchView("wrong");
-    document.getElementById("tab-zhuifeng").onclick = () => switchView("zhuifeng");
 
     document.getElementById("submit-btn").onclick = () => {
       if (!questions.length) return;
@@ -750,7 +525,7 @@
 
     checkAuth();
     updateWrongBadge();
-    switchView("zhuifeng");
+    switchView("practice");
     loadQuestions();
   </script>
 </body>
