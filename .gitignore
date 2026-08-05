@@ -10,5 +10,4 @@ dist/
 scripts/.feishu-image-cache.json
 .vscode/
 __pycache__/
-data/training_plan.json
 .idea/
