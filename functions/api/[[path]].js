@@ -176,7 +176,27 @@ export async function onRequest(context) {
       });
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
 
-      return json({ total: list.length, questions: list, source: "feishu" });
+      let source = "feishu";
+      // 飞书暂缺该科目数据时，回退同源静态资源（如 /data/questions.理论法.json）
+      if (list.length === 0 && subject) {
+        try {
+          const localRes = await fetch(
+            new URL(`/data/questions.${encodeURIComponent(subject)}.json`, request.url)
+          );
+          if (localRes.ok) {
+            const local = await localRes.json();
+            const localList = (local.questions || local).filter(
+              (q) => (!q.状态 || q.状态 === status) && q.题目ID && q.题干
+            );
+            if (localList.length) {
+              list = localList;
+              source = "local";
+            }
+          }
+        } catch (e) { /* 忽略本地回退失败 */ }
+      }
+
+      return json({ total: list.length, questions: list, source });
     }
 
     return json({ error: "Not Found", path: action }, 404);

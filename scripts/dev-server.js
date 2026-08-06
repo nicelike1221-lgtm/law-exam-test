@@ -219,6 +219,24 @@ async function handleApi(req, res, url) {
         return Boolean(q.题目ID && q.题干);
       });
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
+
+      // 飞书/样本暂缺该科目数据时，回退本地打包题库（如 data/questions.理论法.json）
+      if (list.length === 0 && subject) {
+        const localPath = path.join(ROOT, "data", `questions.${subject}.json`);
+        if (fs.existsSync(localPath)) {
+          try {
+            const local = JSON.parse(fs.readFileSync(localPath, "utf8"));
+            const localList = (local.questions || local).filter(
+              (q) => (!q.状态 || q.状态 === status) && q.题目ID && q.题干
+            );
+            if (localList.length) {
+              list = localList;
+              source = "local";
+            }
+          } catch (e) { /* 忽略 */ }
+        }
+      }
+
       return sendJson(res, { total: list.length, questions: list, source });
     }
 

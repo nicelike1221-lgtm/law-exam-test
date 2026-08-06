@@ -39,6 +39,7 @@
           <option value="刑法">刑法</option>
           <option value="民诉">民诉</option>
           <option value="刑诉">刑诉</option>
+          <option value="理论法">理论法</option>
         </select>
         <button id="reload-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">刷新</button>
       </div>
@@ -505,14 +506,32 @@
         const res = await fetch(`${API_BASE}/questions${qs}`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "加载失败");
-        allQuestions = data.questions || [];
+        let list = data.questions || [];
+        let source = data.source || "unknown";
+        // 飞书暂缺该科目数据时，回退本地打包题库（如 /data/questions.理论法.json）
+        if (list.length === 0 && subject) {
+          try {
+            const localRes = await fetch(`/data/questions.${encodeURIComponent(subject)}.json`);
+            if (localRes.ok) {
+              const local = await localRes.json();
+              const localList = (local.questions || local).filter(
+                (q) => (!q.状态 || q.状态 === "已发布") && q.题目ID && q.题干
+              );
+              if (localList.length) {
+                list = localList;
+                source = "local";
+              }
+            }
+          } catch (e) { /* 忽略本地回退失败 */ }
+        }
+        allQuestions = list;
         practiceMode = "all";
         questions = allQuestions.slice();
         idx = 0;
         selected = new Set();
         submitted = false;
         document.getElementById("sync-status").textContent =
-          `✓ 已同步 ${questions.length} 题 · 来源 ${data.source || "unknown"} · 错题 ${wrongCount()}`;
+          `✓ 已同步 ${questions.length} 题 · 来源 ${source} · 错题 ${wrongCount()}`;
         if (currentView === "practice") render();
         else renderWrongList();
       } catch (err) {
