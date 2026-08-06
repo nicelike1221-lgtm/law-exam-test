@@ -50,6 +50,7 @@
       <button id="tab-wrong" class="py-2 text-slate-500 hover:text-slate-800">
         错题本 <span id="wrong-badge" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs">0</span>
       </button>
+      <button id="tab-feishu" class="py-2 text-slate-500 hover:text-slate-800">飞书表格</button>
     </div>
   </header>
 
@@ -113,12 +114,37 @@
       <div id="wrong-list" class="space-y-3"></div>
     </section>
 
+    <!-- 飞书表格（多张表各占一个子标签） -->
+    <section id="view-feishu" class="hidden">
+      <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+        <div>
+          <h2 class="font-semibold">飞书表格</h2>
+          <p class="text-xs text-slate-500 mt-0.5">嵌入的飞书多维表格（需在飞书开启「公开分享 + 允许嵌入」）</p>
+        </div>
+      </div>
+      <div id="feishu-subtabs" class="flex gap-2 mb-3 flex-wrap"></div>
+      <div id="feishu-frame-wrap" class="bg-white border rounded-xl overflow-hidden hidden" style="height:74vh;">
+        <iframe id="feishu-frame" class="w-full h-full" style="border:0;" src=""></iframe>
+      </div>
+      <div id="feishu-empty" class="bg-white border rounded-xl p-8 text-center text-slate-500">
+        尚未配置飞书表嵌入链接。请在站点脚本顶部的 <code>FEISHU_TABLES</code> 中填入每张表的公开嵌入链接（src 地址）。
+      </div>
+    </section>
+
   </main>
 
   <script>
     const CORRECT_PASSWORD = "2026";
     const API_BASE = "/api";
     const WRONG_KEY = "law_wrong_book_v1";
+
+    // 飞书多维表格嵌入配置：每张表 = 一个子标签。
+    // 在飞书把对应多维表格设为「公开分享 + 允许嵌入」后，把分享链接（iframe 的 src）填到 url。
+    const FEISHU_TABLES = [
+      // 示例：
+      // { name: "题目总表", url: "https://www.feishu.cn/base/xxxxxxxx?table=yyyyyyyy&view=zzzzzz&mode=view" },
+      // { name: "统计表",   url: "https://www.feishu.cn/base/aaaaaaaa?table=bbbbbbbb&mode=view" },
+    ];
 
     let allQuestions = [];   // 当前科目下题库
     let questions = [];      // 当前练习队列
@@ -252,7 +278,41 @@
         view === "practice" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800";
       document.getElementById("tab-wrong").className =
         (view === "wrong" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800");
+      document.getElementById("tab-feishu").className =
+        (view === "feishu" ? "tab-active py-2" : "py-2 text-slate-500 hover:text-slate-800");
       if (view === "wrong") renderWrongList();
+      if (view === "feishu") renderFeishuTabs();
+    }
+
+    // ---------- 飞书表格多标签 ----------
+    function renderFeishuTabs() {
+      const sub = document.getElementById("feishu-subtabs");
+      const frame = document.getElementById("feishu-frame");
+      const wrap = document.getElementById("feishu-frame-wrap");
+      const empty = document.getElementById("feishu-empty");
+      sub.innerHTML = "";
+      if (!FEISHU_TABLES.length) {
+        wrap.classList.add("hidden");
+        empty.classList.remove("hidden");
+        return;
+      }
+      empty.classList.add("hidden");
+      wrap.classList.remove("hidden");
+      FEISHU_TABLES.forEach((t, i) => {
+        const b = document.createElement("button");
+        const base = "feishu-subtab text-sm px-3 py-1.5 rounded-lg border ";
+        b.className = base + (i === 0 ? "bg-blue-600 text-white" : "hover:bg-slate-50");
+        b.textContent = t.name || ("表 " + (i + 1));
+        b.onclick = () => {
+          document.querySelectorAll(".feishu-subtab").forEach((x) => {
+            x.className = base + "hover:bg-slate-50";
+          });
+          b.className = base + "bg-blue-600 text-white";
+          frame.src = t.url || "";
+        };
+        sub.appendChild(b);
+      });
+      frame.src = FEISHU_TABLES[0].url || "";
     }
 
     // ---------- 刷题渲染 ----------
@@ -433,6 +493,7 @@
       render();
     };
     document.getElementById("tab-wrong").onclick = () => switchView("wrong");
+    document.getElementById("tab-feishu").onclick = () => switchView("feishu");
 
     document.getElementById("submit-btn").onclick = () => {
       if (!questions.length) return;
