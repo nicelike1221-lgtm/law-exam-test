@@ -1,0 +1,786 @@
+{
+  "科目": "行政法",
+  "count": 195,
+  "updates": [
+    {
+      "题目ID": "xingzheng-001",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-003",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-004",
+      "答案": "ABCD"
+    },
+    {
+      "题目ID": "xingzheng-005",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-007",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-008",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-012",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-013",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-017",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-020",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-023",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-025",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-030",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-031",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-036",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-040",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-042",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-043",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-045",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-046",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-049",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-051",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-054",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-057",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-058",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-059",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-062",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-064",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-066",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-067",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-069",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-070",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-071",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-072",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-075",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-077",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-082",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-083",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-091",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-093",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-094",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-095",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-098",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-099",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-101",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-102",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-103",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-104",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-106",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-107",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-110",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-112",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-113",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-115",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-116",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-119",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-120",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-121",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-125",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-128",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-132",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-133",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-136",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-138",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-145",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-147",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-148",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-149",
+      "答案": "ABCD"
+    },
+    {
+      "题目ID": "xingzheng-150",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-153",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-157",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-167",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-168",
+      "答案": "ABCD"
+    },
+    {
+      "题目ID": "xingzheng-169",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-170",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-173",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-175",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-176",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-180",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-182",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-183",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-184",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-185",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-188",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-192",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-194",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-197",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-199",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-203",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-204",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-207",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-209",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-210",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-211",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-213",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-214",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-216",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-217",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-222",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-224",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-226",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-227",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-228",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-230",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-232",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-238",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-240",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-241",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-244",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-245",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-246",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-250",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-255",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-256",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-257",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-258",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-259",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-260",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-264",
+      "答案": "ACD"
+    },
+    {
+      "题目ID": "xingzheng-265",
+      "答案": "BD"
+    },
+    {
+      "题目ID": "xingzheng-266",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-267",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-269",
+      "答案": "ABCD"
+    },
+    {
+      "题目ID": "xingzheng-270",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-271",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-272",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-281",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-284",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-287",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-288",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-290",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-294",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-295",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-296",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-297",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-303",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-305",
+      "答案": "CD"
+    },
+    {
+      "题目ID": "xingzheng-306",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-307",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-319",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-320",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-321",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-330",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-332",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-334",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-335",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-336",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-338",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-339",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-341",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-342",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-343",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-346",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-347",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-353",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-356",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-358",
+      "答案": "BCD"
+    },
+    {
+      "题目ID": "xingzheng-360",
+      "答案": "BC"
+    },
+    {
+      "题目ID": "xingzheng-370",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-371",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-373",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-374",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-375",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-376",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-377",
+      "答案": "ABC"
+    },
+    {
+      "题目ID": "xingzheng-380",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-381",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-382",
+      "答案": "AC"
+    },
+    {
+      "题目ID": "xingzheng-384",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-385",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-386",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-387",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-388",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-389",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-390",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-393",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-395",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-396",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-398",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-400",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-403",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-406",
+      "答案": "B"
+    },
+    {
+      "题目ID": "xingzheng-409",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-410",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-415",
+      "答案": "ABD"
+    },
+    {
+      "题目ID": "xingzheng-416",
+      "答案": "AB"
+    },
+    {
+      "题目ID": "xingzheng-417",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-419",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-422",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-424",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-425",
+      "答案": "C"
+    },
+    {
+      "题目ID": "xingzheng-427",
+      "答案": "AD"
+    },
+    {
+      "题目ID": "xingzheng-428",
+      "答案": "D"
+    },
+    {
+      "题目ID": "xingzheng-429",
+      "答案": "A"
+    },
+    {
+      "题目ID": "xingzheng-431",
+      "答案": "D"
+    }
+  ]
+}
