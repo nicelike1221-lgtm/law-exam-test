@@ -76,7 +76,6 @@
         <div class="bg-white border rounded-xl p-5 shadow-sm">
           <div class="flex flex-wrap gap-2 text-xs mb-3">
             <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700"></span>
-            <span id="badge-chapter" class="px-2 py-0.5 rounded bg-slate-100 text-slate-600"></span>
           </div>
           <div id="stem" class="text-base leading-7 mb-4"></div>
           <div id="options" class="space-y-2"></div>
@@ -337,7 +336,6 @@
       document.getElementById("q-meta").textContent = q.题目ID || "";
       document.getElementById("practice-mode-tag").classList.toggle("hidden", practiceMode !== "wrong");
       document.getElementById("badge-type").textContent = q.题型 || "";
-      document.getElementById("badge-chapter").textContent = [q.编章, q.章节].filter(Boolean).join(" · ");
       document.getElementById("stem").textContent = q.题干 || "";
 
       const box = document.getElementById("options");
