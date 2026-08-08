@@ -20,6 +20,10 @@
     .tab-active { color: #1d4ed8; border-bottom: 2px solid #2563eb; font-weight: 600; }
     /* 全站统一四号字 */
     * { font-size: 14pt !important; }
+    /* 题干与解析：段首空两字符、两端对齐 */
+    #stem, #result-explain { text-align: justify; text-indent: 2em; }
+    /* 选项居左对齐（覆盖居中设置） */
+    #options .option-btn { text-align: left; }
   </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -362,7 +366,7 @@
       for (const opt of optionList(q)) {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.className = "option-btn w-full text-center border rounded-lg px-3 py-2 text-sm hover:bg-slate-50";
+        btn.className = "option-btn w-full text-left border rounded-lg px-3 py-2 text-sm hover:bg-slate-50";
         btn.dataset.key = opt.key;
         btn.innerHTML = `<span class="font-medium mr-2">${opt.key}.</span>${escapeHtml(opt.text)}`;
         if (selected.has(opt.key)) btn.classList.add("selected");
