@@ -41,27 +41,9 @@
         <div id="sync-status" class="text-xs text-slate-500">题库同步中…</div>
       </div>
       <div class="flex items-center gap-2">
-        <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm">
-          <option value="">全部科目</option>
-          <option value="民法">民法</option>
-          <option value="刑法">刑法</option>
-          <option value="民诉">民诉</option>
-          <option value="刑事诉讼法">刑诉</option>
-          <option value="理论法">理论法</option>
-          <option value="商经知">商经知</option>
-          <option value="三国法">三国法</option>
-          <option value="行政法">李佳</option>
-        </select>
         <button id="home-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">首页</button>
         <button id="reload-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">刷新</button>
       </div>
-    </div>
-    <div class="max-w-4xl mx-auto px-4 flex gap-6 text-sm">
-      <button id="tab-practice" class="tab-active py-2">刷题</button>
-      <button id="tab-wrong" class="py-2 text-slate-500 hover:text-slate-800">
-        错题本 <span id="wrong-badge" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs">0</span>
-      </button>
-      <button id="tab-feishu" class="py-2 text-slate-500 hover:text-slate-800">飞书表格</button>
     </div>
   </header>
 
@@ -88,6 +70,20 @@
 
     <!-- 刷题 -->
     <section id="view-practice">
+      <div class="flex items-center justify-between mb-4">
+        <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
+          <option value="">全部科目</option>
+          <option value="民法">民法</option>
+          <option value="刑法">刑法</option>
+          <option value="民诉">民诉</option>
+          <option value="刑事诉讼法">刑诉</option>
+          <option value="理论法">理论法</option>
+          <option value="商经知">商经知</option>
+          <option value="三国法">三国法</option>
+          <option value="行政法">李佳</option>
+        </select>
+      </div>
+
       <div id="empty-state" class="hidden bg-white border rounded-xl p-8 text-center text-slate-500">
         暂无题目。请导入飞书表，或确认 data/questions.sample.json 存在。
       </div>
@@ -248,11 +244,13 @@
     function updateWrongBadge() {
       const n = wrongCount();
       const el = document.getElementById("wrong-badge");
-      el.textContent = String(n);
-      el.classList.toggle("bg-red-100", n > 0);
-      el.classList.toggle("text-red-700", n > 0);
-      el.classList.toggle("bg-slate-100", n === 0);
-      el.classList.toggle("text-slate-500", n === 0);
+      if (el) {
+        el.textContent = String(n);
+        el.classList.toggle("bg-red-100", n > 0);
+        el.classList.toggle("text-red-700", n > 0);
+        el.classList.toggle("bg-slate-100", n === 0);
+        el.classList.toggle("text-slate-500", n === 0);
+      }
       updateHomeWrongBadge();
     }
 
@@ -307,11 +305,6 @@
       document.getElementById("view-practice").classList.toggle("hidden", view !== "practice");
       document.getElementById("view-wrong").classList.toggle("hidden", view !== "wrong");
       document.getElementById("view-feishu").classList.toggle("hidden", view !== "feishu");
-      const tabOn = "tab-active py-2";
-      const tabOff = "py-2 text-slate-500 hover:text-slate-800";
-      document.getElementById("tab-practice").className = (view === "practice") ? tabOn : tabOff;
-      document.getElementById("tab-wrong").className = (view === "wrong") ? tabOn : tabOff;
-      document.getElementById("tab-feishu").className = (view === "feishu") ? tabOn : tabOff;
       if (view === "wrong") renderWrongList();
       if (view === "feishu") renderFeishuTabs();
     }
@@ -513,17 +506,6 @@
     }
 
     // ---------- 事件 ----------
-    document.getElementById("tab-practice").onclick = () => {
-      practiceMode = "all";
-      questions = allQuestions.slice();
-      idx = 0;
-      selected = new Set();
-      submitted = false;
-      switchView("practice");
-      render();
-    };
-    document.getElementById("tab-wrong").onclick = () => switchView("wrong");
-    document.getElementById("tab-feishu").onclick = () => switchView("feishu");
     document.getElementById("home-btn").onclick = () => switchView("home");
 
     // 导航首页：点击卡片进入对应模块
