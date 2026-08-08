@@ -119,11 +119,6 @@ async function listBySubject(env, token, subject, status) {
       `https://open.feishu.cn/open-apis/bitable/v1/apps/${base}/tables/${table}/records/search`
     );
     const body = {
-      field_names: [
-        "题目ID", "科目", "编章", "章节", "题型", "题干",
-        "选项A", "选项B", "选项C", "选项D", "选项E",
-        "答案", "解析", "考点", "难度", "来源", "年份", "状态", "排序",
-      ],
       filter: {
         conjunction: "and",
         conditions: [
