@@ -22,6 +22,11 @@ function json(data, status = 200) {
   });
 }
 
+// 归一化科目名：去空白（含全角空格）、转小写，兼容飞书选项值的隐藏差异
+function norm(s) {
+  return (s || "").replace(/[\s　]/g, "").toLowerCase();
+}
+
 async function getTenantToken(env) {
   const res = await fetch(
     "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal",
@@ -183,6 +188,17 @@ export async function onRequest(context) {
       return json({ token: token.slice(0, 8) + "...", ok: true });
     }
 
+    if (action === "subjects") {
+      const token = await getTenantToken(env);
+      const all = await listAllRecords(env, token);
+      const m = {};
+      for (const q of all) {
+        const k = q.科目 || "(空)";
+        m[k] = (m[k] || 0) + 1;
+      }
+      return json({ total: all.length, subjects: m });
+    }
+
     if (action === "questions") {
       if (
         !env.FEISHU_APP_ID ||
@@ -211,13 +227,22 @@ export async function onRequest(context) {
       let list;
       if (subject) {
         list = await listBySubject(env, token, subject, status);
+        // 飞书按科目 search 可能因选项值隐藏差异（尾随空格/全角）返回 0，
+        // 用全表拉取 + 内存归一化匹配兜底，避免误回退 local。
+        if (list.length === 0) {
+          const all = await listAllRecords(env, token);
+          const matched = all.filter(
+            (q) => norm(q.科目) === norm(subject) && (!status || q.状态 === status)
+          );
+          if (matched.length) list = matched;
+        }
       } else {
         list = await listAllRecords(env, token);
       }
 
       list = list.filter((q) => {
         if (status && q.状态 && q.状态 !== status) return false;
-        if (subject && q.科目 && q.科目 !== subject) return false;
+        if (subject && q.科目 && norm(q.科目) !== norm(subject)) return false;
         return Boolean(q.题目ID && q.题干);
       });
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
