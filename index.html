@@ -91,7 +91,7 @@
             <option value="理论法">理论法</option>
             <option value="商经知">商经知</option>
             <option value="三国法">三国法</option>
-            <option value="行政法">李佳</option>
+            <option value="行政法" selected>李佳</option>
           </select>
 
           <div class="flex flex-wrap justify-center gap-2 text-xs mb-3">
@@ -506,13 +506,9 @@
       btn.onclick = () => {
         const v = btn.dataset.nav;
         if (v === "practice") {
-          practiceMode = "all";
-          questions = allQuestions.slice();
-          idx = 0;
-          selected = new Set();
-          submitted = false;
+          document.getElementById("subject-select").value = "行政法";
           switchView("practice");
-          render();
+          loadQuestions();
         } else if (v === "wrong") {
           switchView("wrong");
         } else {
@@ -631,6 +627,7 @@
     checkAuth();
     updateWrongBadge();
     switchView("home");
+    document.getElementById("subject-select").value = "行政法";
     loadQuestions();
 
     // 滚动时自动隐藏/显示页头
