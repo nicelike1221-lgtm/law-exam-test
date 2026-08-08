@@ -75,8 +75,14 @@
       </div>
 
       <div id="quiz-panel" class="hidden">
-        <div class="flex flex-col sm:flex-row items-start gap-4">
-          <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white shrink-0">
+        <div class="flex items-center justify-end mb-3 gap-2 flex-wrap text-sm text-slate-500">
+          第 <span id="q-index">1</span> / <span id="q-total">0</span> 题
+          <span id="q-meta" class="ml-2"></span>
+          <span id="practice-mode-tag" class="hidden ml-2 text-xs px-2 py-0.5 rounded bg-red-50 text-red-600">错题重练</span>
+        </div>
+
+        <div class="bg-white border rounded-xl p-5 shadow-sm text-center">
+          <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white mb-3">
             <option value="">全部科目</option>
             <option value="民法">民法</option>
             <option value="刑法">刑法</option>
@@ -88,20 +94,12 @@
             <option value="行政法">李佳</option>
           </select>
 
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-end mb-3 gap-2 flex-wrap text-sm text-slate-500">
-              第 <span id="q-index">1</span> / <span id="q-total">0</span> 题
-              <span id="q-meta" class="ml-2"></span>
-              <span id="practice-mode-tag" class="hidden ml-2 text-xs px-2 py-0.5 rounded bg-red-50 text-red-600">错题重练</span>
-            </div>
-
-            <div class="bg-white border rounded-xl p-5 shadow-sm">
-          <div class="flex flex-wrap gap-2 text-xs mb-3">
+          <div class="flex flex-wrap justify-center gap-2 text-xs mb-3">
             <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700"></span>
           </div>
           <div id="stem" class="text-base leading-7 mb-4"></div>
-          <div id="options" class="space-y-2"></div>
-          <div class="mt-4 flex flex-wrap gap-2">
+          <div id="options" class="space-y-2 mb-4"></div>
+          <div class="flex flex-wrap justify-center gap-2">
             <button id="submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">提交本题</button>
             <button id="prev-btn" class="px-4 py-2 border rounded-lg text-sm">上一题</button>
             <button id="next-btn" class="px-4 py-2 border rounded-lg text-sm">下一题</button>
@@ -114,7 +112,6 @@
           </div>
         </div>
       </div>
-    </div>
     </section>
 
     <!-- 错题本 -->
@@ -365,7 +362,7 @@
       for (const opt of optionList(q)) {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.className = "option-btn w-full text-left border rounded-lg px-3 py-2 text-sm hover:bg-slate-50";
+        btn.className = "option-btn w-full text-center border rounded-lg px-3 py-2 text-sm hover:bg-slate-50";
         btn.dataset.key = opt.key;
         btn.innerHTML = `<span class="font-medium mr-2">${opt.key}.</span>${escapeHtml(opt.text)}`;
         if (selected.has(opt.key)) btn.classList.add("selected");
