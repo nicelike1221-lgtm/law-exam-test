@@ -70,26 +70,23 @@
 
     <!-- 刷题 -->
     <section id="view-practice">
-      <div class="flex items-center justify-between mb-4">
-        <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
-          <option value="">全部科目</option>
-          <option value="民法">民法</option>
-          <option value="刑法">刑法</option>
-          <option value="民诉">民诉</option>
-          <option value="刑事诉讼法">刑诉</option>
-          <option value="理论法">理论法</option>
-          <option value="商经知">商经知</option>
-          <option value="三国法">三国法</option>
-          <option value="行政法">李佳</option>
-        </select>
-      </div>
-
       <div id="empty-state" class="hidden bg-white border rounded-xl p-8 text-center text-slate-500">
         暂无题目。请导入飞书表，或确认 data/questions.sample.json 存在。
       </div>
 
       <div id="quiz-panel" class="hidden">
         <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+          <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
+            <option value="">全部科目</option>
+            <option value="民法">民法</option>
+            <option value="刑法">刑法</option>
+            <option value="民诉">民诉</option>
+            <option value="刑事诉讼法">刑诉</option>
+            <option value="理论法">理论法</option>
+            <option value="商经知">商经知</option>
+            <option value="三国法">三国法</option>
+            <option value="行政法">李佳</option>
+          </select>
           <div class="text-sm text-slate-500">
             第 <span id="q-index">1</span> / <span id="q-total">0</span> 题
             <span id="q-meta" class="ml-2"></span>
@@ -108,7 +105,6 @@
             <button id="prev-btn" class="px-4 py-2 border rounded-lg text-sm">上一题</button>
             <button id="next-btn" class="px-4 py-2 border rounded-lg text-sm">下一题</button>
             <button id="add-wrong-btn" class="hidden border border-red-200 text-red-600 px-4 py-2 rounded-lg text-sm hover:bg-red-50">加入错题本</button>
-            <button id="remove-wrong-btn" class="hidden border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50">移出错题本</button>
           </div>
           <div id="result-box" class="hidden mt-4 border-t pt-4">
             <div id="result-line" class="font-medium mb-2"></div>
@@ -377,7 +373,6 @@
 
       const inBook = isInWrongBook(q.题目ID);
       document.getElementById("add-wrong-btn").classList.toggle("hidden", !submitted || inBook);
-      document.getElementById("remove-wrong-btn").classList.toggle("hidden", !inBook);
 
       document.getElementById("result-box").classList.add("hidden");
       if (submitted) showResult(q, false);
@@ -425,7 +420,6 @@
 
       const inBook = isInWrongBook(q.题目ID);
       document.getElementById("add-wrong-btn").classList.toggle("hidden", ok || inBook);
-      document.getElementById("remove-wrong-btn").classList.toggle("hidden", !inBook);
 
       if (currentView === "wrong") renderWrongList();
     }
@@ -553,20 +547,6 @@
       const q = questions[idx];
       if (!q) return;
       addToWrongBook(q, normalizeAnswer([...selected].join("")));
-      render();
-      if (currentView === "wrong") renderWrongList();
-    };
-    document.getElementById("remove-wrong-btn").onclick = () => {
-      const q = questions[idx];
-      if (!q) return;
-      removeFromWrongBook(q.题目ID);
-      // 若正在错题重练队列，移出后从队列删除
-      if (practiceMode === "wrong") {
-        questions = questions.filter((x) => x.题目ID !== q.题目ID);
-        if (idx >= questions.length) idx = Math.max(0, questions.length - 1);
-      }
-      selected = new Set();
-      submitted = false;
       render();
       if (currentView === "wrong") renderWrongList();
     };
