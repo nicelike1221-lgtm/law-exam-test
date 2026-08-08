@@ -11,6 +11,8 @@
     .option-btn.correct { outline: 2px solid #16a34a; background: #f0fdf4; }
     .option-btn.wrong { outline: 2px solid #dc2626; background: #fef2f2; }
     .tab-active { color: #1d4ed8; border-bottom: 2px solid #2563eb; font-weight: 600; }
+    /* 全站统一四号字 */
+    * { font-size: 14pt !important; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen">
@@ -75,7 +77,6 @@
         <div class="bg-white border rounded-xl p-5 shadow-sm">
           <div class="flex flex-wrap gap-2 text-xs mb-3">
             <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700"></span>
-            <span id="badge-diff" class="px-2 py-0.5 rounded bg-amber-50 text-amber-700"></span>
             <span id="badge-chapter" class="px-2 py-0.5 rounded bg-slate-100 text-slate-600"></span>
           </div>
           <div id="stem" class="text-base leading-7 mb-4"></div>
@@ -337,7 +338,6 @@
       document.getElementById("q-meta").textContent = q.题目ID || "";
       document.getElementById("practice-mode-tag").classList.toggle("hidden", practiceMode !== "wrong");
       document.getElementById("badge-type").textContent = q.题型 || "";
-      document.getElementById("badge-diff").textContent = "难度 " + (q.难度 || "-");
       document.getElementById("badge-chapter").textContent = [q.编章, q.章节].filter(Boolean).join(" · ");
       document.getElementById("stem").textContent = q.题干 || "";
 
