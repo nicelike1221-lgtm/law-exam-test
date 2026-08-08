@@ -109,6 +109,51 @@ async function listAllRecords(env, token) {
   return items;
 }
 
+async function listBySubject(env, token, subject, status) {
+  const base = env.FEISHU_BASE_ID;
+  const table = env.FEISHU_QUESTION_TABLE_ID;
+  let pageToken = "";
+  const items = [];
+  do {
+    const url = new URL(
+      `https://open.feishu.cn/open-apis/bitable/v1/apps/${base}/tables/${table}/records/search`
+    );
+    const body = {
+      field_names: [
+        "题目ID", "科目", "编章", "章节", "题型", "题干",
+        "选项A", "选项B", "选项C", "选项D", "选项E",
+        "答案", "解析", "考点", "难度", "来源", "年份", "状态", "排序",
+      ],
+      filter: {
+        conjunction: "and",
+        conditions: [
+          { field_name: "科目", operator: "is", value: [subject] },
+          { field_name: "状态", operator: "is", value: [status] },
+        ],
+      },
+      page_size: 500,
+    };
+    if (pageToken) body.page_token = pageToken;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (data.code !== 0) throw new Error(data.msg || "搜索飞书记录失败");
+    for (const rec of data.data?.items || []) {
+      const m = mapRecord(rec.fields || {});
+      // 防御：飞书 search 翻页时可能丢弃过滤器，二次校验科目/状态
+      if (m.科目 !== subject) continue;
+      if (status && m.状态 !== status) continue;
+      items.push(m);
+    }
+    pageToken = data.data?.page_token || "";
+    if (!data.data?.has_more) break;
+  } while (pageToken);
+  return items;
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -165,9 +210,15 @@ export async function onRequest(context) {
       }
 
       const token = await getTenantToken(env);
-      let list = await listAllRecords(env, token);
       const subject = url.searchParams.get("subject");
       const status = url.searchParams.get("status") || "已发布";
+
+      let list;
+      if (subject) {
+        list = await listBySubject(env, token, subject, status);
+      } else {
+        list = await listAllRecords(env, token);
+      }
 
       list = list.filter((q) => {
         if (status && q.状态 && q.状态 !== status) return false;
