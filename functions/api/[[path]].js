@@ -143,9 +143,9 @@ async function listBySubject(env, token, subject, status) {
     if (data.code !== 0) throw new Error(data.msg || "搜索飞书记录失败");
     for (const rec of data.data?.items || []) {
       const m = mapRecord(rec.fields || {});
-      // 防御：飞书 search 翻页时可能丢弃过滤器，二次校验科目/状态
-      if (m.科目 !== subject) continue;
-      if (status && m.状态 !== status) continue;
+      // 防御：飞书 search 翻页时可能丢弃过滤器，二次校验科目/状态（norm 兼容隐藏差异）
+      if (norm(m.科目) !== norm(subject)) continue;
+      if (status && norm(m.状态) !== norm(status)) continue;
       items.push(m);
     }
     pageToken = data.data?.page_token || "";
@@ -232,7 +232,9 @@ export async function onRequest(context) {
         if (list.length === 0) {
           const all = await listAllRecords(env, token);
           const matched = all.filter(
-            (q) => norm(q.科目) === norm(subject) && (!status || q.状态 === status)
+            (q) =>
+              norm(q.科目) === norm(subject) &&
+              (!status || norm(q.状态) === norm(status))
           );
           if (matched.length) list = matched;
         }
@@ -241,7 +243,7 @@ export async function onRequest(context) {
       }
 
       list = list.filter((q) => {
-        if (status && q.状态 && q.状态 !== status) return false;
+        if (status && q.状态 && norm(q.状态) !== norm(status)) return false;
         if (subject && q.科目 && norm(q.科目) !== norm(subject)) return false;
         return Boolean(q.题目ID && q.题干);
       });
