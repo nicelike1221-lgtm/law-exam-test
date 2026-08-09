@@ -50,9 +50,30 @@
         radial-gradient(1.3px 1.3px at 60px 220px, rgba(255,255,255,.55), transparent),
         radial-gradient(1px 1px at 175px 200px,   rgba(255,255,255,.40), transparent);
       background-size: 260px 260px;
-      animation: starTwinkle 6s ease-in-out infinite alternate;
+      animation: starDrift 34s linear infinite, starTwinkle 7s ease-in-out infinite alternate;
+      will-change: background-position, opacity;
     }
-    @keyframes starTwinkle { from { opacity: .5; } to { opacity: 1; } }
+    body.cosmic::after {
+      content: "";
+      position: fixed; inset: -18%; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 28% 16% at 22% 28%, rgba(56,189,248,.13), transparent 72%),
+        radial-gradient(ellipse 24% 18% at 78% 22%, rgba(129,140,248,.14), transparent 72%),
+        radial-gradient(ellipse 32% 18% at 66% 82%, rgba(168,85,247,.12), transparent 72%);
+      filter: blur(16px);
+      opacity: .7;
+      animation: nebulaFloat 28s ease-in-out infinite alternate;
+      will-change: transform, opacity;
+    }
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 260px 130px; }
+    }
+    @keyframes starTwinkle { from { opacity: .45; } to { opacity: .95; } }
+    @keyframes nebulaFloat {
+      from { transform: translate3d(-2%, -1%, 0) scale(1); opacity: .52; }
+      to { transform: translate3d(2%, 1.5%, 0) scale(1.06); opacity: .84; }
+    }
 
     /* 基础文字色（覆盖 slate-* 在深色上的不可读） */
     body.cosmic .text-slate-800 { color: #e8ecf7 !important; }
@@ -123,8 +144,18 @@
       content: ""; position: absolute; pointer-events: none; border: 1px solid rgba(125,211,252,.11);
       border-radius: 50%; transform: rotate(-18deg); z-index: -1;
     }
-    body.cosmic main::before { width: 540px; height: 180px; right: -180px; top: 70px; }
-    body.cosmic main::after { width: 420px; height: 140px; left: -180px; top: 310px; border-color: rgba(196,181,253,.10); }
+    body.cosmic main::before {
+      width: 540px; height: 180px; right: -180px; top: 70px;
+      animation: orbitFloat 18s ease-in-out infinite alternate;
+    }
+    body.cosmic main::after {
+      width: 420px; height: 140px; left: -180px; top: 310px; border-color: rgba(196,181,253,.10);
+      animation: orbitFloat 24s ease-in-out -8s infinite alternate-reverse;
+    }
+    @keyframes orbitFloat {
+      from { transform: translate3d(-12px, 8px, 0) rotate(-18deg); opacity: .46; }
+      to { transform: translate3d(18px, -10px, 0) rotate(-10deg); opacity: .9; }
+    }
 
     body.cosmic #view-home { padding-top: 18px; }
     body.cosmic #view-home::before {
@@ -181,7 +212,8 @@
       body.cosmic main::before, body.cosmic main::after { opacity: .45; }
     }
     @media (prefers-reduced-motion: reduce) {
-      body.cosmic::before, body.cosmic header > div::before { animation: none; }
+      body.cosmic::before, body.cosmic::after, body.cosmic header > div::before,
+      body.cosmic main::before, body.cosmic main::after { animation: none; }
       body.cosmic button { transition: none; }
     }
   </style>
