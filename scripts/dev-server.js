@@ -167,6 +167,34 @@ function loadSampleQuestions() {
   return raw.questions || [];
 }
 
+// 读取题目ID -> 天数的映射（学习计划）
+function loadDayMap() {
+  const p = path.join(ROOT, "data", "day_map.json");
+  if (!fs.existsSync(p)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8"));
+  } catch (e) {
+    return {};
+  }
+}
+
+// 载入本地所有科目打包题库（不含 sample）
+function loadAllLocalQuestions() {
+  const dir = path.join(ROOT, "data");
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir)) {
+    if (!/^questions\..+\.json$/.test(f)) continue;
+    if (f === "questions.sample.json") continue;
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      const arr = raw.questions || raw;
+      if (Array.isArray(arr)) out.push(...arr);
+    } catch (e) { /* 忽略 */ }
+  }
+  return out;
+}
+
 function hasFeishuConfig() {
   return Boolean(
     process.env.FEISHU_APP_ID &&
@@ -201,18 +229,20 @@ async function handleApi(req, res, url) {
     }
 
     if (action === "questions") {
+      const subject = url.searchParams.get("subject");
+      const day = url.searchParams.get("day");
+      const status = url.searchParams.get("status") || "已发布";
+
       let list;
       let source;
       if (hasFeishuConfig()) {
         list = await listFeishuQuestions();
         source = "feishu";
       } else {
-        list = loadSampleQuestions();
-        source = "sample";
+        list = loadAllLocalQuestions();
+        source = "local";
       }
 
-      const subject = url.searchParams.get("subject");
-      const status = url.searchParams.get("status") || "已发布";
       list = list.filter((q) => {
         if (status && q.状态 && q.状态 !== status) return false;
         if (subject && q.科目 && q.科目 !== subject) return false;
@@ -220,20 +250,27 @@ async function handleApi(req, res, url) {
       });
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
 
-      // 飞书/样本暂缺该科目数据时，回退本地打包题库（如 data/questions.理论法.json）
-      if (list.length === 0 && subject) {
-        const localPath = path.join(ROOT, "data", `questions.${subject}.json`);
-        if (fs.existsSync(localPath)) {
-          try {
-            const local = JSON.parse(fs.readFileSync(localPath, "utf8"));
-            const localList = (local.questions || local).filter(
-              (q) => (!q.状态 || q.状态 === status) && q.题目ID && q.题干
-            );
-            if (localList.length) {
-              list = localList;
-              source = "local";
-            }
-          } catch (e) { /* 忽略 */ }
+      // 按「天数」筛选（学习计划逐日题量）
+      if (day) {
+        const dayMap = loadDayMap();
+        const dn = Number(day);
+        list = list.filter((q) => dayMap[q.题目ID] === dn);
+      }
+
+      // 飞书/本地暂缺数据时，回退本地打包题库（按科目或天数）
+      if (list.length === 0 && (subject || day)) {
+        const local = loadAllLocalQuestions();
+        const dayMap = loadDayMap();
+        const dn = day ? Number(day) : null;
+        const localList = local.filter((q) => {
+          if (status && q.状态 && q.状态 !== status) return false;
+          if (subject && q.科目 && q.科目 !== subject) return false;
+          if (dn && dayMap[q.题目ID] !== dn) return false;
+          return Boolean(q.题目ID && q.题干);
+        });
+        if (localList.length) {
+          list = localList;
+          source = "local";
         }
       }
 

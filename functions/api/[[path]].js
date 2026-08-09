@@ -154,6 +154,37 @@ async function listBySubject(env, token, subject, status) {
   return items;
 }
 
+async function fetchDayMap(request) {
+  try {
+    const res = await fetch(new URL("/data/day_map.json", request.url));
+    if (!res.ok) return {};
+    return await res.json();
+  } catch (e) {
+    return {};
+  }
+}
+
+async function fetchAllLocal(request, status) {
+  const subjects = ["行政法", "商经知", "理论法", "三国法", "刑事诉讼法", "民诉"];
+  const out = [];
+  for (const s of subjects) {
+    try {
+      const res = await fetch(
+        new URL(`/data/questions.${encodeURIComponent(s)}.json`, request.url)
+      );
+      if (!res.ok) continue;
+      const data = await res.json();
+      const arr = data.questions || data;
+      if (Array.isArray(arr)) {
+        for (const q of arr) {
+          if ((!q.状态 || q.状态 === status) && q.题目ID && q.题干) out.push(q);
+        }
+      }
+    } catch (e) { /* 忽略 */ }
+  }
+  return out;
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -200,46 +231,42 @@ export async function onRequest(context) {
     }
 
     if (action === "questions") {
-      if (
-        !env.FEISHU_APP_ID ||
-        !env.FEISHU_APP_SECRET ||
-        !env.FEISHU_BASE_ID ||
-        !env.FEISHU_QUESTION_TABLE_ID
-      ) {
-        return json(
-          {
-            error: "飞书环境变量未配置完整",
-            need: [
-              "FEISHU_APP_ID",
-              "FEISHU_APP_SECRET",
-              "FEISHU_BASE_ID",
-              "FEISHU_QUESTION_TABLE_ID",
-            ],
-          },
-          500
-        );
-      }
-
-      const token = await getTenantToken(env);
       const subject = url.searchParams.get("subject");
+      const day = url.searchParams.get("day");
       const status = url.searchParams.get("status") || "已发布";
 
-      let list;
-      if (subject) {
-        list = await listBySubject(env, token, subject, status);
-        // 飞书按科目 search 可能因选项值隐藏差异（尾随空格/全角）返回 0，
-        // 用全表拉取 + 内存归一化匹配兜底，避免误回退 local。
-        if (list.length === 0) {
-          const all = await listAllRecords(env, token);
-          const matched = all.filter(
-            (q) =>
-              norm(q.科目) === norm(subject) &&
-              (!status || norm(q.状态) === norm(status))
-          );
-          if (matched.length) list = matched;
+      const needFeishu = Boolean(
+        env.FEISHU_APP_ID &&
+          env.FEISHU_APP_SECRET &&
+          env.FEISHU_BASE_ID &&
+          env.FEISHU_QUESTION_TABLE_ID
+      );
+
+      let list = [];
+      let source = "unknown";
+      if (needFeishu) {
+        try {
+          const token = await getTenantToken(env);
+          if (subject) {
+            list = await listBySubject(env, token, subject, status);
+            // 飞书按科目 search 可能因选项值隐藏差异返回 0，用全表兜底
+            if (list.length === 0) {
+              const all = await listAllRecords(env, token);
+              const matched = all.filter(
+                (q) =>
+                  norm(q.科目) === norm(subject) &&
+                  (!status || norm(q.状态) === norm(status))
+              );
+              if (matched.length) list = matched;
+            }
+          } else {
+            list = await listAllRecords(env, token);
+          }
+          source = "feishu";
+        } catch (e) {
+          list = [];
+          source = "unknown";
         }
-      } else {
-        list = await listAllRecords(env, token);
       }
 
       list = list.filter((q) => {
@@ -249,24 +276,28 @@ export async function onRequest(context) {
       });
       list.sort((a, b) => (a.排序 || 0) - (b.排序 || 0));
 
-      let source = "feishu";
-      // 飞书暂缺该科目数据时，回退同源静态资源（如 /data/questions.理论法.json）
-      if (list.length === 0 && subject) {
-        try {
-          const localRes = await fetch(
-            new URL(`/data/questions.${encodeURIComponent(subject)}.json`, request.url)
-          );
-          if (localRes.ok) {
-            const local = await localRes.json();
-            const localList = (local.questions || local).filter(
-              (q) => (!q.状态 || q.状态 === status) && q.题目ID && q.题干
-            );
-            if (localList.length) {
-              list = localList;
-              source = "local";
-            }
-          }
-        } catch (e) { /* 忽略本地回退失败 */ }
+      // 按「天数」筛选（学习计划逐日题量）
+      if (day) {
+        const dayMap = await fetchDayMap(request);
+        const dn = Number(day);
+        list = list.filter((q) => dayMap[q.题目ID] === dn);
+      }
+
+      // 飞书缺失/失败时的本地回退（按科目或天数）
+      if (list.length === 0 && (subject || day)) {
+        const local = await fetchAllLocal(request, status);
+        const dayMap = await fetchDayMap(request);
+        const dn = day ? Number(day) : null;
+        const localList = local.filter((q) => {
+          if (status && q.状态 && norm(q.状态) !== norm(status)) return false;
+          if (subject && q.科目 && norm(q.科目) !== norm(subject)) return false;
+          if (dn && dayMap[q.题目ID] !== dn) return false;
+          return Boolean(q.题目ID && q.题干);
+        });
+        if (localList.length) {
+          list = localList;
+          source = "local";
+        }
       }
 
       return json({ total: list.length, questions: list, source });

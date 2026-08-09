@@ -56,7 +56,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <button data-nav="practice" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
           <div class="text-xl font-semibold mb-1">📝 刷题</div>
-          <p class="text-sm text-slate-500">按科目抽题练习，答完即时判分并展示解析与考点。</p>
+          <p class="text-sm text-slate-500">按学习计划的天数抽题练习，答完即时判分并展示解析与考点。</p>
         </button>
         <button data-nav="wrong" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
           <div class="text-xl font-semibold mb-1">📒 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
@@ -87,16 +87,8 @@
 
         <div class="bg-white border rounded-xl p-5 shadow-sm text-center">
           <div class="flex items-center gap-2 mb-3">
-            <select id="subject-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
-              <option value="">全部科目</option>
-              <option value="民法">民法</option>
-              <option value="刑法">刑法</option>
-              <option value="民诉">民诉</option>
-              <option value="刑事诉讼法">刑诉</option>
-              <option value="理论法">理论法</option>
-              <option value="商经知">商经知</option>
-              <option value="三国法">三国法</option>
-              <option value="行政法" selected>行政法</option>
+            <select id="day-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
+              <option value="1">Day1 · 加载中…</option>
             </select>
             <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-xs"></span>
           </div>
@@ -169,8 +161,13 @@
       // { name: "统计表",   url: "https://www.feishu.cn/base/aaaaaaaa?table=bbbbbbbb&mode=view" },
     ];
 
-    let allQuestions = [];   // 当前科目下题库
+    let allQuestions = [];   // 当前天数下题库
     let questions = [];      // 当前练习队列
+    let ALL_Q = [];          // 全库缓存（用于按天筛选）
+    let ALL_Q_SOURCE = "?";  // 全库来源
+    let DAY_MAP = {};        // 题目ID -> 天数
+    let DAY_META = [];       // 天数下拉元数据
+    let currentDay = 1;
     let idx = 0;
     let selected = new Set();
     let submitted = false;
@@ -345,7 +342,7 @@
         document.getElementById("empty-state").classList.remove("hidden");
         document.getElementById("empty-state").textContent =
           practiceMode === "wrong"
-            ? "错题本为空，或当前科目下没有对应错题。"
+            ? "错题本为空，或当前天数下没有对应错题。"
             : "暂无题目。请导入飞书表，或确认 data/questions.sample.json 存在。";
         return;
       }
@@ -429,8 +426,10 @@
     // ---------- 错题列表 ----------
     function renderWrongList() {
       const list = wrongBookList();
-      const subject = document.getElementById("subject-select").value;
-      const filtered = subject ? list.filter((x) => x.科目 === subject) : list;
+      const day = document.getElementById("day-select").value;
+      const filtered = day
+        ? list.filter((x) => String(DAY_MAP[x.题目ID]) === String(day))
+        : list;
 
       updateWrongBadge();
       const wrap = document.getElementById("wrong-list");
@@ -485,8 +484,10 @@
       if (onlyIds && onlyIds.length) {
         list = onlyIds.map((id) => book[id]).filter(Boolean);
       } else {
-        const subject = document.getElementById("subject-select").value;
-        list = wrongBookList().filter((x) => !subject || x.科目 === subject);
+        const day = document.getElementById("day-select").value;
+        list = wrongBookList().filter(
+          (x) => !day || String(DAY_MAP[x.题目ID]) === String(day)
+        );
       }
       if (!list.length) {
         alert("没有可重练的错题");
@@ -509,7 +510,7 @@
       btn.onclick = () => {
         const v = btn.dataset.nav;
         if (v === "practice") {
-          document.getElementById("subject-select").value = "行政法";
+          document.getElementById("day-select").value = "1";
           switchView("practice");
           loadQuestions();
         } else if (v === "wrong") {
@@ -565,10 +566,54 @@
       }
     };
     document.getElementById("reload-btn").onclick = () => loadQuestions();
-    document.getElementById("subject-select").onchange = () => {
+    document.getElementById("day-select").onchange = () => {
       if (currentView === "wrong") renderWrongList();
       else loadQuestions();
     };
+
+    // ---------- 天数下拉元数据 + 全库缓存 ----------
+    async function loadDayMeta() {
+      try {
+        const [meta, map] = await Promise.all([
+          fetch("/data/day_meta.json").then((r) => r.json()),
+          fetch("/data/day_map.json").then((r) => r.json()),
+        ]);
+        DAY_META = meta || [];
+        DAY_MAP = map || {};
+        const sel = document.getElementById("day-select");
+        sel.innerHTML = DAY_META.map(
+          (x) => `<option value="${x.day}">${x.label}</option>`
+        ).join("");
+      } catch (e) {
+        console.warn("天数元数据加载失败", e);
+      }
+    }
+
+    async function ensureAll() {
+      if (ALL_Q.length) return;
+      const res = await fetch(`${API_BASE}/questions`); // 全库
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "加载失败");
+      ALL_Q = data.questions || [];
+      ALL_Q_SOURCE = data.source || "?";
+    }
+
+    function applyDay(day) {
+      currentDay = Number(day);
+      document.getElementById("day-select").value = String(currentDay);
+      const list = ALL_Q.filter((q) => DAY_MAP[q.题目ID] === currentDay);
+      allQuestions = list;
+      practiceMode = "all";
+      questions = allQuestions.slice();
+      idx = 0;
+      selected = new Set();
+      submitted = false;
+      const meta = DAY_META.find((x) => x.day === currentDay);
+      document.getElementById("sync-status").textContent =
+        `✓ ${meta ? meta.label : "Day" + currentDay} · ${questions.length} 题 · 来源 ${ALL_Q_SOURCE} · 错题 ${wrongCount()}`;
+      if (currentView === "practice") render();
+      else renderWrongList();
+    }
 
     document.getElementById("wrong-practice-all").onclick = () => startWrongPractice();
     document.getElementById("wrong-clear").onclick = () => {
@@ -584,43 +629,14 @@
     };
 
     async function loadQuestions() {
-      const subject = document.getElementById("subject-select").value;
-      const qs = subject ? `?subject=${encodeURIComponent(subject)}` : "";
       document.getElementById("sync-status").textContent = "加载中…";
       try {
-        const res = await fetch(`${API_BASE}/questions${qs}`);
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "加载失败");
-        let list = data.questions || [];
-        let source = data.source || "unknown";
-        // 飞书暂缺该科目数据时，回退本地打包题库（如 /data/questions.理论法.json）
-        if (list.length === 0 && subject) {
-          try {
-            const localRes = await fetch(`/data/questions.${encodeURIComponent(subject)}.json`);
-            if (localRes.ok) {
-              const local = await localRes.json();
-              const localList = (local.questions || local).filter(
-                (q) => (!q.状态 || q.状态 === "已发布") && q.题目ID && q.题干
-              );
-              if (localList.length) {
-                list = localList;
-                source = "local";
-              }
-            }
-          } catch (e) { /* 忽略本地回退失败 */ }
-        }
-        allQuestions = list;
-        practiceMode = "all";
-        questions = allQuestions.slice();
-        idx = 0;
-        selected = new Set();
-        submitted = false;
-        document.getElementById("sync-status").textContent =
-          `✓ 已同步 ${questions.length} 题 · 来源 ${source} · 错题 ${wrongCount()}`;
-        if (currentView === "practice") render();
-        else renderWrongList();
+        await ensureAll();
+        const day = document.getElementById("day-select").value || 1;
+        applyDay(day);
       } catch (err) {
         document.getElementById("sync-status").textContent = "加载失败: " + err.message;
+        ALL_Q = [];
         allQuestions = [];
         questions = [];
         render();
@@ -630,8 +646,10 @@
     checkAuth();
     updateWrongBadge();
     switchView("home");
-    document.getElementById("subject-select").value = "行政法";
-    loadQuestions();
+    loadDayMeta().then(() => {
+      document.getElementById("day-select").value = "1";
+      loadQuestions();
+    });
 
     // 滚动时自动隐藏/显示页头
     (function () {
