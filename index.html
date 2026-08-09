@@ -27,12 +27,15 @@
 
     /* ===== 深空宇宙背景（墨渊·阅读宇宙 INK ABYSS 风格） ===== */
     body.cosmic {
-      background-color: #060814;
+      background-color: #070a18;
       background-image:
-        radial-gradient(1100px 700px at 82% 6%,   rgba(99,102,241,0.22), transparent 60%),
-        radial-gradient(900px 600px at 8% 18%,    rgba(56,189,248,0.16), transparent 55%),
-        radial-gradient(1000px 820px at 50% 108%, rgba(168,85,247,0.18), transparent 60%),
-        radial-gradient(720px 520px at 26% 78%,   rgba(45,212,191,0.10), transparent 60%);
+        radial-gradient(1100px 700px at 86% 2%,   rgba(99,102,241,0.23), transparent 60%),
+        radial-gradient(900px 600px at 4% 20%,    rgba(56,189,248,0.16), transparent 55%),
+        radial-gradient(1000px 820px at 52% 108%, rgba(168,85,247,0.18), transparent 60%),
+        radial-gradient(720px 520px at 20% 74%,   rgba(45,212,191,0.10), transparent 60%),
+        linear-gradient(120deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(30deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: auto, auto, auto, auto, 180px 180px, 240px 240px;
       background-attachment: fixed;
       color: #e8ecf7;
     }
@@ -87,6 +90,100 @@
     /* hover 玻璃态 */
     body.cosmic .hover\:bg-slate-50:hover { background: rgba(51,65,85,.6) !important; }
     body.cosmic .hover\:bg-red-50:hover   { background: rgba(220,38,38,.3) !important; }
+
+    body.cosmic header {
+      background: rgba(7,10,24,.66) !important;
+      border-color: rgba(148,163,184,.18) !important;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    body.cosmic header > div { position: relative; }
+    body.cosmic header > div::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: #7dd3fc; box-shadow: 0 0 14px rgba(125,211,252,.9);
+      margin-right: 9px; flex: 0 0 auto; animation: pulseDot 3s ease-in-out infinite;
+    }
+    @keyframes pulseDot { 50% { opacity: .45; transform: scale(.72); } }
+    body.cosmic header > div > div:first-child { letter-spacing: .09em; color: #eef2ff !important; }
+    body.cosmic header button,
+    body.cosmic select,
+    body.cosmic input {
+      background: rgba(15,23,42,.66) !important;
+      color: #e8ecf7 !important;
+      border-color: rgba(148,163,184,.28) !important;
+    }
+    body.cosmic select option { background: #111936; color: #eef2ff; }
+    body.cosmic button { transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+    body.cosmic button:hover { border-color: rgba(125,211,252,.62) !important; }
+    body.cosmic button:active { transform: scale(.98); }
+
+    body.cosmic main { position: relative; }
+    body.cosmic main::before,
+    body.cosmic main::after {
+      content: ""; position: absolute; pointer-events: none; border: 1px solid rgba(125,211,252,.11);
+      border-radius: 50%; transform: rotate(-18deg); z-index: -1;
+    }
+    body.cosmic main::before { width: 540px; height: 180px; right: -180px; top: 70px; }
+    body.cosmic main::after { width: 420px; height: 140px; left: -180px; top: 310px; border-color: rgba(196,181,253,.10); }
+
+    body.cosmic #view-home { padding-top: 18px; }
+    body.cosmic #view-home::before {
+      content: "LAW EXAM CONSTELLATION  /  STUDY OBSERVATORY";
+      display: block; color: #7dd3fc; font-size: 10pt !important; letter-spacing: .17em; margin-bottom: 14px;
+      opacity: .78;
+    }
+    body.cosmic #view-home h2 { font-size: 25pt !important; letter-spacing: -.02em; color: #f3f4ff !important; margin-bottom: 8px; }
+    body.cosmic #view-home h2::after {
+      content: "  /  在星海中完成你的法考轨迹"; font-size: 10pt !important; letter-spacing: .08em; color: #9fb0c9; font-weight: 400;
+    }
+    body.cosmic .cosmic-overview {
+      max-width: 660px; border-top: 1px solid rgba(148,163,184,.16); border-bottom: 1px solid rgba(148,163,184,.16);
+      padding: 13px 0 15px; margin-bottom: 22px;
+    }
+    body.cosmic .cosmic-overview > div { padding: 0 13px; border-left: 1px solid rgba(148,163,184,.14); }
+    body.cosmic .cosmic-overview > div:first-child { border-left: 0; padding-left: 0; }
+    body.cosmic .cosmic-overview span,
+    body.cosmic .cosmic-overview small { display: block; color: #93a4bd; font-size: 9pt !important; letter-spacing: .11em; }
+    body.cosmic .cosmic-overview strong { display: block; margin: 3px 0; color: #eef2ff; font-size: 19pt !important; font-weight: 600; letter-spacing: .02em; }
+    body.cosmic .nav-card {
+      min-height: 154px; padding: 24px !important; position: relative; overflow: hidden;
+      background: linear-gradient(145deg, rgba(20,30,66,.72), rgba(12,17,38,.66)) !important;
+      border-color: rgba(148,163,184,.22) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 20px 50px rgba(0,0,0,.18) !important;
+    }
+    body.cosmic .nav-card::after {
+      content: ""; position: absolute; width: 170px; height: 170px; right: -80px; top: -90px; border: 1px solid rgba(125,211,252,.2);
+      border-radius: 50%; box-shadow: 0 0 0 18px rgba(125,211,252,.035), 0 0 0 36px rgba(125,211,252,.025);
+    }
+    body.cosmic .nav-card:hover { transform: translateY(-3px); border-color: rgba(125,211,252,.55) !important; }
+    body.cosmic .nav-card > div:first-child { color: #f3f4ff !important; letter-spacing: .015em; }
+    body.cosmic .nav-card p { max-width: 29ch; line-height: 1.75; }
+
+    body.cosmic #quiz-panel > div:first-child { padding: 10px 14px; border: 1px solid rgba(148,163,184,.14); border-radius: 12px; background: rgba(15,23,42,.38); }
+    body.cosmic #quiz-panel > div:nth-child(2) {
+      background: linear-gradient(145deg, rgba(20,30,66,.78), rgba(9,14,31,.72)) !important;
+      border-color: rgba(148,163,184,.24) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 22px 60px rgba(0,0,0,.22) !important;
+    }
+    body.cosmic #stem { color: #f2f5ff !important; font-size: 15pt !important; line-height: 1.9; }
+    body.cosmic #result-box { border-color: rgba(148,163,184,.18) !important; }
+    body.cosmic #result-explain { border: 1px solid rgba(148,163,184,.16); }
+    body.cosmic #badge-type { background: rgba(99,102,241,.28) !important; color: #c4b5fd !important; border: 1px solid rgba(167,139,250,.32); }
+    body.cosmic #submit-btn, body.cosmic #wrong-practice-all { background: #4f46a5 !important; border: 1px solid rgba(196,181,253,.35); }
+    body.cosmic #submit-btn:hover, body.cosmic #wrong-practice-all:hover { background: #635bca !important; }
+    body.cosmic #empty-state, body.cosmic #wrong-empty, body.cosmic #feishu-empty { background: rgba(15,23,42,.6) !important; }
+    body.cosmic code { color: #c4b5fd; }
+
+    @media (max-width: 640px) {
+      body.cosmic #view-home h2 { font-size: 21pt !important; }
+      body.cosmic #view-home h2::after { display: block; margin-top: 5px; }
+      body.cosmic .nav-card { min-height: 132px; }
+      body.cosmic main::before, body.cosmic main::after { opacity: .45; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.cosmic::before, body.cosmic header > div::before { animation: none; }
+      body.cosmic button { transition: none; }
+    }
   </style>
 </head>
 <body class="cosmic text-slate-800 min-h-screen">
@@ -116,17 +213,22 @@
     <!-- 导航首页 -->
     <section id="view-home">
       <h2 class="text-lg font-semibold mb-4">请选择进入：</h2>
+      <div class="cosmic-overview grid grid-cols-3 gap-2 mb-5">
+        <div><span>QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
+        <div><span>ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
+        <div><span>DEADLINE</span><strong>08.30</strong><small>一遍完成目标</small></div>
+      </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <button data-nav="practice" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">📝 刷题</div>
+          <div class="text-xl font-semibold mb-1">01 / 刷题</div>
           <p class="text-sm text-slate-500">按学习计划的天数抽题练习，答完即时判分并展示解析与考点。</p>
         </button>
         <button data-nav="wrong" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">📒 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
+          <div class="text-xl font-semibold mb-1">02 / 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
           <p class="text-sm text-slate-500">浏览与重练答错的题目，数据保存在本机浏览器。</p>
         </button>
         <button data-nav="feishu" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">📊 飞书表格</div>
+          <div class="text-xl font-semibold mb-1">03 / 飞书表格</div>
           <p class="text-sm text-slate-500">查看嵌入的飞书多维表格（需配置公开嵌入链接）。</p>
         </button>
       </div>
