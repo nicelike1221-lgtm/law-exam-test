@@ -11,3 +11,4 @@ scripts/.feishu-image-cache.json
 .vscode/
 __pycache__/
 .idea/
+data/_backup_*/
