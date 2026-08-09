@@ -16,12 +16,12 @@
     "day": 2,
     "date": "2026-08-10",
     "weekday": "周一",
-    "label": "Day2 · 行政法104",
-    "total": 104,
+    "label": "Day2 · 行政法82",
+    "total": 82,
     "spans": [
       {
         "subject": "行政法",
-        "count": 104
+        "count": 82
       }
     ]
   },
@@ -29,12 +29,12 @@
     "day": 3,
     "date": "2026-08-11",
     "weekday": "周二",
-    "label": "Day3 · 行政法104",
-    "total": 104,
+    "label": "Day3 · 行政法82",
+    "total": 82,
     "spans": [
       {
         "subject": "行政法",
-        "count": 104
+        "count": 82
       }
     ]
   },
@@ -42,12 +42,12 @@
     "day": 4,
     "date": "2026-08-12",
     "weekday": "周三",
-    "label": "Day4 · 行政法104",
-    "total": 104,
+    "label": "Day4 · 行政法82",
+    "total": 82,
     "spans": [
       {
         "subject": "行政法",
-        "count": 104
+        "count": 82
       }
     ]
   },
@@ -55,16 +55,12 @@
     "day": 5,
     "date": "2026-08-13",
     "weekday": "周四",
-    "label": "Day5 · 行政法28 + 商经知76",
-    "total": 104,
+    "label": "Day5 · 行政法82",
+    "total": 82,
     "spans": [
       {
         "subject": "行政法",
-        "count": 28
-      },
-      {
-        "subject": "商经知",
-        "count": 76
+        "count": 82
       }
     ]
   },
@@ -72,12 +68,16 @@
     "day": 6,
     "date": "2026-08-14",
     "weekday": "周五",
-    "label": "Day6 · 商经知104",
-    "total": 104,
+    "label": "Day6 · 行政法12 + 理论法70",
+    "total": 82,
     "spans": [
       {
-        "subject": "商经知",
-        "count": 104
+        "subject": "行政法",
+        "count": 12
+      },
+      {
+        "subject": "理论法",
+        "count": 70
       }
     ]
   },
@@ -85,12 +85,12 @@
     "day": 7,
     "date": "2026-08-15",
     "weekday": "周六",
-    "label": "Day7 · 商经知104",
-    "total": 104,
+    "label": "Day7 · 理论法82",
+    "total": 82,
     "spans": [
       {
-        "subject": "商经知",
-        "count": 104
+        "subject": "理论法",
+        "count": 82
       }
     ]
   },
@@ -98,12 +98,12 @@
     "day": 8,
     "date": "2026-08-16",
     "weekday": "周日",
-    "label": "Day8 · 商经知103",
-    "total": 103,
+    "label": "Day8 · 理论法82",
+    "total": 82,
     "spans": [
       {
-        "subject": "商经知",
-        "count": 103
+        "subject": "理论法",
+        "count": 82
       }
     ]
   },
@@ -111,16 +111,12 @@
     "day": 9,
     "date": "2026-08-17",
     "weekday": "周一",
-    "label": "Day9 · 商经知71 + 理论法32",
-    "total": 103,
+    "label": "Day9 · 理论法82",
+    "total": 82,
     "spans": [
       {
-        "subject": "商经知",
-        "count": 71
-      },
-      {
         "subject": "理论法",
-        "count": 32
+        "count": 82
       }
     ]
   },
@@ -128,12 +124,12 @@
     "day": 10,
     "date": "2026-08-18",
     "weekday": "周二",
-    "label": "Day10 · 理论法103",
-    "total": 103,
+    "label": "Day10 · 理论法82",
+    "total": 82,
     "spans": [
       {
         "subject": "理论法",
-        "count": 103
+        "count": 82
       }
     ]
   },
@@ -141,12 +137,12 @@
     "day": 11,
     "date": "2026-08-19",
     "weekday": "周三",
-    "label": "Day11 · 理论法103",
-    "total": 103,
+    "label": "Day11 · 理论法82",
+    "total": 82,
     "spans": [
       {
         "subject": "理论法",
-        "count": 103
+        "count": 82
       }
     ]
   },
@@ -154,12 +150,16 @@
     "day": 12,
     "date": "2026-08-20",
     "weekday": "周四",
-    "label": "Day12 · 理论法103",
-    "total": 103,
+    "label": "Day12 · 理论法36 + 三国法45",
+    "total": 81,
     "spans": [
       {
         "subject": "理论法",
-        "count": 103
+        "count": 36
+      },
+      {
+        "subject": "三国法",
+        "count": 45
       }
     ]
   },
@@ -167,12 +167,12 @@
     "day": 13,
     "date": "2026-08-21",
     "weekday": "周五",
-    "label": "Day13 · 理论法103",
-    "total": 103,
+    "label": "Day13 · 三国法81",
+    "total": 81,
     "spans": [
       {
-        "subject": "理论法",
-        "count": 103
+        "subject": "三国法",
+        "count": 81
       }
     ]
   },
@@ -180,16 +180,12 @@
     "day": 14,
     "date": "2026-08-22",
     "weekday": "周六",
-    "label": "Day14 · 理论法72 + 三国法31",
-    "total": 103,
+    "label": "Day14 · 三国法81",
+    "total": 81,
     "spans": [
       {
-        "subject": "理论法",
-        "count": 72
-      },
-      {
         "subject": "三国法",
-        "count": 31
+        "count": 81
       }
     ]
   },
@@ -197,12 +193,12 @@
     "day": 15,
     "date": "2026-08-23",
     "weekday": "周日",
-    "label": "Day15 · 三国法103",
-    "total": 103,
+    "label": "Day15 · 三国法81",
+    "total": 81,
     "spans": [
       {
         "subject": "三国法",
-        "count": 103
+        "count": 81
       }
     ]
   },
@@ -210,12 +206,12 @@
     "day": 16,
     "date": "2026-08-24",
     "weekday": "周一",
-    "label": "Day16 · 三国法103",
-    "total": 103,
+    "label": "Day16 · 三国法81",
+    "total": 81,
     "spans": [
       {
         "subject": "三国法",
-        "count": 103
+        "count": 81
       }
     ]
   },
@@ -223,12 +219,16 @@
     "day": 17,
     "date": "2026-08-25",
     "weekday": "周二",
-    "label": "Day17 · 三国法103",
-    "total": 103,
+    "label": "Day17 · 三国法3 + 刑事诉讼法78",
+    "total": 81,
     "spans": [
       {
         "subject": "三国法",
-        "count": 103
+        "count": 3
+      },
+      {
+        "subject": "刑事诉讼法",
+        "count": 78
       }
     ]
   },
@@ -236,16 +236,12 @@
     "day": 18,
     "date": "2026-08-26",
     "weekday": "周三",
-    "label": "Day18 · 三国法32 + 刑事诉讼法71",
-    "total": 103,
+    "label": "Day18 · 刑事诉讼法81",
+    "total": 81,
     "spans": [
       {
-        "subject": "三国法",
-        "count": 32
-      },
-      {
         "subject": "刑事诉讼法",
-        "count": 71
+        "count": 81
       }
     ]
   },
@@ -253,12 +249,12 @@
     "day": 19,
     "date": "2026-08-27",
     "weekday": "周四",
-    "label": "Day19 · 刑事诉讼法103",
-    "total": 103,
+    "label": "Day19 · 刑事诉讼法81",
+    "total": 81,
     "spans": [
       {
         "subject": "刑事诉讼法",
-        "count": 103
+        "count": 81
       }
     ]
   },
@@ -266,12 +262,12 @@
     "day": 20,
     "date": "2026-08-28",
     "weekday": "周五",
-    "label": "Day20 · 刑事诉讼法103",
-    "total": 103,
+    "label": "Day20 · 刑事诉讼法81",
+    "total": 81,
     "spans": [
       {
         "subject": "刑事诉讼法",
-        "count": 103
+        "count": 81
       }
     ]
   },
@@ -279,16 +275,16 @@
     "day": 21,
     "date": "2026-08-29",
     "weekday": "周六",
-    "label": "Day21 · 刑事诉讼法93 + 民诉10",
-    "total": 103,
+    "label": "Day21 · 刑事诉讼法49 + 民诉32",
+    "total": 81,
     "spans": [
       {
         "subject": "刑事诉讼法",
-        "count": 93
+        "count": 49
       },
       {
         "subject": "民诉",
-        "count": 10
+        "count": 32
       }
     ]
   },
@@ -296,12 +292,12 @@
     "day": 22,
     "date": "2026-08-30",
     "weekday": "周日",
-    "label": "Day22 · 民诉103",
-    "total": 103,
+    "label": "Day22 · 民诉81",
+    "total": 81,
     "spans": [
       {
         "subject": "民诉",
-        "count": 103
+        "count": 81
       }
     ]
   }
