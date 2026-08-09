@@ -24,9 +24,72 @@
     #stem, #result-explain { text-align: justify; text-indent: 2em; }
     /* 选项居左对齐（覆盖居中设置） */
     #options .option-btn { text-align: left; }
+
+    /* ===== 深空宇宙背景（墨渊·阅读宇宙 INK ABYSS 风格） ===== */
+    body.cosmic {
+      background-color: #060814;
+      background-image:
+        radial-gradient(1100px 700px at 82% 6%,   rgba(99,102,241,0.22), transparent 60%),
+        radial-gradient(900px 600px at 8% 18%,    rgba(56,189,248,0.16), transparent 55%),
+        radial-gradient(1000px 820px at 50% 108%, rgba(168,85,247,0.18), transparent 60%),
+        radial-gradient(720px 520px at 26% 78%,   rgba(45,212,191,0.10), transparent 60%);
+      background-attachment: fixed;
+      color: #e8ecf7;
+    }
+    body.cosmic::before {
+      content: "";
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image:
+        radial-gradient(1.6px 1.6px at 20px 30px,  rgba(255,255,255,.90), transparent),
+        radial-gradient(1.4px 1.4px at 140px 90px, rgba(255,255,255,.70), transparent),
+        radial-gradient(1px 1px at 90px 170px,    rgba(255,255,255,.55), transparent),
+        radial-gradient(1px 1px at 210px 60px,    rgba(255,255,255,.45), transparent),
+        radial-gradient(1.3px 1.3px at 60px 220px, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px 1px at 175px 200px,   rgba(255,255,255,.40), transparent);
+      background-size: 260px 260px;
+      animation: starTwinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes starTwinkle { from { opacity: .5; } to { opacity: 1; } }
+
+    /* 基础文字色（覆盖 slate-* 在深色上的不可读） */
+    body.cosmic .text-slate-800 { color: #e8ecf7 !important; }
+    body.cosmic .text-slate-600 { color: #c6d0e2 !important; }
+    body.cosmic .text-slate-500 { color: #9fb0c9 !important; }
+    body.cosmic .text-green-700 { color: #86efac !important; }
+    body.cosmic .text-blue-700  { color: #bfdbfe !important; }
+    body.cosmic .text-red-700   { color: #fca5a5 !important; }
+
+    /* 白色表面 → 深空玻璃 */
+    body.cosmic .bg-white {
+      background: rgba(17,24,48,.58) !important;
+      color: #e8ecf7 !important;
+      border-color: rgba(255,255,255,.14) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    body.cosmic .bg-slate-50  { background: rgba(30,41,70,.5) !important; color: #e8ecf7 !important; }
+    body.cosmic .bg-blue-50   { background: rgba(37,99,235,.25) !important; color: #bfdbfe !important; }
+    body.cosmic .bg-red-50    { background: rgba(220,38,38,.18) !important; color: #fca5a5 !important; }
+    body.cosmic .bg-red-100   { background: rgba(220,38,38,.22) !important; color: #fecaca !important; }
+    body.cosmic .bg-slate-900\/60 { background: rgba(2,6,23,.72) !important; }
+
+    /* 边框 */
+    body.cosmic .border { border-color: rgba(255,255,255,.14) !important; }
+    body.cosmic .border-slate-200 { border-color: rgba(255,255,255,.14) !important; }
+    body.cosmic .border-red-200 { border-color: rgba(248,113,113,.4) !important; }
+
+    /* 选项按钮（透明底→玻璃，选中/对错用深色半透明） */
+    body.cosmic .option-btn { background: rgba(30,41,70,.45) !important; color: #e8ecf7 !important; }
+    body.cosmic .option-btn.selected { background: rgba(37,99,235,.35) !important; color: #e8ecf7 !important; }
+    body.cosmic .option-btn.correct  { background: rgba(22,163,74,.30) !important; color: #e8ecf7 !important; }
+    body.cosmic .option-btn.wrong    { background: rgba(220,38,38,.30) !important; color: #e8ecf7 !important; }
+
+    /* hover 玻璃态 */
+    body.cosmic .hover\:bg-slate-50:hover { background: rgba(51,65,85,.6) !important; }
+    body.cosmic .hover\:bg-red-50:hover   { background: rgba(220,38,38,.3) !important; }
   </style>
 </head>
-<body class="text-slate-800 min-h-screen">
+<body class="cosmic text-slate-800 min-h-screen">
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
     <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
@@ -88,7 +151,28 @@
         <div class="bg-white border rounded-xl p-5 shadow-sm text-center">
           <div class="flex items-center gap-2 mb-3">
             <select id="day-select" class="border rounded-lg px-2 py-1 text-sm bg-white">
-              <option value="1">Day1 · 加载中…</option>
+              <option value="1">Day1 · 行政法80</option>
+              <option value="2">Day2 · 行政法95</option>
+              <option value="3">Day3 · 行政法95</option>
+              <option value="4">Day4 · 行政法64 + 商经知31</option>
+              <option value="5">Day5 · 商经知95</option>
+              <option value="6">Day6 · 商经知95</option>
+              <option value="7">Day7 · 商经知95</option>
+              <option value="8">Day8 · 商经知95</option>
+              <option value="9">Day9 · 商经知47 + 理论法48</option>
+              <option value="10">Day10 · 理论法95</option>
+              <option value="11">Day11 · 理论法94</option>
+              <option value="12">Day12 · 理论法94</option>
+              <option value="13">Day13 · 理论法94</option>
+              <option value="14">Day14 · 理论法91 + 三国法3</option>
+              <option value="15">Day15 · 三国法94</option>
+              <option value="16">Day16 · 三国法94</option>
+              <option value="17">Day17 · 三国法81 + 刑事诉讼法13</option>
+              <option value="18">Day18 · 刑事诉讼法94</option>
+              <option value="19">Day19 · 刑事诉讼法94</option>
+              <option value="20">Day20 · 刑事诉讼法94</option>
+              <option value="21">Day21 · 刑事诉讼法75 + 民诉19</option>
+              <option value="22">Day22 · 民诉94</option>
             </select>
             <span id="badge-type" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-xs"></span>
           </div>
@@ -578,14 +662,22 @@
           fetch("/data/day_meta.json").then((r) => r.json()),
           fetch("/data/day_map.json").then((r) => r.json()),
         ]);
-        DAY_META = meta || [];
         DAY_MAP = map || {};
-        const sel = document.getElementById("day-select");
-        sel.innerHTML = DAY_META.map(
-          (x) => `<option value="${x.day}">${x.label}</option>`
-        ).join("");
+        // 下拉框选项已静态写入 HTML；这里仅把 label 用于同步状态栏。
+        // 若 day_meta.json 失败，尝试从 day_map 的键反推最小 label 集合。
+        if (meta && meta.length) {
+          DAY_META = meta;
+        } else {
+          const maxDay = Object.values(DAY_MAP).reduce((a, b) => Math.max(a, b), 0);
+          DAY_META = Array.from({ length: maxDay }, (_, i) => ({
+            day: i + 1,
+            label: "Day" + (i + 1),
+          }));
+        }
       } catch (e) {
         console.warn("天数元数据加载失败", e);
+        document.getElementById("sync-status").textContent =
+          "天数配置加载失败，请刷新页面（若持续失败检查 /data/day_map.json）";
       }
     }
 
@@ -632,6 +724,9 @@
       document.getElementById("sync-status").textContent = "加载中…";
       try {
         await ensureAll();
+        if (!Object.keys(DAY_MAP).length) {
+          throw new Error("天数配置未加载，请刷新页面");
+        }
         const day = document.getElementById("day-select").value || 1;
         applyDay(day);
       } catch (err) {
