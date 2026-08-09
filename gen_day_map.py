@@ -40,7 +40,11 @@ for s, f in SUBJECT_FILES:
     path = os.path.join(DATA, f)
     data = json.load(open(path, encoding="utf-8"))
     if isinstance(data, dict):
-        data = data.get("questions") or data.get("items") or list(data.values())[0]
+        # 注意：空列表 [] 为假值，必须显式判断 None，不能让它 fallback 到 values()[0]
+        arr = data.get("questions")
+        if arr is None:
+            arr = data.get("items") or []
+        data = arr
     qs_by_subj[s] = serveable(data)
     TOTAL += len(qs_by_subj[s])
 
