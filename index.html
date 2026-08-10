@@ -408,7 +408,7 @@
         </button>
         <button data-nav="feishu" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
           <div class="text-xl font-semibold mb-1">03 / 飞书表格</div>
-          <p class="text-sm text-slate-500">查看嵌入的飞书多维表格（需配置公开嵌入链接）。</p>
+          <p class="text-sm text-slate-500">点击进入新建的飞书多维表格，查看与管理你的学习数据。</p>
         </button>
       </div>
     </section>
@@ -535,9 +535,10 @@
     // 飞书多维表格嵌入配置：每张表 = 一个子标签。
     // 在飞书把对应多维表格设为「公开分享 + 允许嵌入」后，把分享链接（iframe 的 src）填到 url。
     const FEISHU_TABLES = [
-      // 示例：
-      // { name: "题目总表", url: "https://www.feishu.cn/base/xxxxxxxx?table=yyyyyyyy&view=zzzzzz&mode=view" },
-      // { name: "统计表",   url: "https://www.feishu.cn/base/aaaaaaaa?table=bbbbbbbb&mode=view" },
+      {
+        name: "新建飞书表格",
+        url: "https://rcnv9xvjwka4.feishu.cn/base/HEyFbYUAWaZeoXsyihVcMzYSnEb?from=from_copylink"
+      }
     ];
 
     let allQuestions = [];   // 当前天数下题库
