@@ -325,6 +325,19 @@
     }
     body.cosmic .nav-card::after { border-color: rgba(49,93,168,.22) !important; box-shadow: 0 0 0 18px rgba(49,93,168,.035), 0 0 0 36px rgba(49,93,168,.02) !important; }
     body.cosmic .nav-card > div:first-child { color: #30383d !important; }
+    body.cosmic .subject-picker-kicker { color: #315da8; font-size: 9pt !important; letter-spacing: .22em; }
+    body.cosmic .subject-card {
+      display: block; width: 100%; min-height: 132px; padding: 20px; text-align: left;
+      background: rgba(247,245,238,.76) !important; color: #30383d !important;
+      border: 1px solid rgba(56,62,66,.18); border-radius: 14px;
+      box-shadow: 0 10px 26px rgba(65,63,56,.07), inset 0 1px 0 rgba(255,255,255,.72);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    body.cosmic .subject-card:hover { transform: translateY(-2px); border-color: rgba(49,93,168,.5); background: rgba(255,255,255,.82) !important; }
+    body.cosmic .subject-card:active { transform: scale(.985); }
+    body.cosmic .subject-card-title { font-size: 16pt !important; font-weight: 600; }
+    body.cosmic .subject-card-meta { color: #697176; font-size: 10pt !important; margin-top: 7px; }
+    body.cosmic .subject-card-arrow { float: right; color: #315da8; font-size: 16pt !important; }
     body.cosmic .option-btn {
       background: rgba(255,255,255,.32) !important;
       color: #30383d !important;
@@ -398,6 +411,20 @@
           <p class="text-sm text-slate-500">查看嵌入的飞书多维表格（需配置公开嵌入链接）。</p>
         </button>
       </div>
+    </section>
+
+    <!-- 科目选择 -->
+    <section id="view-subjects" class="hidden">
+      <div class="subject-picker-head flex items-end justify-between gap-4 mb-5">
+        <div>
+          <div class="subject-picker-kicker">SELECT A SUBJECT</div>
+          <h2 class="text-xl font-semibold mt-1">选择科目开始刷题</h2>
+          <p class="text-sm text-slate-500 mt-1">先选一门科目，进入后从该科目题库开始练习。</p>
+        </div>
+        <button id="subjects-back-home" class="border px-3 py-1.5 rounded-lg text-sm">返回首页</button>
+      </div>
+      <div id="subject-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      <div id="subject-empty" class="hidden bg-white border rounded-xl p-8 text-center text-slate-500">题库同步中，请稍候。</div>
     </section>
 
     <!-- 刷题 -->
@@ -520,6 +547,7 @@
     let DAY_MAP = {};        // 题目ID -> 天数
     let DAY_META = [];       // 天数下拉元数据
     let currentDay = 1;
+    let selectedSubject = "";
     let idx = 0;
     let selected = new Set();
     let submitted = false;
@@ -649,11 +677,77 @@
       currentView = view;
       const home = view === "home";
       document.getElementById("view-home").classList.toggle("hidden", !home);
+      document.getElementById("view-subjects").classList.toggle("hidden", view !== "subjects");
       document.getElementById("view-practice").classList.toggle("hidden", view !== "practice");
       document.getElementById("view-wrong").classList.toggle("hidden", view !== "wrong");
       document.getElementById("view-feishu").classList.toggle("hidden", view !== "feishu");
+      if (view === "subjects") renderSubjectPicker();
       if (view === "wrong") renderWrongList();
       if (view === "feishu") renderFeishuTabs();
+    }
+
+    function subjectLabel(subject) {
+      const labels = {
+        "行政法": "行政法（李佳）",
+        "商经知": "商法 · 经济法 · 知识产权法",
+        "理论法": "理论法",
+        "三国法": "国际公法 · 国际私法 · 国际经济法",
+        "刑事诉讼法": "刑事诉讼法",
+        "民诉": "民事诉讼法",
+        "民法": "民法"
+      };
+      return labels[subject] || subject;
+    }
+
+    function renderSubjectPicker() {
+      const grid = document.getElementById("subject-grid");
+      const empty = document.getElementById("subject-empty");
+      const counts = {};
+      for (const q of ALL_Q) {
+        const subject = String(q.科目 || "").trim();
+        if (subject) counts[subject] = (counts[subject] || 0) + 1;
+      }
+      const subjects = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      grid.innerHTML = "";
+      if (!subjects.length) {
+        empty.classList.remove("hidden");
+        return;
+      }
+      empty.classList.add("hidden");
+      subjects.forEach((subject, i) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "subject-card";
+        card.innerHTML = `<span class="subject-card-arrow">→</span><div class="subject-card-title">${escapeHtml(subjectLabel(subject))}</div><div class="subject-card-meta">${counts[subject]} 道已发布题目 · 点击进入刷题</div>`;
+        card.style.setProperty("--subject-index", String(i));
+        card.onclick = () => startSubjectPractice(subject);
+        grid.appendChild(card);
+      });
+    }
+
+    async function openSubjectPicker() {
+      switchView("subjects");
+      if (!ALL_Q.length) {
+        document.getElementById("subject-empty").classList.remove("hidden");
+        try { await ensureAll(); } catch (err) {
+          document.getElementById("subject-empty").textContent = "题库加载失败：" + err.message;
+          return;
+        }
+      }
+      renderSubjectPicker();
+    }
+
+    function startSubjectPractice(subject) {
+      selectedSubject = subject;
+      practiceMode = "subject";
+      questions = ALL_Q.filter((q) => String(q.科目 || "").trim() === subject);
+      allQuestions = questions.slice();
+      idx = 0;
+      selected = new Set();
+      submitted = false;
+      document.getElementById("sync-status").textContent = `✓ ${subjectLabel(subject)} · ${questions.length} 题 · 来源 ${ALL_Q_SOURCE}`;
+      switchView("practice");
+      render();
     }
 
     // ---------- 飞书表格多标签 ----------
@@ -706,6 +800,7 @@
       document.getElementById("q-total").textContent = String(questions.length);
       document.getElementById("q-meta").textContent = q.题目ID || "";
       document.getElementById("practice-mode-tag").classList.toggle("hidden", practiceMode !== "wrong");
+      document.getElementById("day-select").classList.toggle("hidden", practiceMode === "subject");
       document.getElementById("badge-type").textContent = q.题型 || "";
       document.getElementById("stem").textContent = q.题干 || "";
 
@@ -862,9 +957,7 @@
       btn.onclick = () => {
         const v = btn.dataset.nav;
         if (v === "practice") {
-          document.getElementById("day-select").value = "1";
-          switchView("practice");
-          loadQuestions();
+          openSubjectPicker();
         } else if (v === "wrong") {
           switchView("wrong");
         } else {
@@ -872,6 +965,8 @@
         }
       };
     });
+
+    document.getElementById("subjects-back-home").onclick = () => switchView("home");
 
     // 同步首页错题数角标
     function updateHomeWrongBadge() {
