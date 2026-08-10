@@ -128,12 +128,12 @@
     "day": 10,
     "date": "2026-08-18",
     "weekday": "周二",
-    "label": "Day10 · 理论法104",
-    "total": 104,
+    "label": "Day10 · 理论法103",
+    "total": 103,
     "spans": [
       {
         "subject": "理论法",
-        "count": 104
+        "count": 103
       }
     ]
   },
@@ -141,12 +141,12 @@
     "day": 11,
     "date": "2026-08-19",
     "weekday": "周三",
-    "label": "Day11 · 理论法104",
-    "total": 104,
+    "label": "Day11 · 理论法103",
+    "total": 103,
     "spans": [
       {
         "subject": "理论法",
-        "count": 104
+        "count": 103
       }
     ]
   },
@@ -180,16 +180,16 @@
     "day": 14,
     "date": "2026-08-22",
     "weekday": "周六",
-    "label": "Day14 · 理论法72 + 三国法31",
+    "label": "Day14 · 理论法74 + 三国法29",
     "total": 103,
     "spans": [
       {
         "subject": "理论法",
-        "count": 72
+        "count": 74
       },
       {
         "subject": "三国法",
-        "count": 31
+        "count": 29
       }
     ]
   },
