@@ -41,18 +41,14 @@
       pointer-events: none;
     }
     #login-layer {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 26px;
-      padding: 28px 18px;
+      padding: 24px 18px;
     }
     #login-layer::after {
       content: "LAW EXAM · A QUIET PLACE TO THINK";
       position: absolute;
       left: 28px;
       bottom: 24px;
-      color: rgba(219, 231, 246, .58);
+      color: rgba(58, 77, 108, .68);
       font-size: 9pt !important;
       letter-spacing: .18em;
       pointer-events: none;
@@ -63,34 +59,6 @@
       box-shadow: 0 24px 80px rgba(70, 68, 62, .18), inset 0 1px 0 rgba(255, 255, 255, .7) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-    }
-    #login-layer > .welcome-copy {
-      width: min(680px, 92vw);
-      max-width: 680px;
-      padding: 0 8px;
-      text-align: center;
-    }
-    #login-layer > .welcome-copy .eyebrow {
-      margin-bottom: 13px;
-      color: rgba(58, 77, 108, .78);
-      font-size: 10pt !important;
-      letter-spacing: .28em;
-    }
-    #login-layer > .welcome-copy h2 {
-      margin: 0;
-      color: #30383d;
-      font-size: clamp(25pt, 5vw, 43pt) !important;
-      font-weight: 500;
-      letter-spacing: .08em;
-      line-height: 1.18;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, .32);
-    }
-    #login-layer > .welcome-copy p {
-      margin: 15px auto 0;
-      max-width: 38em;
-      color: rgba(70, 78, 82, .76);
-      font-size: 11pt !important;
-      letter-spacing: .12em;
     }
     #login-layer h1 { color: #2f3437 !important; letter-spacing: .04em; }
     #login-layer input {
@@ -298,16 +266,93 @@
       #login-layer::after { content: "LAW EXAM · A QUIET PLACE TO THINK"; }
       body.cosmic button { transition: none; }
     }
+
+    /* ===== 全站纸张拼贴风覆盖 ===== */
+    body.cosmic {
+      background-color: #ece9df !important;
+      background-image:
+        linear-gradient(rgba(247,245,238,.68), rgba(247,245,238,.68)),
+        url("./assets/images/bg-navigation-collage.jpg") !important;
+      background-size: cover !important;
+      background-position: center top !important;
+      background-attachment: fixed !important;
+      color: #30383d !important;
+    }
+    body.cosmic::before,
+    body.cosmic::after { display: none !important; }
+    body.cosmic header {
+      background: rgba(247,245,238,.82) !important;
+      border-color: rgba(56,62,66,.18) !important;
+      box-shadow: 0 1px 0 rgba(255,255,255,.72) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    body.cosmic header > div::before { background: #315da8 !important; box-shadow: 0 0 10px rgba(49,93,168,.38) !important; }
+    body.cosmic header > div > div:first-child { color: #30383d !important; letter-spacing: .08em; }
+    body.cosmic main::before,
+    body.cosmic main::after { display: none !important; }
+    body.cosmic .text-slate-800,
+    body.cosmic .text-slate-600,
+    body.cosmic .text-slate-500 { color: #4b5255 !important; }
+    body.cosmic .text-green-700 { color: #4e765b !important; }
+    body.cosmic .text-blue-700 { color: #315da8 !important; }
+    body.cosmic .text-red-700 { color: #a34b42 !important; }
+    body.cosmic .bg-white,
+    body.cosmic .bg-slate-50,
+    body.cosmic #quiz-panel > div:nth-child(2) {
+      background: rgba(247,245,238,.76) !important;
+      color: #30383d !important;
+      border-color: rgba(56,62,66,.18) !important;
+      box-shadow: 0 12px 32px rgba(65,63,56,.08), inset 0 1px 0 rgba(255,255,255,.72) !important;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    body.cosmic .border,
+    body.cosmic .border-slate-200 { border-color: rgba(56,62,66,.18) !important; }
+    body.cosmic input,
+    body.cosmic select,
+    body.cosmic header button {
+      background: rgba(255,255,255,.42) !important;
+      color: #30383d !important;
+      border-color: rgba(56,62,66,.24) !important;
+    }
+    body.cosmic select option { background: #f7f5ee; color: #30383d; }
+    body.cosmic .nav-card {
+      background: rgba(247,245,238,.72) !important;
+      color: #30383d !important;
+      border-color: rgba(56,62,66,.18) !important;
+      box-shadow: 0 14px 34px rgba(65,63,56,.09), inset 0 1px 0 rgba(255,255,255,.72) !important;
+    }
+    body.cosmic .nav-card::after { border-color: rgba(49,93,168,.22) !important; box-shadow: 0 0 0 18px rgba(49,93,168,.035), 0 0 0 36px rgba(49,93,168,.02) !important; }
+    body.cosmic .nav-card > div:first-child { color: #30383d !important; }
+    body.cosmic .option-btn {
+      background: rgba(255,255,255,.32) !important;
+      color: #30383d !important;
+      border-color: rgba(56,62,66,.18) !important;
+    }
+    body.cosmic .option-btn.selected { background: rgba(49,93,168,.12) !important; outline-color: #315da8 !important; }
+    body.cosmic .option-btn.correct { background: rgba(78,118,91,.13) !important; outline-color: #4e765b !important; }
+    body.cosmic .option-btn.wrong { background: rgba(163,75,66,.12) !important; outline-color: #a34b42 !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn { background: #315da8 !important; border-color: rgba(49,93,168,.38) !important; color: #fff !important; }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { background: #244b8d !important; }
+    body.cosmic #stem { color: #30383d !important; }
+    body.cosmic #result-explain { border-color: rgba(56,62,66,.16) !important; color: #4b5255 !important; }
+    body.cosmic .bg-blue-50 { background: rgba(49,93,168,.1) !important; color: #315da8 !important; }
+    body.cosmic .bg-red-50,
+    body.cosmic .bg-red-100 { background: rgba(163,75,66,.1) !important; color: #a34b42 !important; }
+    body.cosmic .bg-slate-900\\/60 { background: rgba(73,77,77,.2) !important; }
+    body.cosmic #login-layer h1 { color: #30383d !important; }
+    body.cosmic #login-layer input { color: #30383d !important; }
+    body.cosmic code { color: #315da8 !important; }
   </style>
 </head>
 <body class="cosmic text-slate-800 min-h-screen">
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
-    <div class="welcome-copy" aria-hidden="true">
-      <div class="eyebrow">LAW EXAM / OBSERVATORY</div>
-      <h2>欢迎来到你的法考星图</h2>
-      <p>在寂静的地平线前，逐题走完属于你的路。</p>
-    </div>
     <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
       <div class="mb-6 text-[10pt] tracking-[.24em] text-slate-400">ENTER THE OBSERVATORY</div>
       <h1 class="text-xl font-semibold mb-2">宇宙明亮，欢迎光临</h1>
