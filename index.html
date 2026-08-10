@@ -361,6 +361,63 @@
     body.cosmic #login-layer h1 { color: #30383d !important; }
     body.cosmic #login-layer input { color: #30383d !important; }
     body.cosmic code { color: #315da8 !important; }
+
+    /* ===== 读书笔记库：画册封面 + 索引表 ===== */
+    .reading-library { padding-bottom: 40px; }
+    .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
+    .reading-kicker { color: #315da8; font-size: 9pt !important; letter-spacing: .2em; text-transform: uppercase; }
+    .reading-count { display: flex; align-items: baseline; gap: 8px; color: #697176; }
+    .reading-count strong { color: #30383d; font-size: 21pt !important; font-weight: 600; }
+    .reading-count span { font-size: 10pt !important; }
+    .book-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 18px 0 22px; }
+    .book-card { min-width: 0; padding: 0; text-align: left; border: 0; background: transparent; color: #30383d; cursor: pointer; transition: transform .2s ease; }
+    .book-card:hover { transform: translateY(-4px); }
+    .book-card:active { transform: scale(.98); }
+    .book-card:focus-visible, .note-title-link:focus-visible { outline: 2px solid #315da8; outline-offset: 4px; }
+    .book-cover { position: relative; min-height: 224px; padding: 19px 16px 15px; display: flex; flex-direction: column; overflow: hidden; color: #f8f5eb; background: var(--book-color); border: 1px solid rgba(48,56,61,.22); border-radius: 6px 10px 10px 6px; box-shadow: 6px 7px 0 rgba(61,65,63,.1), inset 10px 0 0 rgba(0,0,0,.08), inset 1px 0 0 rgba(255,255,255,.22); }
+    .book-cover::after { content: ""; position: absolute; width: 180px; height: 180px; right: -92px; bottom: -92px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; box-shadow: 0 0 0 14px rgba(255,255,255,.06), 0 0 0 30px rgba(255,255,255,.04); }
+    .book-cover-rule { width: 42px; height: 2px; margin-bottom: 20px; background: rgba(255,255,255,.78); }
+    .book-cover-mark { font-size: 8pt !important; letter-spacing: .18em; opacity: .84; }
+    .book-cover-title { margin-top: auto; max-width: 10em; font-size: 16pt !important; font-weight: 600; line-height: 1.35; letter-spacing: .06em; }
+    .book-cover-author { margin-top: 10px; font-size: 9pt !important; opacity: .82; line-height: 1.4; }
+    .book-cover-foot { margin-top: 15px; padding-top: 9px; border-top: 1px solid rgba(255,255,255,.3); font-size: 7pt !important; letter-spacing: .08em; opacity: .72; }
+    .book-card-info { display: block; padding: 10px 2px 0; }
+    .book-card-info strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11pt !important; font-weight: 600; }
+    .book-card-info small { display: block; margin-top: 4px; color: #697176; font-size: 9pt !important; }
+    .book-detail-panel { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; margin: 20px 0 24px; padding: 22px; background: rgba(247,245,238,.82); border: 1px solid rgba(56,62,66,.18); border-radius: 12px; box-shadow: 0 12px 30px rgba(65,63,56,.08); }
+    .book-detail-panel .book-cover { min-height: 244px; }
+    .book-detail-copy { min-width: 0; }
+    .book-detail-copy h3 { margin: 7px 0 4px; color: #30383d; font-size: 19pt !important; font-weight: 600; }
+    .book-detail-meta { color: #697176; font-size: 10pt !important; }
+    .book-detail-copy blockquote { margin: 17px 0 12px; padding-left: 13px; border-left: 2px solid #315da8; color: #4b5255; font-size: 12pt !important; line-height: 1.7; }
+    .book-detail-note { color: #4b5255; font-size: 10pt !important; line-height: 1.8; }
+    .reading-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .reading-tags span { display: inline-flex; padding: 3px 8px; color: #315da8; background: rgba(49,93,168,.09); border: 1px solid rgba(49,93,168,.18); border-radius: 999px; font-size: 8pt !important; }
+    .book-detail-copy .reading-tags { margin-top: 14px; }
+    .notes-table-wrap { overflow: hidden; background: rgba(247,245,238,.82); border: 1px solid rgba(56,62,66,.18); border-radius: 12px; box-shadow: 0 12px 30px rgba(65,63,56,.06); }
+    .notes-table-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding: 18px 20px 14px; border-bottom: 1px solid rgba(56,62,66,.14); }
+    .notes-table-head h3 { margin-top: 4px; color: #30383d; font-size: 14pt !important; font-weight: 600; }
+    .notes-table-head > span { color: #879097; font-size: 9pt !important; }
+    .notes-table-scroll { overflow-x: auto; }
+    .notes-table { width: 100%; min-width: 760px; border-collapse: collapse; text-align: left; }
+    .notes-table th { padding: 11px 14px; color: #7a8388; background: rgba(230,227,216,.42); font-size: 8pt !important; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
+    .notes-table td { padding: 13px 14px; color: #4b5255; border-top: 1px solid rgba(56,62,66,.1); font-size: 9pt !important; vertical-align: top; }
+    .notes-table tr:hover td { background: rgba(255,255,255,.26); }
+    .note-title-link { color: #315da8; font-size: 10pt !important; font-weight: 600; text-align: left; }
+    .note-title-link:hover { text-decoration: underline; }
+    .note-status { display: inline-flex; padding: 3px 8px; border-radius: 999px; font-size: 8pt !important; white-space: nowrap; }
+    .note-status-done { color: #4e765b; background: rgba(78,118,91,.11); }
+    .note-status-reading { color: #315da8; background: rgba(49,93,168,.11); }
+    .note-status-pending { color: #8a6b4a; background: rgba(168,111,75,.12); }
+    .note-summary { min-width: 220px; line-height: 1.6; }
+    @media (max-width: 760px) {
+      .book-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
+      .book-cover { min-height: 190px; padding: 14px 12px 12px; }
+      .book-cover-title { font-size: 13pt !important; }
+      .book-detail-panel { grid-template-columns: 112px minmax(0, 1fr); gap: 15px; padding: 15px; }
+      .book-detail-panel .book-cover { min-height: 174px; }
+      .notes-table-head { align-items: start; flex-direction: column; gap: 7px; }
+    }
   </style>
 </head>
 <body class="cosmic text-slate-800 min-h-screen">
@@ -407,8 +464,8 @@
           <p class="text-sm text-slate-500">浏览与重练答错的题目，数据保存在本机浏览器。</p>
         </button>
         <button data-nav="feishu" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">03 / 飞书表格</div>
-          <p class="text-sm text-slate-500">点击进入固定的画册视图，浏览你的学习数据。</p>
+          <div class="text-xl font-semibold mb-1">03 / 读书笔记库</div>
+          <p class="text-sm text-slate-500">用书封整理读过的书，点击封面查看对应的阅读笔记。</p>
         </button>
       </div>
     </section>
@@ -508,20 +565,47 @@
       <div id="wrong-list" class="space-y-3"></div>
     </section>
 
-    <!-- 飞书表格（多张表各占一个子标签） -->
-    <section id="view-feishu" class="hidden">
-      <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+    <!-- 读书笔记库 -->
+    <section id="view-feishu" class="hidden reading-library">
+      <div class="reading-library-head flex items-end justify-between gap-4 mb-5 flex-wrap">
         <div>
-          <h2 class="font-semibold">飞书表格</h2>
-          <p class="text-xs text-slate-500 mt-0.5">嵌入的飞书多维表格（需在飞书开启「公开分享 + 允许嵌入」）</p>
+          <div class="reading-kicker">READING ARCHIVE / 2026</div>
+          <h2 class="text-xl font-semibold mt-1">读书笔记库</h2>
+          <p class="text-sm text-slate-500 mt-1">把看过的书留下来：先从封面进入，再回到你的阅读记录。</p>
+        </div>
+        <div class="reading-count"><strong id="reading-book-count">0</strong><span>本已收录</span></div>
+      </div>
+
+      <div id="book-gallery" class="book-gallery" aria-label="已读书籍封面"></div>
+
+      <div id="book-detail" class="book-detail-panel hidden" aria-live="polite">
+        <div class="book-detail-cover" id="detail-cover"></div>
+        <div class="book-detail-copy">
+          <div class="reading-kicker" id="detail-kicker">READING NOTE</div>
+          <h3 id="detail-title">—</h3>
+          <p class="book-detail-meta" id="detail-meta">—</p>
+          <blockquote id="detail-quote">—</blockquote>
+          <p class="book-detail-note" id="detail-note">—</p>
+          <div id="detail-tags" class="reading-tags"></div>
         </div>
       </div>
-      <div id="feishu-subtabs" class="flex gap-2 mb-3 flex-wrap"></div>
-      <div id="feishu-frame-wrap" class="bg-white border rounded-xl overflow-hidden hidden" style="height:74vh;">
-        <iframe id="feishu-frame" class="w-full h-full" style="border:0;" src=""></iframe>
-      </div>
-      <div id="feishu-empty" class="bg-white border rounded-xl p-8 text-center text-slate-500">
-        尚未配置飞书表嵌入链接。请在站点脚本顶部的 <code>FEISHU_TABLES</code> 中填入每张表的公开嵌入链接（src 地址）。
+
+      <div class="notes-table-wrap">
+        <div class="notes-table-head">
+          <div>
+            <div class="reading-kicker">INDEX OF NOTES</div>
+            <h3>阅读记录</h3>
+          </div>
+          <span>点击书名查看笔记详情</span>
+        </div>
+        <div class="notes-table-scroll">
+          <table class="notes-table">
+            <thead>
+              <tr><th>书名</th><th>作者 / 来源</th><th>阅读状态</th><th>阅读日期</th><th>标签</th><th>笔记摘要</th></tr>
+            </thead>
+            <tbody id="notes-table-body"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -532,12 +616,55 @@
     const API_BASE = "/api";
     const WRONG_KEY = "law_wrong_book_v1";
 
-    // 飞书多维表格嵌入配置：每张表 = 一个子标签。
-    // 在飞书把对应多维表格设为「公开分享 + 允许嵌入」后，把分享链接（iframe 的 src）填到 url。
-    const FEISHU_TABLES = [
+    // 读书笔记库：封面与笔记数据可直接替换为你的真实书单。
+    const READING_BOOKS = [
       {
-        name: "画册视图",
-        url: "https://rcnv9xvjwka4.feishu.cn/base/HEyFbYUAWaZeoXsyihVcMzYSnEb?from=from_copylink"
+        id: "xingzheng",
+        title: "行政法真金题",
+        author: "李佳 · 2026",
+        date: "2026.08",
+        status: "精读中",
+        color: "#315da8",
+        mark: "LAW",
+        tags: ["行政法", "真题", "法考"],
+        quote: "先把规则放回制度，再把制度放回题目。",
+        note: "以真题为线索整理行政处罚、行政复议与行政诉讼程序，重点回看高频设题陷阱。"
+      },
+      {
+        id: "shangjingzhi",
+        title: "商经知真金题",
+        author: "法大金题解析 · 2026",
+        date: "2026.08",
+        status: "已读",
+        color: "#a86f4b",
+        mark: "BUSINESS",
+        tags: ["商法", "经济法", "知产"],
+        quote: "从一条法条，找到一整套交易秩序。",
+        note: "记录公司法、证券法、竞争法与知识产权法中的结构化考点，按题型回顾易错边界。"
+      },
+      {
+        id: "sanguo",
+        title: "三国法真金题",
+        author: "赵明阳 · 2026",
+        date: "2026.08",
+        status: "已读",
+        color: "#667d72",
+        mark: "WORLD LAW",
+        tags: ["国际公法", "国际私法", "国际经济法"],
+        quote: "把地图上的距离，读成规则之间的连接。",
+        note: "围绕管辖、法律适用与国际贸易规则建立错题索引，保留每道题的判定路径。"
+      },
+      {
+        id: "xingsu",
+        title: "刑事诉讼法金题",
+        author: "2026 法大金题",
+        date: "2026.08",
+        status: "待读",
+        color: "#6d667d",
+        mark: "PROCEDURE",
+        tags: ["刑诉", "程序", "证据"],
+        quote: "程序不是路障，是判断能否抵达结论的路径。",
+        note: "后续补入关于证据规则、强制措施和审判程序的重点笔记。"
       }
     ];
 
@@ -553,7 +680,8 @@
     let selected = new Set();
     let submitted = false;
     let practiceMode = "all"; // all | wrong
-    let currentView = "practice"; // practice | wrong
+    let currentView = "practice"; // practice | wrong | feishu
+    let selectedBookId = "";
 
     // ---------- 错题本存储 ----------
     function loadWrongBook() {
@@ -684,7 +812,7 @@
       document.getElementById("view-feishu").classList.toggle("hidden", view !== "feishu");
       if (view === "subjects") renderSubjectPicker();
       if (view === "wrong") renderWrongList();
-      if (view === "feishu") renderFeishuTabs();
+      if (view === "feishu") renderReadingLibrary();
     }
 
     function subjectLabel(subject) {
@@ -751,35 +879,60 @@
       render();
     }
 
-    // ---------- 飞书表格多标签 ----------
-    function renderFeishuTabs() {
-      const sub = document.getElementById("feishu-subtabs");
-      const frame = document.getElementById("feishu-frame");
-      const wrap = document.getElementById("feishu-frame-wrap");
-      const empty = document.getElementById("feishu-empty");
-      sub.innerHTML = "";
-      if (!FEISHU_TABLES.length) {
-        wrap.classList.add("hidden");
-        empty.classList.remove("hidden");
-        return;
-      }
-      empty.classList.add("hidden");
-      wrap.classList.remove("hidden");
-      FEISHU_TABLES.forEach((t, i) => {
-        const b = document.createElement("button");
-        const base = "feishu-subtab text-sm px-3 py-1.5 rounded-lg border ";
-        b.className = base + (i === 0 ? "bg-blue-600 text-white" : "hover:bg-slate-50");
-        b.textContent = t.name || ("表 " + (i + 1));
-        b.onclick = () => {
-          document.querySelectorAll(".feishu-subtab").forEach((x) => {
-            x.className = base + "hover:bg-slate-50";
-          });
-          b.className = base + "bg-blue-600 text-white";
-          frame.src = t.url || "";
-        };
-        sub.appendChild(b);
+    // ---------- 读书笔记库 ----------
+    function bookCover(book, compact = false) {
+      return `<div class="book-cover" style="--book-color:${book.color}">
+        <div class="book-cover-rule"></div>
+        <div class="book-cover-mark">${escapeHtml(book.mark)}</div>
+        <div class="book-cover-title">${escapeHtml(book.title)}</div>
+        <div class="book-cover-author">${escapeHtml(book.author)}</div>
+        <div class="book-cover-foot">READING NOTE · ${escapeHtml(book.date)}</div>
+      </div>`;
+    }
+
+    function renderReadingLibrary() {
+      document.getElementById("reading-book-count").textContent = String(READING_BOOKS.length);
+      const gallery = document.getElementById("book-gallery");
+      gallery.innerHTML = "";
+      READING_BOOKS.forEach((book, i) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "book-card";
+        card.style.setProperty("--book-index", String(i));
+        card.innerHTML = `${bookCover(book, true)}<span class="book-card-info"><strong>${escapeHtml(book.title)}</strong><small>${escapeHtml(book.status)} · ${escapeHtml(book.date)}</small></span>`;
+        card.onclick = () => showBookDetail(book.id);
+        gallery.appendChild(card);
       });
-      frame.src = FEISHU_TABLES[0].url || "";
+
+      const tbody = document.getElementById("notes-table-body");
+      tbody.innerHTML = READING_BOOKS.map((book) => `<tr>
+        <td><button class="note-title-link" data-book-id="${escapeHtml(book.id)}">${escapeHtml(book.title)}</button></td>
+        <td>${escapeHtml(book.author)}</td>
+        <td><span class="note-status note-status-${book.status === "已读" ? "done" : book.status === "精读中" ? "reading" : "pending"}">${escapeHtml(book.status)}</span></td>
+        <td>${escapeHtml(book.date)}</td>
+        <td><div class="reading-tags">${book.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div></td>
+        <td class="note-summary">${escapeHtml(book.note)}</td>
+      </tr>`).join("");
+      tbody.querySelectorAll(".note-title-link").forEach((button) => {
+        button.onclick = () => showBookDetail(button.dataset.bookId);
+      });
+      if (selectedBookId) showBookDetail(selectedBookId);
+    }
+
+    function showBookDetail(id) {
+      const book = READING_BOOKS.find((item) => item.id === id);
+      if (!book) return;
+      selectedBookId = id;
+      const panel = document.getElementById("book-detail");
+      panel.classList.remove("hidden");
+      document.getElementById("detail-cover").innerHTML = bookCover(book);
+      document.getElementById("detail-kicker").textContent = `${book.status} / ${book.date}`;
+      document.getElementById("detail-title").textContent = book.title;
+      document.getElementById("detail-meta").textContent = book.author;
+      document.getElementById("detail-quote").textContent = `“${book.quote}”`;
+      document.getElementById("detail-note").textContent = book.note;
+      document.getElementById("detail-tags").innerHTML = book.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     // ---------- 刷题渲染 ----------
