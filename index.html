@@ -25,6 +25,42 @@
     /* 选项居左对齐（覆盖居中设置） */
     #options .option-btn { text-align: left; }
 
+    /* ===== 入口登录场景：孤独地平线 ===== */
+    #login-layer {
+      background:
+        linear-gradient(180deg, rgba(5, 10, 22, .38), rgba(5, 10, 22, .68)),
+        url("./assets/images/bg-navigation-solitude.png") center / cover no-repeat;
+      isolation: isolate;
+    }
+    #login-layer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at 50% 62%, transparent 0 28%, rgba(3, 7, 18, .32) 72%, rgba(3, 7, 18, .58));
+      pointer-events: none;
+    }
+    #login-layer > div {
+      background: rgba(9, 15, 31, .72) !important;
+      border: 1px solid rgba(214, 226, 244, .22);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255, 255, 255, .1) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    #login-layer h1 { color: #f4f7fb !important; letter-spacing: .04em; }
+    #login-layer input {
+      background: rgba(5, 10, 22, .62) !important;
+      color: #f4f7fb !important;
+      border-color: rgba(214, 226, 244, .26) !important;
+    }
+    #login-layer input::placeholder { color: rgba(205, 218, 235, .68); }
+    #login-layer #pwd-btn {
+      background: rgba(176, 119, 74, .92) !important;
+      border: 1px solid rgba(255, 220, 176, .34);
+    }
+    #login-layer #pwd-btn:hover { background: rgba(196, 137, 87, .98) !important; }
+    #login-layer #pwd-error { color: #f9b1a8 !important; }
+
     /* ===== 深空宇宙背景（墨渊·阅读宇宙 INK ABYSS 风格） ===== */
     body.cosmic {
       background-color: #070a18;
@@ -222,7 +258,9 @@
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
     <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
+      <div class="mb-6 text-[10pt] tracking-[.24em] text-slate-400">LAW EXAM / OBSERVATORY</div>
       <h1 class="text-xl font-semibold mb-2">宇宙明亮，欢迎光临</h1>
+      <p class="text-[10pt] text-slate-400 mb-5">穿过这片寂静，继续你的法考轨迹。</p>
       <input id="pwd-input" type="password" placeholder="请输入访问密码"
         class="w-full border rounded-lg px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       <button id="pwd-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2">进入</button>
