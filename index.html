@@ -40,12 +40,57 @@
       background: radial-gradient(ellipse at 50% 62%, transparent 0 28%, rgba(3, 7, 18, .32) 72%, rgba(3, 7, 18, .58));
       pointer-events: none;
     }
+    #login-layer {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      padding: 28px 18px;
+    }
+    #login-layer::after {
+      content: "LAW EXAM · A QUIET PLACE TO THINK";
+      position: absolute;
+      left: 28px;
+      bottom: 24px;
+      color: rgba(219, 231, 246, .58);
+      font-size: 9pt !important;
+      letter-spacing: .18em;
+      pointer-events: none;
+    }
     #login-layer > div {
       background: rgba(9, 15, 31, .72) !important;
       border: 1px solid rgba(214, 226, 244, .22);
       box-shadow: 0 24px 80px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255, 255, 255, .1) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+    }
+    #login-layer > .welcome-copy {
+      width: min(680px, 92vw);
+      max-width: 680px;
+      padding: 0 8px;
+      text-align: center;
+    }
+    #login-layer > .welcome-copy .eyebrow {
+      margin-bottom: 13px;
+      color: rgba(213, 229, 247, .72);
+      font-size: 10pt !important;
+      letter-spacing: .28em;
+    }
+    #login-layer > .welcome-copy h2 {
+      margin: 0;
+      color: #f4f7fb;
+      font-size: clamp(25pt, 5vw, 43pt) !important;
+      font-weight: 500;
+      letter-spacing: .08em;
+      line-height: 1.18;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, .32);
+    }
+    #login-layer > .welcome-copy p {
+      margin: 15px auto 0;
+      max-width: 38em;
+      color: rgba(211, 225, 242, .76);
+      font-size: 11pt !important;
+      letter-spacing: .12em;
     }
     #login-layer h1 { color: #f4f7fb !important; letter-spacing: .04em; }
     #login-layer input {
@@ -250,6 +295,7 @@
     @media (prefers-reduced-motion: reduce) {
       body.cosmic::before, body.cosmic::after, body.cosmic header > div::before,
       body.cosmic main::before, body.cosmic main::after { animation: none; }
+      #login-layer::after { content: "LAW EXAM · A QUIET PLACE TO THINK"; }
       body.cosmic button { transition: none; }
     }
   </style>
@@ -257,10 +303,15 @@
 <body class="cosmic text-slate-800 min-h-screen">
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
+    <div class="welcome-copy" aria-hidden="true">
+      <div class="eyebrow">LAW EXAM / OBSERVATORY</div>
+      <h2>欢迎来到你的法考星图</h2>
+      <p>在寂静的地平线前，逐题走完属于你的路。</p>
+    </div>
     <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
-      <div class="mb-6 text-[10pt] tracking-[.24em] text-slate-400">LAW EXAM / OBSERVATORY</div>
+      <div class="mb-6 text-[10pt] tracking-[.24em] text-slate-400">ENTER THE OBSERVATORY</div>
       <h1 class="text-xl font-semibold mb-2">宇宙明亮，欢迎光临</h1>
-      <p class="text-[10pt] text-slate-400 mb-5">穿过这片寂静，继续你的法考轨迹。</p>
+      <p class="text-[10pt] text-slate-400 mb-5">输入密码，继续你的法考轨迹。</p>
       <input id="pwd-input" type="password" placeholder="请输入访问密码"
         class="w-full border rounded-lg px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       <button id="pwd-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2">进入</button>
