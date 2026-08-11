@@ -186,6 +186,12 @@
     body.cosmic button { transition: transform .18s ease, background .18s ease, border-color .18s ease; }
     body.cosmic button:hover { border-color: rgba(125,211,252,.62) !important; }
     body.cosmic button:active { transform: scale(.98); }
+    body.cosmic header nav button {
+      min-width: 42px; min-height: 36px; padding: 6px 9px !important;
+      font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif !important;
+      font-size: 16pt !important; line-height: 1;
+    }
+    body.cosmic header nav button:hover { transform: translateY(-2px); }
 
     body.cosmic main { position: relative; }
     body.cosmic main::before,
@@ -707,11 +713,11 @@
 
   <header class="bg-transparent border-b border-slate-200 sticky top-0 z-10 transition-transform duration-300">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <div class="font-semibold">宇宙明亮，欢迎光临</div>
-      <div class="flex items-center gap-2">
-        <button id="home-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">首页</button>
-        <button id="reload-btn" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">刷新</button>
-      </div>
+      <div class="font-semibold">🌌 宇宙明亮，欢迎光临</div>
+      <nav class="flex items-center gap-2" aria-label="主导航">
+        <button id="home-btn" title="首页" aria-label="首页" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">🏠</button>
+        <button id="reload-btn" title="刷新题库" aria-label="刷新题库" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">🔄</button>
+      </nav>
     </div>
   </header>
 
