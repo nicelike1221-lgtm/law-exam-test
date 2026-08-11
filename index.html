@@ -955,6 +955,27 @@
       body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #a8c9e8 !important; }
     }
 
+    /* ===== 学习工作台组件 ===== */
+    body.cosmic .study-widgets { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin: 16px 0 18px; }
+    body.cosmic .study-widget { border: 3px solid #174f8f; background: #ffffff; box-shadow: 4px 4px 0 #a8c9e8; padding: 14px 16px; }
+    body.cosmic .study-widget-kicker { color: #6e91b2; font-size: 8pt !important; letter-spacing: .14em; }
+    body.cosmic .study-widget-title { margin-top: 5px; color: #163f70; font-size: 13pt !important; font-weight: 700; }
+    body.cosmic .study-widget-value { color: #0b4da2; font-family: "Courier New", monospace !important; font-size: 20pt !important; font-weight: 700; }
+    body.cosmic .study-widget-note { color: #68829c; font-size: 9pt !important; line-height: 1.65; }
+    body.cosmic .study-progress-track { height: 13px; margin: 11px 0 8px; border: 2px solid #174f8f; background: #e7f2ff; overflow: hidden; }
+    body.cosmic .study-progress-fill { width: 0%; height: 100%; background: #4d91d1; transition: width .25s steps(4, end); }
+    body.cosmic .study-widget-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    body.cosmic .study-widget-list { display: grid; gap: 7px; margin-top: 10px; }
+    body.cosmic .study-widget-list div { display: flex; justify-content: space-between; gap: 12px; color: #5f7892; font-size: 9pt !important; border-bottom: 1px dashed #c5d9eb; padding-bottom: 5px; }
+    body.cosmic .study-widget-list strong { color: #194d83; font-family: "Courier New", monospace !important; }
+    body.cosmic .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+    body.cosmic .quick-action { border: 2px solid #6b9fce; background: #f7fbff; color: #245d95; padding: 7px 10px; box-shadow: 2px 2px 0 #b8d2eb; cursor: pointer; font-size: 9pt !important; }
+    body.cosmic .quick-action:hover { background: #e2f0fc; border-color: #174f8f; transform: translate(1px, 1px); }
+    @media (max-width: 760px) {
+      body.cosmic .study-widgets { grid-template-columns: 1fr; gap: 10px; }
+      body.cosmic .study-widget { padding: 12px 13px; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
@@ -1060,6 +1081,34 @@
           <div class="text-xl font-semibold mb-1">03 / 读书笔记库</div>
           <p class="text-sm text-slate-500">用书封整理读过的书，点击封面查看对应的阅读笔记。</p>
         </button>
+      </div>
+      <div class="study-widgets" aria-label="学习概览">
+        <article class="study-widget">
+          <div class="study-widget-kicker">TODAY'S PROGRESS</div>
+          <div class="study-widget-row">
+            <div>
+              <div class="study-widget-title">今日学习进度</div>
+              <div class="study-widget-note"><span id="today-progress-done">0</span> / <span id="today-progress-total">0</span> 题 · 按当前学习日统计</div>
+            </div>
+            <div class="study-widget-value" id="today-progress-percent">0%</div>
+          </div>
+          <div class="study-progress-track" aria-label="今日学习进度"><div id="today-progress-fill" class="study-progress-fill"></div></div>
+          <div class="study-widget-note" id="today-progress-note">题库同步后自动更新</div>
+        </article>
+        <article class="study-widget">
+          <div class="study-widget-kicker">QUICK STATUS</div>
+          <div class="study-widget-title">学习状态</div>
+          <div class="study-widget-list">
+            <div><span>当前学习日</span><strong id="home-current-day">Day 1</strong></div>
+            <div><span>待复习错题</span><strong id="home-wrong-total">0</strong></div>
+            <div><span>题库来源</span><strong id="home-source">同步中</strong></div>
+          </div>
+        </article>
+      </div>
+      <div class="quick-actions" aria-label="快捷操作">
+        <button class="quick-action" data-quick="practice">▶ 继续刷题</button>
+        <button class="quick-action" data-quick="wrong">↻ 重练错题</button>
+        <button class="quick-action" data-quick="feishu">▣ 打开阅读笔记</button>
       </div>
       <div class="index-catalog" aria-label="学习内容分类">
         <div class="index-catalog-label">INDEX / CATEGORIES</div>
@@ -1355,6 +1404,7 @@
         el.classList.toggle("text-slate-500", n === 0);
       }
       updateHomeWrongBadge();
+      updateHomeWidgets();
     }
 
     function wrongBookList() {
@@ -1536,6 +1586,7 @@
 
     // ---------- 刷题渲染 ----------
     function render() {
+      updateHomeWidgets();
       if (!questions.length) {
         document.getElementById("quiz-panel").classList.add("hidden");
         document.getElementById("empty-state").classList.remove("hidden");
@@ -1721,6 +1772,38 @@
 
     document.getElementById("subjects-back-home").onclick = () => switchView("home");
 
+    document.querySelectorAll(".quick-action").forEach((btn) => {
+      btn.onclick = () => {
+        const v = btn.dataset.quick;
+        if (v === "practice") openSubjectPicker();
+        else if (v === "wrong") switchView("wrong");
+        else switchView("feishu");
+      };
+    });
+
+    function updateHomeWidgets() {
+      const wrong = wrongCount();
+      const wrongEl = document.getElementById("home-wrong-total");
+      if (wrongEl) wrongEl.textContent = String(wrong);
+      const dayEl = document.getElementById("home-current-day");
+      if (dayEl) dayEl.textContent = `Day ${currentDay}`;
+      const sourceEl = document.getElementById("home-source");
+      if (sourceEl) sourceEl.textContent = ALL_Q_SOURCE === "?" ? "同步中" : ALL_Q_SOURCE;
+      const total = allQuestions.length || (currentDay && DAY_MAP ? Object.values(DAY_MAP).filter((d) => Number(d) === Number(currentDay)).length : 0);
+      const done = questions.length && practiceMode === "all" ? Math.min(idx, questions.length) : 0;
+      const pct = total ? Math.min(100, Math.round((done / total) * 100)) : 0;
+      const doneEl = document.getElementById("today-progress-done");
+      const totalEl = document.getElementById("today-progress-total");
+      const pctEl = document.getElementById("today-progress-percent");
+      const fillEl = document.getElementById("today-progress-fill");
+      const noteEl = document.getElementById("today-progress-note");
+      if (doneEl) doneEl.textContent = String(done);
+      if (totalEl) totalEl.textContent = String(total);
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      if (fillEl) fillEl.style.width = `${pct}%`;
+      if (noteEl) noteEl.textContent = total ? (pct >= 100 ? "今天的计划已完成" : "完成一题后进度会自动更新") : "题库同步后自动更新";
+    }
+
     // 同步首页错题数角标
     function updateHomeWrongBadge() {
       const n = wrongCount();
@@ -1804,6 +1887,7 @@
       if (!res.ok) throw new Error(data.error || "加载失败");
       ALL_Q = data.questions || [];
       ALL_Q_SOURCE = data.source || "?";
+      updateHomeWidgets();
     }
 
     function applyDay(day) {
@@ -1821,6 +1905,7 @@
         `✓ ${meta ? meta.label : "Day" + currentDay} · ${questions.length} 题 · 来源 ${ALL_Q_SOURCE} · 错题 ${wrongCount()}`;
       if (currentView === "practice") render();
       else renderWrongList();
+      updateHomeWidgets();
     }
 
     document.getElementById("wrong-practice-all").onclick = () => startWrongPractice();
