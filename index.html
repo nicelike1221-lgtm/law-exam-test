@@ -1042,6 +1042,7 @@
     body.cosmic .nav-card::after { border-color: #d2e1ef !important; box-shadow: 0 0 0 13px rgba(126, 174, 221, .09), 0 0 0 26px rgba(126, 174, 221, .04) !important; }
     body.cosmic .nav-card > div:first-child,
     body.cosmic .subject-card-title { color: #111111 !important; }
+    body.cosmic .subject-card-emoji { font-size: 30pt !important; line-height: 1; display: inline-block; margin-bottom: 6px; }
     body.cosmic .nav-card p,
     body.cosmic .subject-card p { color: #697580 !important; }
     body.cosmic .index-catalog { border-top-color: #111111 !important; }
@@ -1161,30 +1162,30 @@
     <section id="view-home">
       <h2 class="text-lg font-semibold mb-4">请选择进入：</h2>
       <div class="cosmic-overview grid grid-cols-3 gap-2 mb-5">
-        <div><span>QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
-        <div><span>ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
-        <div><span>DEADLINE</span><strong>08.30</strong><small>一遍完成目标</small></div>
+        <div><span>📚 QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
+        <div><span>🗓️ ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
+        <div><span>🎯 DEADLINE</span><strong>08.30</strong><small>一遍完成目标</small></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <button data-nav="practice" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">01 / 刷题</div>
+          <div class="text-xl font-semibold mb-1">📝 01 / 刷题</div>
           <p class="text-sm text-slate-500">按学习计划的天数抽题练习，答完即时判分并展示解析与考点。</p>
         </button>
         <button data-nav="wrong" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">02 / 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
+          <div class="text-xl font-semibold mb-1">❌ 02 / 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
           <p class="text-sm text-slate-500">浏览与重练答错的题目，数据保存在本机浏览器。</p>
         </button>
         <button data-nav="feishu" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">03 / 读书笔记库</div>
+          <div class="text-xl font-semibold mb-1">📖 03 / 读书笔记库</div>
           <p class="text-sm text-slate-500">用书封整理读过的书，点击封面查看对应的阅读笔记。</p>
         </button>
       </div>
       <div class="study-widgets" aria-label="学习概览">
         <article class="study-widget">
-          <div class="study-widget-kicker">TODAY'S PROGRESS</div>
+          <div class="study-widget-kicker">📈 TODAY'S PROGRESS</div>
           <div class="study-widget-row">
             <div>
-              <div class="study-widget-title">今日学习进度</div>
+              <div class="study-widget-title">🎯 今日学习进度</div>
               <div class="study-widget-note"><span id="today-progress-done">0</span> / <span id="today-progress-total">0</span> 题 · 按当前学习日统计</div>
             </div>
             <div class="study-widget-value" id="today-progress-percent">0%</div>
@@ -1193,8 +1194,8 @@
           <div class="study-widget-note" id="today-progress-note">题库同步后自动更新</div>
         </article>
         <article class="study-widget">
-          <div class="study-widget-kicker">QUICK STATUS</div>
-          <div class="study-widget-title">学习状态</div>
+          <div class="study-widget-kicker">📊 QUICK STATUS</div>
+          <div class="study-widget-title">📌 学习状态</div>
           <div class="study-widget-list">
             <div><span>当前学习日</span><strong id="home-current-day">Day 1</strong></div>
             <div><span>待复习错题</span><strong id="home-wrong-total">0</strong></div>
@@ -1203,14 +1204,14 @@
         </article>
       </div>
       <div class="quick-actions" aria-label="快捷操作">
-        <button class="quick-action" data-quick="practice">▶ 继续刷题</button>
-        <button class="quick-action" data-quick="wrong">↻ 重练错题</button>
-        <button class="quick-action" data-quick="feishu">▣ 打开阅读笔记</button>
+        <button class="quick-action" data-quick="practice">🚀 继续刷题</button>
+        <button class="quick-action" data-quick="wrong">🔁 重练错题</button>
+        <button class="quick-action" data-quick="feishu">📚 打开阅读笔记</button>
       </div>
       <div class="index-catalog" aria-label="学习内容分类">
-        <div class="index-catalog-label">INDEX / CATEGORIES</div>
+        <div class="index-catalog-label">🗂️ INDEX / CATEGORIES</div>
         <div class="index-catalog-list">
-          <span>行政法</span><span>商经知</span><span>理论法</span><span>三国法</span><span>刑诉法</span><span>民诉法</span><span>错题回看</span><span>阅读笔记</span>
+          <span>🏛️ 行政法</span><span>💼 商经知</span><span>⚖️ 理论法</span><span>🌏 三国法</span><span>⚔️ 刑诉法</span><span>🧾 民诉法</span><span>🔍 错题回看</span><span>📖 阅读笔记</span>
         </div>
       </div>
     </section>
@@ -1219,8 +1220,8 @@
     <section id="view-subjects" class="hidden">
       <div class="subject-picker-head flex items-end justify-between gap-4 mb-5">
         <div>
-          <div class="subject-picker-kicker">SELECT A SUBJECT</div>
-          <h2 class="text-xl font-semibold mt-1">选择科目开始刷题</h2>
+          <div class="subject-picker-kicker">🎓 SELECT A SUBJECT</div>
+          <h2 class="text-xl font-semibold mt-1">🎯 选择科目开始刷题</h2>
           <p class="text-sm text-slate-500 mt-1">先选一门科目，进入后从该科目题库开始练习。</p>
         </div>
         <button id="subjects-back-home" class="border px-3 py-1.5 rounded-lg text-sm">返回首页</button>
@@ -1574,6 +1575,16 @@
       return labels[subject] || subject;
     }
 
+    const SUBJECT_EMOJI = {
+      "行政法": "🏛️",
+      "商经知": "💼",
+      "理论法": "⚖️",
+      "三国法": "🌏",
+      "刑事诉讼法": "⚔️",
+      "民诉": "🧾",
+      "民法": "📜"
+    };
+
     function renderSubjectPicker() {
       const grid = document.getElementById("subject-grid");
       const empty = document.getElementById("subject-empty");
@@ -1593,7 +1604,7 @@
         const card = document.createElement("button");
         card.type = "button";
         card.className = "subject-card";
-        card.innerHTML = `<span class="subject-card-arrow">→</span><div class="subject-card-title">${escapeHtml(subjectLabel(subject))}</div><div class="subject-card-meta">${counts[subject]} 道已发布题目 · 点击进入刷题</div>`;
+        card.innerHTML = `<span class="subject-card-emoji">${SUBJECT_EMOJI[subject] || "📘"}</span><span class="subject-card-arrow">→</span><div class="subject-card-title">${escapeHtml(subjectLabel(subject))}</div><div class="subject-card-meta">${counts[subject]} 道已发布题目 · 点击进入刷题</div>`;
         card.style.setProperty("--subject-index", String(i));
         card.onclick = () => startSubjectPractice(subject);
         grid.appendChild(card);
