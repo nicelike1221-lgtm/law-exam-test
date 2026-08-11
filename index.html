@@ -362,6 +362,138 @@
     body.cosmic #login-layer input { color: #30383d !important; }
     body.cosmic code { color: #315da8 !important; }
 
+    /* ===== 学习图鉴：参考 DOTOWN 的分类索引感 ===== */
+    body.cosmic {
+      font-family: "Noto Sans SC", "PingFang SC", system-ui, sans-serif !important;
+      background-color: #f3f0e7 !important;
+      background-image:
+        linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96,105,96,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.45), rgba(243,240,231,.76)),
+        url("./assets/images/bg-navigation-collage.jpg") !important;
+      background-size: 32px 32px, 32px 32px, auto, cover !important;
+      background-position: center, center, center, center top !important;
+      color: #353c3b !important;
+    }
+    body.cosmic header {
+      background: rgba(243,240,231,.9) !important;
+      border-color: rgba(53,60,59,.2) !important;
+      box-shadow: 0 1px 0 rgba(255,255,255,.8) !important;
+      backdrop-filter: blur(12px);
+    }
+    body.cosmic header > div { max-width: 1060px !important; }
+    body.cosmic header > div::before {
+      width: 9px; height: 9px; margin-right: 10px;
+      background: #6f876e !important; box-shadow: none !important;
+    }
+    body.cosmic header > div > div:first-child {
+      color: #353c3b !important; letter-spacing: .08em; font-size: 12pt !important;
+    }
+    body.cosmic header button,
+    body.cosmic input,
+    body.cosmic select {
+      background: rgba(255,255,255,.45) !important;
+      color: #353c3b !important;
+      border-color: rgba(53,60,59,.25) !important;
+      border-radius: 999px !important;
+    }
+    body.cosmic header button:hover { background: #fffdf6 !important; border-color: #6f876e !important; }
+    body.cosmic main { max-width: 1060px !important; padding-top: 42px !important; }
+    body.cosmic #view-home,
+    body.cosmic #view-subjects,
+    body.cosmic #view-wrong,
+    body.cosmic #view-feishu { position: relative; }
+    body.cosmic #view-home::before,
+    body.cosmic #view-subjects::before,
+    body.cosmic #view-wrong::before,
+    body.cosmic #view-feishu::before {
+      content: "LAW EXAM · STUDY INDEX";
+      display: block; margin-bottom: 13px; color: #6f876e;
+      font-size: 8pt !important; font-weight: 600; letter-spacing: .24em;
+    }
+    body.cosmic #view-home h2 {
+      margin-bottom: 22px !important; color: #353c3b !important;
+      font-size: 26pt !important; font-weight: 600; letter-spacing: -.04em;
+    }
+    body.cosmic #view-home h2::after {
+      content: "  /  一页一页，把规则读成自己的地图";
+      color: #7b8580; font-size: 10pt !important; font-weight: 400; letter-spacing: .04em;
+    }
+    body.cosmic .cosmic-overview {
+      max-width: none; margin-bottom: 26px !important; padding: 15px 0 16px;
+      border-top: 1px solid rgba(53,60,59,.22); border-bottom: 1px solid rgba(53,60,59,.16);
+    }
+    body.cosmic .cosmic-overview > div { border-left-color: rgba(53,60,59,.16); }
+    body.cosmic .cosmic-overview span,
+    body.cosmic .cosmic-overview small { color: #7b8580; letter-spacing: .12em; }
+    body.cosmic .cosmic-overview strong { color: #353c3b; font-size: 20pt !important; }
+    body.cosmic .nav-card {
+      min-height: 178px; padding: 23px !important; border-radius: 3px 12px 12px 3px;
+      background: rgba(255,253,246,.78) !important; border-color: rgba(53,60,59,.2) !important;
+      box-shadow: 7px 7px 0 rgba(111,135,110,.13), inset 8px 0 0 rgba(111,135,110,.19) !important;
+    }
+    body.cosmic .nav-card:nth-child(2) { box-shadow: 7px 7px 0 rgba(168,111,75,.12), inset 8px 0 0 rgba(168,111,75,.18) !important; }
+    body.cosmic .nav-card:nth-child(3) { box-shadow: 7px 7px 0 rgba(49,93,168,.12), inset 8px 0 0 rgba(49,93,168,.16) !important; }
+    body.cosmic .nav-card::after { border-color: rgba(111,135,110,.28) !important; box-shadow: 0 0 0 18px rgba(111,135,110,.05), 0 0 0 36px rgba(111,135,110,.03) !important; }
+    body.cosmic .nav-card:hover { transform: translateY(-4px) rotate(-.3deg); background: #fffdf6 !important; border-color: #6f876e !important; }
+    body.cosmic .nav-card > div:first-child { color: #353c3b !important; font-size: 18pt !important; }
+    body.cosmic .nav-card p { color: #69736e !important; line-height: 1.8; }
+    body.cosmic .index-catalog { margin-top: 36px; padding: 15px 0 0; border-top: 1px solid rgba(53,60,59,.2); }
+    body.cosmic .index-catalog-label { color: #7b8580; font-size: 8pt !important; letter-spacing: .2em; }
+    body.cosmic .index-catalog-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+    body.cosmic .index-catalog-list span { padding: 5px 10px; color: #596660; background: rgba(255,253,246,.5); border: 1px solid rgba(53,60,59,.17); border-radius: 999px; font-size: 9pt !important; }
+    body.cosmic .index-catalog-list span:nth-child(3n+1) { color: #6f876e; border-color: rgba(111,135,110,.35); }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) { color: #9a6b4d; border-color: rgba(168,111,75,.28); }
+    body.cosmic .subject-picker-head,
+    body.cosmic .reading-library-head { border-bottom-color: rgba(53,60,59,.18) !important; }
+    body.cosmic .subject-picker-kicker,
+    body.cosmic .reading-kicker { color: #6f876e !important; letter-spacing: .2em; }
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 { color: #353c3b !important; font-size: 21pt !important; letter-spacing: -.025em; }
+    body.cosmic .subject-card {
+      min-height: 148px; padding: 22px !important; border-radius: 3px 10px 10px 3px;
+      background: rgba(255,253,246,.78) !important; border-color: rgba(53,60,59,.2) !important;
+      box-shadow: 5px 5px 0 rgba(111,135,110,.12), inset 7px 0 0 rgba(111,135,110,.18) !important;
+    }
+    body.cosmic .subject-card:nth-child(3n+2) { box-shadow: 5px 5px 0 rgba(168,111,75,.11), inset 7px 0 0 rgba(168,111,75,.16) !important; }
+    body.cosmic .subject-card:nth-child(3n) { box-shadow: 5px 5px 0 rgba(49,93,168,.1), inset 7px 0 0 rgba(49,93,168,.14) !important; }
+    body.cosmic .subject-card:hover { border-color: #6f876e !important; background: #fffdf6 !important; transform: translateY(-3px) rotate(-.2deg); }
+    body.cosmic .subject-card-title { color: #353c3b !important; font-size: 16pt !important; }
+    body.cosmic .subject-card-meta { color: #7b8580 !important; }
+    body.cosmic .subject-card-arrow { color: #6f876e !important; }
+    body.cosmic #quiz-panel > div:first-child { border-color: rgba(53,60,59,.16); background: rgba(255,253,246,.4); }
+    body.cosmic #quiz-panel > div:nth-child(2) {
+      background: rgba(255,253,246,.86) !important; border-color: rgba(53,60,59,.2) !important;
+      border-radius: 3px 14px 14px 3px; box-shadow: 8px 8px 0 rgba(111,135,110,.1), inset 8px 0 0 rgba(111,135,110,.13) !important;
+    }
+    body.cosmic #stem { color: #353c3b !important; }
+    body.cosmic .option-btn { background: rgba(255,255,255,.4) !important; color: #353c3b !important; border-color: rgba(53,60,59,.2) !important; }
+    body.cosmic .option-btn:hover { background: #fffdf6 !important; border-color: #6f876e !important; }
+    body.cosmic .option-btn.selected { background: rgba(49,93,168,.1) !important; outline-color: #315da8 !important; }
+    body.cosmic .option-btn.correct { background: rgba(111,135,110,.14) !important; outline-color: #6f876e !important; }
+    body.cosmic .option-btn.wrong { background: rgba(163,75,66,.1) !important; outline-color: #a34b42 !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn { background: #6f876e !important; border-color: rgba(53,60,59,.25) !important; }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { background: #587258 !important; }
+    body.cosmic #result-explain { background: rgba(255,255,255,.36) !important; border-color: rgba(53,60,59,.16) !important; }
+    body.cosmic .bg-blue-50 { background: rgba(49,93,168,.09) !important; color: #315da8 !important; }
+    body.cosmic .bg-red-50,
+    body.cosmic .bg-red-100 { background: rgba(163,75,66,.1) !important; color: #a34b42 !important; }
+    body.cosmic .book-detail-panel,
+    body.cosmic .notes-table-wrap { background: rgba(255,253,246,.82) !important; border-color: rgba(53,60,59,.2) !important; box-shadow: 7px 7px 0 rgba(111,135,110,.1) !important; }
+    body.cosmic .notes-table th { background: rgba(230,227,216,.55); color: #69736e; }
+    body.cosmic .notes-table td { color: #4f5a56; }
+    @media (max-width: 760px) {
+      body.cosmic main { padding-top: 28px !important; }
+      body.cosmic #view-home h2 { font-size: 22pt !important; }
+      body.cosmic #view-home h2::after { display: block; margin-top: 8px; }
+      body.cosmic .nav-card { min-height: 142px; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
@@ -467,6 +599,12 @@
           <div class="text-xl font-semibold mb-1">03 / 读书笔记库</div>
           <p class="text-sm text-slate-500">用书封整理读过的书，点击封面查看对应的阅读笔记。</p>
         </button>
+      </div>
+      <div class="index-catalog" aria-label="学习内容分类">
+        <div class="index-catalog-label">INDEX / CATEGORIES</div>
+        <div class="index-catalog-list">
+          <span>行政法</span><span>商经知</span><span>理论法</span><span>三国法</span><span>刑诉法</span><span>民诉法</span><span>错题回看</span><span>阅读笔记</span>
+        </div>
       </div>
     </section>
 
