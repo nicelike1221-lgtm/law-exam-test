@@ -864,6 +864,24 @@
     body.cosmic #login-layer #pwd-btn:hover { background: #367cbd !important; }
     body.cosmic #login-layer #pwd-error { color: #c6536d !important; }
 
+    /* ===== 顶部导航整理：去除孤立装饰点，强化对齐 ===== */
+    body.cosmic header > div::before { display: none !important; }
+    body.cosmic header > div {
+      min-height: 54px;
+      align-items: center;
+    }
+    body.cosmic header > div > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    body.cosmic header nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     /* ===== 首页配色收束：统一蓝白层级，降低跳色 ===== */
     body.cosmic #view-home,
     body.cosmic #view-subjects,
