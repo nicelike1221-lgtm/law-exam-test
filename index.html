@@ -827,6 +827,43 @@
       body.cosmic .nav-card:nth-child(3), body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #6ba7d9 !important; }
     }
 
+    /* ===== 蓝白登录页覆盖：白底、蓝线框、柔和层级 ===== */
+    body.cosmic #login-layer {
+      background: #ffffff !important;
+      background-image:
+        linear-gradient(rgba(126, 174, 221, .15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 174, 221, .15) 1px, transparent 1px) !important;
+      background-size: 16px 16px !important;
+    }
+    body.cosmic #login-layer::before {
+      background: linear-gradient(rgba(255, 255, 255, .22), rgba(235, 245, 255, .18)) !important;
+    }
+    body.cosmic #login-layer::after {
+      color: rgba(38, 91, 148, .58) !important;
+    }
+    body.cosmic #login-layer > div {
+      border-color: #185aa0 !important;
+      box-shadow: 8px 8px 0 #9fc5e8 !important;
+      background: #ffffff !important;
+    }
+    body.cosmic #login-layer h1 { color: #123b68 !important; }
+    body.cosmic #login-layer p { color: #6d87a2 !important; }
+    body.cosmic #login-layer input {
+      border-color: #185aa0 !important;
+      box-shadow: 3px 3px 0 #f0b6c6 !important;
+      background: #ffffff !important;
+      color: #123b68 !important;
+    }
+    body.cosmic #login-layer input::placeholder { color: #91a8be !important; }
+    body.cosmic #login-layer #pwd-btn {
+      border-color: #185aa0 !important;
+      box-shadow: 4px 4px 0 #123b68 !important;
+      background: #4d91d1 !important;
+      color: #ffffff !important;
+    }
+    body.cosmic #login-layer #pwd-btn:hover { background: #367cbd !important; }
+    body.cosmic #login-layer #pwd-error { color: #c6536d !important; }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
