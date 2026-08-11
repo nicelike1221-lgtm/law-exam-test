@@ -864,6 +864,79 @@
     body.cosmic #login-layer #pwd-btn:hover { background: #367cbd !important; }
     body.cosmic #login-layer #pwd-error { color: #c6536d !important; }
 
+    /* ===== 首页配色收束：统一蓝白层级，降低跳色 ===== */
+    body.cosmic #view-home,
+    body.cosmic #view-subjects,
+    body.cosmic #view-wrong,
+    body.cosmic #view-feishu { color: #173b63 !important; }
+    body.cosmic #view-home h2,
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 { color: #123b68 !important; text-shadow: 2px 2px 0 rgba(126, 174, 221, .30) !important; }
+    body.cosmic .cosmic-overview {
+      border-top-color: #1b5b9f !important;
+      border-bottom-color: #1b5b9f !important;
+      background: rgba(255, 255, 255, .82) !important;
+    }
+    body.cosmic .cosmic-overview > div { border-left-color: rgba(27, 91, 159, .20) !important; }
+    body.cosmic .cosmic-overview span,
+    body.cosmic .cosmic-overview small { color: #6f879e !important; }
+    body.cosmic .cosmic-overview strong { color: #194d83 !important; }
+    body.cosmic .nav-card,
+    body.cosmic .subject-card {
+      background: #f3f8fd !important;
+      border-color: #174f8f !important;
+      box-shadow: 6px 6px 0 #a8c9e8 !important;
+    }
+    body.cosmic .nav-card:nth-child(1),
+    body.cosmic .nav-card:nth-child(2),
+    body.cosmic .nav-card:nth-child(3),
+    body.cosmic .subject-card:nth-child(3n+1),
+    body.cosmic .subject-card:nth-child(3n+2),
+    body.cosmic .subject-card:nth-child(3n) {
+      background: #f3f8fd !important;
+      box-shadow: 6px 6px 0 #a8c9e8 !important;
+    }
+    body.cosmic .nav-card:hover,
+    body.cosmic .subject-card:hover {
+      background: #e2f0fc !important;
+      border-color: #0b4da2 !important;
+      box-shadow: 3px 3px 0 #174f8f !important;
+    }
+    body.cosmic .nav-card > div:first-child,
+    body.cosmic .subject-card-title { color: #163f70 !important; }
+    body.cosmic .nav-card p,
+    body.cosmic .subject-card p { color: #5f7892 !important; }
+    body.cosmic .index-catalog { border-top-color: #1b5b9f !important; }
+    body.cosmic .index-catalog-label { color: #7090ac !important; }
+    body.cosmic .index-catalog-list span {
+      color: #245d95 !important;
+      border-color: #8ab8df !important;
+      background: #f7fbff !important;
+      box-shadow: 2px 2px 0 rgba(72, 128, 181, .26) !important;
+    }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) {
+      color: #806d27 !important;
+      border-color: #dfcf7f !important;
+      background: #fffdf0 !important;
+    }
+    body.cosmic .index-catalog-list span:nth-child(3n+1),
+    body.cosmic .index-catalog-list span:nth-child(3n) {
+      color: #245d95 !important;
+      border-color: #8ab8df !important;
+      background: #f7fbff !important;
+    }
+    @media (max-width: 760px) {
+      body.cosmic .nav-card,
+      body.cosmic .subject-card,
+      body.cosmic .nav-card:nth-child(1),
+      body.cosmic .nav-card:nth-child(2),
+      body.cosmic .nav-card:nth-child(3),
+      body.cosmic .subject-card:nth-child(3n+1),
+      body.cosmic .subject-card:nth-child(3n+2),
+      body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #a8c9e8 !important; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
