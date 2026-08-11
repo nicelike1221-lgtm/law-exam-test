@@ -976,6 +976,103 @@
       body.cosmic .study-widget { padding: 12px 13px; }
     }
 
+    /* ===== DOTOWN 风格覆盖：轻量像素目录页 ===== */
+    body.cosmic {
+      background-color: #ffffff !important;
+      background-image:
+        linear-gradient(rgba(224, 229, 234, .58) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(224, 229, 234, .58) 1px, transparent 1px),
+        linear-gradient(#ffffff, #f8fafc) !important;
+      background-size: 16px 16px, 16px 16px, auto !important;
+      color: #111111 !important;
+    }
+    body.cosmic header {
+      background: #ffffff !important;
+      border-bottom: 1px solid #c8d0d8 !important;
+      box-shadow: none !important;
+      color: #111111 !important;
+    }
+    body.cosmic header > div { min-height: 62px; max-width: 1060px !important; }
+    body.cosmic header > div > div:first-child { color: #111111 !important; text-shadow: none; letter-spacing: .04em; }
+    body.cosmic header nav button,
+    body.cosmic header button { border: 2px solid #111111 !important; box-shadow: none !important; background: #ffffff !important; color: #111111 !important; }
+    body.cosmic header nav button:hover,
+    body.cosmic header button:hover { background: #e9f3ff !important; border-color: #145ca8 !important; }
+    body.cosmic main { max-width: 1060px !important; padding-top: 34px !important; }
+    body.cosmic #view-home::before,
+    body.cosmic #view-subjects::before,
+    body.cosmic #view-wrong::before,
+    body.cosmic #view-feishu::before {
+      content: "PIXEL STUDY DIRECTORY" !important;
+      color: #111111 !important;
+      font-size: 9pt !important;
+      letter-spacing: .16em;
+      text-shadow: none;
+      margin-bottom: 12px;
+    }
+    body.cosmic #view-home h2,
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 {
+      color: #111111 !important;
+      text-shadow: none !important;
+      letter-spacing: .02em !important;
+    }
+    body.cosmic #view-home h2::after { content: "  /  选择一个入口开始今天的学习" !important; color: #697580 !important; }
+    body.cosmic .cosmic-overview { max-width: 760px; border-color: #111111 !important; background: #ffffff !important; }
+    body.cosmic .cosmic-overview > div { border-left-color: #cbd5dc !important; }
+    body.cosmic .cosmic-overview span,
+    body.cosmic .cosmic-overview small { color: #697580 !important; }
+    body.cosmic .cosmic-overview strong { color: #111111 !important; }
+    body.cosmic .nav-card,
+    body.cosmic .subject-card {
+      border: 2px solid #111111 !important;
+      box-shadow: 4px 4px 0 #b7c5d0 !important;
+      background: #ffffff !important;
+      border-radius: 0 !important;
+    }
+    body.cosmic .nav-card:nth-child(1),
+    body.cosmic .nav-card:nth-child(2),
+    body.cosmic .nav-card:nth-child(3),
+    body.cosmic .subject-card:nth-child(3n+1),
+    body.cosmic .subject-card:nth-child(3n+2),
+    body.cosmic .subject-card:nth-child(3n) { background: #ffffff !important; box-shadow: 4px 4px 0 #b7c5d0 !important; }
+    body.cosmic .nav-card:hover,
+    body.cosmic .subject-card:hover { background: #f0f7ff !important; border-color: #145ca8 !important; box-shadow: 2px 2px 0 #6e9bc2 !important; }
+    body.cosmic .nav-card::after { border-color: #d2e1ef !important; box-shadow: 0 0 0 13px rgba(126, 174, 221, .09), 0 0 0 26px rgba(126, 174, 221, .04) !important; }
+    body.cosmic .nav-card > div:first-child,
+    body.cosmic .subject-card-title { color: #111111 !important; }
+    body.cosmic .nav-card p,
+    body.cosmic .subject-card p { color: #697580 !important; }
+    body.cosmic .index-catalog { border-top-color: #111111 !important; }
+    body.cosmic .index-catalog-label { color: #697580 !important; }
+    body.cosmic .index-catalog-list span { color: #111111 !important; border-color: #9cb7cc !important; background: #ffffff !important; box-shadow: 2px 2px 0 #d2dce4 !important; }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) { color: #145ca8 !important; border-color: #77a9d3 !important; background: #f3f8fd !important; }
+    body.cosmic .study-widget { border: 2px solid #111111; box-shadow: 4px 4px 0 #b7c5d0; }
+    body.cosmic .quick-action { border: 2px solid #111111; box-shadow: 2px 2px 0 #d2dce4; background: #ffffff; color: #111111; }
+    body.cosmic .quick-action:hover { background: #f0f7ff; border-color: #145ca8; }
+    body.cosmic #quiz-panel > div:first-child,
+    body.cosmic #quiz-panel > div:nth-child(2),
+    body.cosmic #result-box,
+    body.cosmic #result-explain,
+    body.cosmic .book-detail-panel,
+    body.cosmic .notes-table-wrap { border-color: #111111 !important; box-shadow: 4px 4px 0 #b7c5d0 !important; background: #ffffff !important; }
+    body.cosmic .option-btn { border-color: #111111 !important; box-shadow: 2px 2px 0 #d2dce4 !important; background: #ffffff !important; color: #111111 !important; }
+    body.cosmic .option-btn:hover,
+    body.cosmic .option-btn.selected { background: #e9f3ff !important; border-color: #145ca8 !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn { border: 2px solid #111111 !important; box-shadow: 3px 3px 0 #145ca8 !important; background: #ffffff !important; color: #111111 !important; }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { background: #e9f3ff !important; }
+    body.cosmic #login-layer { background: #ffffff !important; }
+    body.cosmic #login-layer > div { border-color: #111111 !important; box-shadow: 6px 6px 0 #b7c5d0 !important; }
+    @media (max-width: 760px) {
+      body.cosmic header > div { min-height: 56px; }
+      body.cosmic main { padding-top: 25px !important; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
