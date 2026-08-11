@@ -728,6 +728,105 @@
       body.cosmic .nav-card:nth-child(3), body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #86c6df !important; }
     }
 
+    /* ===== 复古互联网窗口覆盖：参考截图的 90 年代网页气质 ===== */
+    body.cosmic {
+      color: #111111 !important;
+      background-color: #f6f7f4 !important;
+      background-image:
+        linear-gradient(rgba(214, 222, 224, .58) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(214, 222, 224, .58) 1px, transparent 1px),
+        linear-gradient(#ffffff, #f3f5f2) !important;
+      background-size: 16px 16px, 16px 16px, auto !important;
+    }
+    body.cosmic header {
+      background: #0647b7 !important;
+      border-bottom: 4px solid #082d72 !important;
+      box-shadow: 0 4px 0 #f2ca24 !important;
+      color: #ffffff !important;
+    }
+    body.cosmic header > div::before {
+      background: #f9d526 !important;
+      box-shadow: 3px 3px 0 #082d72 !important;
+    }
+    body.cosmic header > div > div:first-child { color: #ffffff !important; text-shadow: 2px 2px 0 #082d72; }
+    body.cosmic header nav button,
+    body.cosmic header button,
+    body.cosmic input,
+    body.cosmic select {
+      border: 3px solid #111111 !important;
+      box-shadow: 3px 3px 0 #68727a !important;
+      background: #f9faf8 !important;
+      color: #111111 !important;
+    }
+    body.cosmic header nav button { background: #e9edf0 !important; }
+    body.cosmic header nav button:hover,
+    body.cosmic header button:hover,
+    body.cosmic select:hover { background: #cfe8ff !important; }
+    body.cosmic main { max-width: 900px !important; padding-top: 44px !important; }
+    body.cosmic #view-home::before,
+    body.cosmic #view-subjects::before,
+    body.cosmic #view-wrong::before,
+    body.cosmic #view-feishu::before { color: #0647b7 !important; text-shadow: 2px 2px 0 rgba(6, 71, 183, .18); }
+    body.cosmic #view-home h2,
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 { color: #111111 !important; text-shadow: 3px 3px 0 rgba(242, 202, 36, .34); }
+    body.cosmic .cosmic-overview {
+      border-top: 3px solid #111111 !important;
+      border-bottom: 3px solid #111111 !important;
+      background: rgba(255, 255, 255, .72) !important;
+    }
+    body.cosmic .cosmic-overview > div { border-left-color: rgba(17, 17, 17, .24) !important; }
+    body.cosmic .nav-card,
+    body.cosmic .subject-card {
+      border: 3px solid #111111 !important;
+      box-shadow: 6px 6px 0 #68727a !important;
+      background: #ffffff !important;
+    }
+    body.cosmic .nav-card:nth-child(1),
+    body.cosmic .subject-card:nth-child(3n+1) { background: #ffe9ee !important; box-shadow: 6px 6px 0 #e26b8a !important; }
+    body.cosmic .nav-card:nth-child(2),
+    body.cosmic .subject-card:nth-child(3n+2) { background: #fff4bd !important; box-shadow: 6px 6px 0 #e8b91e !important; }
+    body.cosmic .nav-card:nth-child(3),
+    body.cosmic .subject-card:nth-child(3n) { background: #e7f2ff !important; box-shadow: 6px 6px 0 #6ba7d9 !important; }
+    body.cosmic .nav-card:hover,
+    body.cosmic .subject-card:hover { transform: translate(3px, 3px) !important; border-color: #111111 !important; background: #ffffff !important; box-shadow: 3px 3px 0 #111111 !important; }
+    body.cosmic .nav-card::after { border-color: rgba(6, 71, 183, .24) !important; box-shadow: 0 0 0 13px rgba(6, 71, 183, .06), 0 0 0 26px rgba(6, 71, 183, .03) !important; }
+    body.cosmic .index-catalog { border-top-color: #111111 !important; }
+    body.cosmic .index-catalog-list span { border: 2px solid #111111 !important; background: #ffffff !important; box-shadow: 2px 2px 0 rgba(17, 17, 17, .28); }
+    body.cosmic .index-catalog-list span:nth-child(3n+1) { color: #0647b7 !important; border-color: #6ba7d9 !important; }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) { color: #b57700 !important; border-color: #e8b91e !important; }
+    body.cosmic #quiz-panel > div:first-child { border: 3px solid #111111 !important; background: #e7f2ff !important; }
+    body.cosmic #quiz-panel > div:nth-child(2) { border: 3px solid #111111 !important; box-shadow: 7px 7px 0 #6ba7d9 !important; background: #ffffff !important; }
+    body.cosmic .option-btn { border: 3px solid #111111 !important; box-shadow: 3px 3px 0 rgba(17, 17, 17, .28); background: #ffffff !important; color: #111111 !important; }
+    body.cosmic .option-btn:hover { background: #e7f2ff !important; border-color: #0647b7 !important; }
+    body.cosmic .option-btn.selected { outline-color: #0647b7 !important; background: #d7e9ff !important; }
+    body.cosmic .option-btn.correct { outline-color: #368c47 !important; background: #def4df !important; }
+    body.cosmic .option-btn.wrong { outline-color: #d4475e !important; background: #ffe1e5 !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn { border: 3px solid #111111 !important; box-shadow: 4px 4px 0 #111111 !important; background: #0647b7 !important; }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { background: #0a62d8 !important; }
+    body.cosmic #result-box,
+    body.cosmic #result-explain,
+    body.cosmic .book-detail-panel,
+    body.cosmic .notes-table-wrap { border-color: #111111 !important; box-shadow: 5px 5px 0 rgba(6, 71, 183, .30) !important; background: #ffffff !important; }
+    body.cosmic .notes-table th { border-bottom-color: #111111 !important; background: #e7f2ff !important; }
+    body.cosmic .notes-table td { border-top-color: rgba(17, 17, 17, .22) !important; }
+    body.cosmic #login-layer { background: #0647b7 !important; }
+    body.cosmic #login-layer::before { background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .11) 0 2px, transparent 2px 8px) !important; }
+    body.cosmic #login-layer > div { border: 4px solid #111111 !important; box-shadow: 8px 8px 0 #111111 !important; background: #ffffff !important; }
+    body.cosmic #login-layer input { border-color: #111111 !important; box-shadow: 3px 3px 0 #e26b8a !important; }
+    body.cosmic .book-cover { border-color: #111111 !important; box-shadow: 6px 6px 0 rgba(17, 17, 17, .30), inset 10px 0 0 rgba(0, 0, 0, .10) !important; }
+    @media (max-width: 760px) {
+      body.cosmic main { padding-top: 30px !important; }
+      body.cosmic .nav-card, body.cosmic .subject-card { box-shadow: 4px 4px 0 #e26b8a !important; }
+      body.cosmic .nav-card:nth-child(2), body.cosmic .subject-card:nth-child(3n+2) { box-shadow: 4px 4px 0 #e8b91e !important; }
+      body.cosmic .nav-card:nth-child(3), body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #6ba7d9 !important; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
