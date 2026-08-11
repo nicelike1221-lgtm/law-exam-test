@@ -494,6 +494,145 @@
       body.cosmic .nav-card { min-height: 142px; }
     }
 
+    /* ===== 像素风覆盖：8-bit 法考图鉴 ===== */
+    body.cosmic {
+      font-family: "Courier New", "Noto Sans SC", monospace !important;
+      background-color: #f0ead8 !important;
+      background-image:
+        linear-gradient(rgba(53,60,59,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53,60,59,.08) 1px, transparent 1px),
+        linear-gradient(rgba(255,253,246,.62), rgba(240,234,216,.86)) !important;
+      background-size: 16px 16px, 16px 16px, auto !important;
+      image-rendering: pixelated;
+    }
+    body.cosmic header {
+      background: #f0ead8 !important;
+      border-bottom: 4px solid #353c3b !important;
+      box-shadow: 0 4px 0 #6f876e !important;
+      backdrop-filter: none !important;
+    }
+    body.cosmic header > div::before {
+      width: 8px; height: 8px; border-radius: 0 !important;
+      background: #6f876e !important; box-shadow: 3px 3px 0 #353c3b !important;
+      animation: none !important;
+    }
+    body.cosmic header > div > div:first-child {
+      font-family: "Courier New", monospace !important;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    body.cosmic header button,
+    body.cosmic input,
+    body.cosmic select {
+      border-radius: 0 !important;
+      border: 2px solid #353c3b !important;
+      box-shadow: 3px 3px 0 #6f876e !important;
+      background: #fffdf6 !important;
+    }
+    body.cosmic header button:hover,
+    body.cosmic select:hover { background: #dfe8d7 !important; }
+    body.cosmic main { padding-top: 46px !important; }
+    body.cosmic #view-home::before,
+    body.cosmic #view-subjects::before,
+    body.cosmic #view-wrong::before,
+    body.cosmic #view-feishu::before {
+      color: #6f876e !important; font-family: "Courier New", monospace !important;
+      font-weight: 700; letter-spacing: .16em; text-shadow: 2px 2px 0 rgba(53,60,59,.12);
+    }
+    body.cosmic #view-home h2,
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 {
+      font-family: "Courier New", "Noto Sans SC", monospace !important;
+      font-weight: 700 !important; letter-spacing: -.06em !important;
+      text-shadow: 3px 3px 0 rgba(111,135,110,.2);
+    }
+    body.cosmic #view-home h2::after { font-family: "Noto Sans SC", sans-serif !important; letter-spacing: 0 !important; }
+    body.cosmic .cosmic-overview {
+      border-top: 3px solid #353c3b !important;
+      border-bottom: 3px solid #353c3b !important;
+      background: rgba(255,253,246,.45);
+    }
+    body.cosmic .cosmic-overview > div { border-left: 2px solid rgba(53,60,59,.2) !important; }
+    body.cosmic .cosmic-overview strong { font-family: "Courier New", monospace !important; font-weight: 700 !important; }
+    body.cosmic .nav-card,
+    body.cosmic .subject-card {
+      border-radius: 0 !important;
+      border: 3px solid #353c3b !important;
+      box-shadow: 6px 6px 0 #6f876e !important;
+      background: #fffdf6 !important;
+      transition: transform .12s steps(2, end), box-shadow .12s steps(2, end), background .12s steps(2, end) !important;
+    }
+    body.cosmic .nav-card:nth-child(2),
+    body.cosmic .subject-card:nth-child(3n+2) { box-shadow: 6px 6px 0 #a86f4b !important; }
+    body.cosmic .nav-card:nth-child(3),
+    body.cosmic .subject-card:nth-child(3n) { box-shadow: 6px 6px 0 #315da8 !important; }
+    body.cosmic .nav-card::after { border-radius: 0 !important; border-width: 3px !important; box-shadow: 0 0 0 13px rgba(111,135,110,.08), 0 0 0 26px rgba(111,135,110,.05) !important; }
+    body.cosmic .nav-card:hover,
+    body.cosmic .subject-card:hover { transform: translate(3px, 3px) !important; box-shadow: 3px 3px 0 #353c3b !important; background: #dfe8d7 !important; border-color: #353c3b !important; }
+    body.cosmic .nav-card:active,
+    body.cosmic .subject-card:active { transform: translate(6px, 6px) !important; box-shadow: none !important; }
+    body.cosmic .nav-card > div:first-child,
+    body.cosmic .subject-card-title { font-family: "Courier New", "Noto Sans SC", monospace !important; font-weight: 700 !important; }
+    body.cosmic .index-catalog { border-top: 3px solid #353c3b !important; }
+    body.cosmic .index-catalog-list span {
+      border-radius: 0 !important; border: 2px solid #353c3b !important;
+      background: #fffdf6 !important; box-shadow: 2px 2px 0 rgba(53,60,59,.4);
+      font-family: "Courier New", "Noto Sans SC", monospace !important;
+    }
+    body.cosmic .index-catalog-list span:nth-child(3n+1) { color: #4d704d !important; border-color: #6f876e !important; }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) { color: #955f3c !important; border-color: #a86f4b !important; }
+    body.cosmic #quiz-panel > div:first-child { border-radius: 0 !important; border: 2px solid #353c3b !important; background: #dfe8d7 !important; }
+    body.cosmic #quiz-panel > div:nth-child(2) {
+      border-radius: 0 !important; border: 3px solid #353c3b !important;
+      box-shadow: 7px 7px 0 #6f876e !important; background: #fffdf6 !important;
+    }
+    body.cosmic .option-btn {
+      border-radius: 0 !important; border: 2px solid #353c3b !important;
+      box-shadow: 3px 3px 0 rgba(53,60,59,.35); background: #fffdf6 !important;
+      transition: transform .1s steps(2, end), box-shadow .1s steps(2, end), background .1s steps(2, end) !important;
+    }
+    body.cosmic .option-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(53,60,59,.35); background: #dfe8d7 !important; }
+    body.cosmic .option-btn.selected { outline: 3px solid #315da8 !important; background: #dbe7f5 !important; }
+    body.cosmic .option-btn.correct { outline: 3px solid #6f876e !important; background: #dfe8d7 !important; }
+    body.cosmic .option-btn.wrong { outline: 3px solid #a34b42 !important; background: #f1d8d1 !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn {
+      border-radius: 0 !important; border: 3px solid #353c3b !important;
+      box-shadow: 4px 4px 0 #353c3b !important; background: #6f876e !important;
+      font-family: "Courier New", "Noto Sans SC", monospace !important; font-weight: 700;
+    }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #353c3b !important; background: #587258 !important; }
+    body.cosmic #submit-btn:active,
+    body.cosmic #wrong-practice-all:active,
+    body.cosmic #pwd-btn:active { transform: translate(4px, 4px); box-shadow: none !important; }
+    body.cosmic #result-box,
+    body.cosmic #result-explain,
+    body.cosmic .book-detail-panel,
+    body.cosmic .notes-table-wrap {
+      border-radius: 0 !important; border: 3px solid #353c3b !important;
+      box-shadow: 5px 5px 0 rgba(111,135,110,.45) !important;
+    }
+    body.cosmic .book-cover { border-radius: 0 5px 5px 0 !important; border: 3px solid #353c3b !important; box-shadow: 6px 6px 0 rgba(53,60,59,.35), inset 10px 0 0 rgba(0,0,0,.1) !important; }
+    body.cosmic .book-cover::after { border-radius: 0 !important; }
+    body.cosmic .reading-tags span,
+    body.cosmic .note-status { border-radius: 0 !important; border: 2px solid currentColor !important; }
+    body.cosmic .notes-table th { border-bottom: 3px solid #353c3b; }
+    body.cosmic .notes-table td { border-top: 2px dashed rgba(53,60,59,.25); }
+    body.cosmic #login-layer { background: #6f876e !important; }
+    body.cosmic #login-layer::before { background: repeating-linear-gradient(0deg, rgba(53,60,59,.1) 0 2px, transparent 2px 8px) !important; }
+    body.cosmic #login-layer > div { border-radius: 0 !important; border: 4px solid #353c3b !important; box-shadow: 8px 8px 0 #353c3b !important; background: #fffdf6 !important; backdrop-filter: none !important; }
+    body.cosmic #login-layer input { border-radius: 0 !important; border: 3px solid #353c3b !important; box-shadow: 3px 3px 0 #a86f4b !important; }
+    body.cosmic #login-layer h1 { font-family: "Courier New", "Noto Sans SC", monospace !important; font-weight: 700 !important; }
+    @media (max-width: 760px) {
+      body.cosmic main { padding-top: 30px !important; }
+      body.cosmic .nav-card, body.cosmic .subject-card { box-shadow: 4px 4px 0 #6f876e !important; }
+      body.cosmic .nav-card:nth-child(2), body.cosmic .subject-card:nth-child(3n+2) { box-shadow: 4px 4px 0 #a86f4b !important; }
+      body.cosmic .nav-card:nth-child(3), body.cosmic .subject-card:nth-child(3n) { box-shadow: 4px 4px 0 #315da8 !important; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
