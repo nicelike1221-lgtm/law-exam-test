@@ -1189,6 +1189,29 @@
       body.cosmic .study-widget { box-shadow: 4px 4px 0 #f0b7c6 !important; }
     }
 
+    /* ===== 像素小人吉祥物 ===== */
+    .mascot-img {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border: 2px solid #d85c7b;
+      box-shadow: 3px 3px 0 #f0b7c6;
+      background: #ffffff;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    @keyframes mascot-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes mascot-wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      75% { transform: rotate(4deg); }
+    }
+    .mascot-bounce { animation: mascot-bounce 2.2s ease-in-out infinite; }
+    .mascot-wave { animation: mascot-wave 3s ease-in-out infinite; }
+    body.cosmic .mascot-img { border-color: #d85c7b !important; box-shadow: 3px 3px 0 #f0b7c6 !important; }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
@@ -1250,8 +1273,9 @@
 <body class="cosmic text-slate-800 min-h-screen">
   <!-- 登录层 -->
   <div id="login-layer" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60">
-    <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm">
-      <div class="mb-6 text-[10pt] tracking-[.24em] text-slate-400">ENTER THE OBSERVATORY</div>
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-[90%] max-w-sm text-center">
+      <img src="/assets/images/mascot-a-web.png" alt="陪你刷题的像素小人" class="mascot-img mascot-bounce mx-auto" width="96" height="96" />
+      <div class="mb-3 mt-3 text-[10pt] tracking-[.24em] text-slate-400">ENTER THE OBSERVATORY</div>
       <h1 class="text-xl font-semibold mb-2">宇宙明亮，欢迎光临</h1>
       <p class="text-[10pt] text-slate-400 mb-5">输入密码，继续你的法考轨迹。</p>
       <input id="pwd-input" type="password" placeholder="请输入访问密码"
@@ -1275,7 +1299,13 @@
 
     <!-- 导航首页 -->
     <section id="view-home">
-      <h2 class="text-lg font-semibold mb-4">请选择进入：</h2>
+      <div class="flex items-center gap-3 mb-4">
+        <img src="/assets/images/mascot-b-web.png" alt="今日也要加油的像素小人" class="mascot-img mascot-wave" width="56" height="56" />
+        <div>
+          <h2 class="text-lg font-semibold">请选择进入：</h2>
+          <p class="text-[10pt] text-slate-400">今天也一起加油，先完成一个小目标。</p>
+        </div>
+      </div>
       <div class="cosmic-overview grid grid-cols-3 gap-2 mb-5">
         <div><span>📚 QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
         <div><span>🗓️ ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
