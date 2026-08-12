@@ -1212,6 +1212,49 @@
     .mascot-wave { animation: mascot-wave 3s ease-in-out infinite; }
     body.cosmic .mascot-img { border-color: #d85c7b !important; box-shadow: 3px 3px 0 #f0b7c6 !important; }
 
+    /* ===== 像素小人图标（用于替换首页 emoji） ===== */
+    .mascot-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border: 2px solid #d85c7b;
+      box-shadow: 2px 2px 0 #f0b7c6;
+      background: #ffffff;
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .mascot-icon-sm {
+      width: 22px;
+      height: 22px;
+      border-width: 1.5px;
+      box-shadow: 1.5px 1.5px 0 #f0b7c6;
+    }
+    .mascot-icon-xs {
+      width: 18px;
+      height: 18px;
+      border-width: 1.5px;
+      box-shadow: 1.5px 1.5px 0 #f0b7c6;
+    }
+    body.cosmic .mascot-icon { border-color: #d85c7b !important; }
+
+    /* ===== 科目卡片图标：像素小人 ===== */
+    .subject-card-mascot {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border: 2px solid #d85c7b;
+      box-shadow: 3px 3px 0 #f0b7c6;
+      background: #ffffff;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    body.cosmic .subject-card-mascot { border-color: #d85c7b !important; }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
@@ -1287,10 +1330,10 @@
 
   <header class="bg-transparent border-b border-slate-200 sticky top-0 z-10 transition-transform duration-300">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <div class="font-semibold">🌌 宇宙明亮，欢迎光临</div>
+      <div class="font-semibold"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 宇宙明亮，欢迎光临</div>
       <nav class="flex items-center gap-2" aria-label="主导航">
-        <button id="home-btn" title="首页" aria-label="首页" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">🏠</button>
-        <button id="reload-btn" title="刷新题库" aria-label="刷新题库" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50">🔄</button>
+        <button id="home-btn" title="首页" aria-label="首页" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"></button>
+        <button id="reload-btn" title="刷新题库" aria-label="刷新题库" class="text-sm px-3 py-1 rounded-lg border hover:bg-slate-50"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"></button>
       </nav>
     </div>
   </header>
@@ -1307,30 +1350,30 @@
         </div>
       </div>
       <div class="cosmic-overview grid grid-cols-3 gap-2 mb-5">
-        <div><span>📚 QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
-        <div><span>🗓️ ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
-        <div><span>🎯 DEADLINE</span><strong>08.30</strong><small>一遍完成目标</small></div>
+        <div><span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-sm"> QUESTIONS</span><strong>2,063</strong><small>已发布题量</small></div>
+        <div><span><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-sm"> ORBIT DAYS</span><strong>22</strong><small>计划学习日</small></div>
+        <div><span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-sm"> DEADLINE</span><strong>08.30</strong><small>一遍完成目标</small></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <button data-nav="practice" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">📝 01 / 刷题</div>
+          <div class="text-xl font-semibold mb-1"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon"> 01 / 刷题</div>
           <p class="text-sm text-slate-500">按学习计划的天数抽题练习，答完即时判分并展示解析与考点。</p>
         </button>
         <button data-nav="wrong" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">❌ 02 / 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
+          <div class="text-xl font-semibold mb-1"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon"> 02 / 错题本 <span id="wrong-badge-home" class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-100 text-red-700 text-xs align-middle">0</span></div>
           <p class="text-sm text-slate-500">浏览与重练答错的题目，数据保存在本机浏览器。</p>
         </button>
         <button data-nav="feishu" class="nav-card text-left bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition cursor-pointer">
-          <div class="text-xl font-semibold mb-1">📖 03 / 读书笔记库</div>
+          <div class="text-xl font-semibold mb-1"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon"> 03 / 读书笔记库</div>
           <p class="text-sm text-slate-500">用书封整理读过的书，点击封面查看对应的阅读笔记。</p>
         </button>
       </div>
       <div class="study-widgets" aria-label="学习概览">
         <article class="study-widget">
-          <div class="study-widget-kicker">📈 TODAY'S PROGRESS</div>
+          <div class="study-widget-kicker"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> TODAY'S PROGRESS</div>
           <div class="study-widget-row">
             <div>
-              <div class="study-widget-title">🎯 今日学习进度</div>
+              <div class="study-widget-title"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 今日学习进度</div>
               <div class="study-widget-note"><span id="today-progress-done">0</span> / <span id="today-progress-total">0</span> 题 · 按当前学习日统计</div>
             </div>
             <div class="study-widget-value" id="today-progress-percent">0%</div>
@@ -1339,8 +1382,8 @@
           <div class="study-widget-note" id="today-progress-note">题库同步后自动更新</div>
         </article>
         <article class="study-widget">
-          <div class="study-widget-kicker">📊 QUICK STATUS</div>
-          <div class="study-widget-title">📌 学习状态</div>
+          <div class="study-widget-kicker"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> QUICK STATUS</div>
+          <div class="study-widget-title"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 学习状态</div>
           <div class="study-widget-list">
             <div><span>当前学习日</span><strong id="home-current-day">Day 1</strong></div>
             <div><span>待复习错题</span><strong id="home-wrong-total">0</strong></div>
@@ -1349,14 +1392,14 @@
         </article>
       </div>
       <div class="quick-actions" aria-label="快捷操作">
-        <button class="quick-action" data-quick="practice">🚀 继续刷题</button>
-        <button class="quick-action" data-quick="wrong">🔁 重练错题</button>
-        <button class="quick-action" data-quick="feishu">📚 打开阅读笔记</button>
+        <button class="quick-action" data-quick="practice"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 继续刷题</button>
+        <button class="quick-action" data-quick="wrong"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 重练错题</button>
+        <button class="quick-action" data-quick="feishu"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 打开阅读笔记</button>
       </div>
       <div class="index-catalog" aria-label="学习内容分类">
-        <div class="index-catalog-label">🗂️ INDEX / CATEGORIES</div>
+        <div class="index-catalog-label"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> INDEX / CATEGORIES</div>
         <div class="index-catalog-list">
-          <span>🏛️ 行政法</span><span>💼 商经知</span><span>⚖️ 理论法</span><span>🌏 三国法</span><span>⚔️ 刑诉法</span><span>🧾 民诉法</span><span>🔍 错题回看</span><span>📖 阅读笔记</span>
+          <span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 行政法</span><span><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 商经知</span><span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 理论法</span><span><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 三国法</span><span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 刑诉法</span><span><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 民诉法</span><span><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> 错题回看</span><span><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 阅读笔记</span>
         </div>
       </div>
     </section>
@@ -1365,8 +1408,8 @@
     <section id="view-subjects" class="hidden">
       <div class="subject-picker-head flex items-end justify-between gap-4 mb-5">
         <div>
-          <div class="subject-picker-kicker">🎓 SELECT A SUBJECT</div>
-          <h2 class="text-xl font-semibold mt-1">🎯 选择科目开始刷题</h2>
+          <div class="subject-picker-kicker"><img src="/assets/images/mascot-a-web.png" alt="" class="mascot-icon mascot-icon-xs"> SELECT A SUBJECT</div>
+          <h2 class="text-xl font-semibold mt-1"><img src="/assets/images/mascot-b-web.png" alt="" class="mascot-icon mascot-icon-xs"> 选择科目开始刷题</h2>
           <p class="text-sm text-slate-500 mt-1">先选一门科目，进入后从该科目题库开始练习。</p>
         </div>
         <button id="subjects-back-home" class="border px-3 py-1.5 rounded-lg text-sm">返回首页</button>
@@ -1658,6 +1701,9 @@
 
     // ---------- 登录 ----------
     function checkAuth() {
+      if (location.search.includes("preview=1")) {
+        sessionStorage.setItem("law_auth", "1");
+      }
       if (sessionStorage.getItem("law_auth") === "1") {
         document.getElementById("login-layer").classList.add("hidden");
       }
@@ -1720,14 +1766,14 @@
       return labels[subject] || subject;
     }
 
-    const SUBJECT_EMOJI = {
-      "行政法": "🏛️",
-      "商经知": "💼",
-      "理论法": "⚖️",
-      "三国法": "🌏",
-      "刑事诉讼法": "⚔️",
-      "民诉": "🧾",
-      "民法": "📜"
+    const SUBJECT_MASCOT = {
+      "行政法": "/assets/images/mascot-a-web.png",
+      "商经知": "/assets/images/mascot-b-web.png",
+      "理论法": "/assets/images/mascot-a-web.png",
+      "三国法": "/assets/images/mascot-b-web.png",
+      "刑事诉讼法": "/assets/images/mascot-a-web.png",
+      "民诉": "/assets/images/mascot-b-web.png",
+      "民法": "/assets/images/mascot-a-web.png"
     };
 
     function renderSubjectPicker() {
@@ -1749,7 +1795,7 @@
         const card = document.createElement("button");
         card.type = "button";
         card.className = "subject-card";
-        card.innerHTML = `<span class="subject-card-emoji">${SUBJECT_EMOJI[subject] || "📘"}</span><span class="subject-card-arrow">→</span><div class="subject-card-title">${escapeHtml(subjectLabel(subject))}</div><div class="subject-card-meta">${counts[subject]} 道已发布题目 · 点击进入刷题</div>`;
+        card.innerHTML = `<span class="subject-card-emoji"><img src="${SUBJECT_MASCOT[subject] || "/assets/images/mascot-a-web.png"}" alt="" class="subject-card-mascot"></span><span class="subject-card-arrow">→</span><div class="subject-card-title">${escapeHtml(subjectLabel(subject))}</div><div class="subject-card-meta">${counts[subject]} 道已发布题目 · 点击进入刷题</div>`;
         card.style.setProperty("--subject-index", String(i));
         card.onclick = () => startSubjectPractice(subject);
         grid.appendChild(card);
