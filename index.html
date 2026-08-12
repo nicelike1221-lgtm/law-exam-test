@@ -1074,6 +1074,121 @@
       body.cosmic main { padding-top: 25px !important; }
     }
 
+    /* ===== 温柔打卡主题：粉色格纹 + 白色卡片 + 珊瑚强调 ===== */
+    body.cosmic {
+      background-color: #fff8fb !important;
+      background-image:
+        linear-gradient(90deg, rgba(235, 145, 169, .14) 50%, transparent 50%),
+        linear-gradient(rgba(235, 145, 169, .14) 50%, transparent 50%),
+        linear-gradient(90deg, rgba(255,255,255,.72) 50%, transparent 50%),
+        linear-gradient(rgba(255,255,255,.72) 50%, transparent 50%) !important;
+      background-size: 32px 32px, 32px 32px, 16px 16px, 16px 16px !important;
+      color: #5d3340 !important;
+    }
+    body.cosmic header {
+      background: #fffafb !important;
+      border-bottom: 2px solid #d85c7b !important;
+      box-shadow: 0 3px 0 rgba(216, 92, 123, .16) !important;
+      color: #6c3042 !important;
+    }
+    body.cosmic header > div > div:first-child { color: #c94f70 !important; text-shadow: 2px 2px 0 #f5c9d5 !important; }
+    body.cosmic header button {
+      border-color: #d85c7b !important;
+      background: #ffffff !important;
+      color: #a83f5b !important;
+      box-shadow: 2px 2px 0 #f0b7c6 !important;
+    }
+    body.cosmic header button:hover { background: #fff0f4 !important; border-color: #b83f60 !important; }
+    body.cosmic #view-home,
+    body.cosmic #view-subjects,
+    body.cosmic #view-wrong,
+    body.cosmic #view-feishu { color: #633745 !important; }
+    body.cosmic #view-home h2,
+    body.cosmic #view-subjects h2,
+    body.cosmic #view-wrong h2,
+    body.cosmic #view-feishu h2 { color: #a83f5b !important; text-shadow: 2px 2px 0 #f6cbd7 !important; }
+    body.cosmic #view-home h2::after { color: #9b6574 !important; }
+    body.cosmic .cosmic-overview {
+      border-color: #d85c7b !important;
+      background: #ffffff !important;
+      box-shadow: 4px 4px 0 #f0b7c6 !important;
+    }
+    body.cosmic .cosmic-overview > div { border-left-color: #f0c2ce !important; }
+    body.cosmic .cosmic-overview span,
+    body.cosmic .cosmic-overview small { color: #9b6574 !important; }
+    body.cosmic .cosmic-overview strong { color: #c94f70 !important; }
+    body.cosmic .nav-card,
+    body.cosmic .subject-card {
+      background: #ffffff !important;
+      border-color: #d85c7b !important;
+      box-shadow: 5px 5px 0 #f0b7c6 !important;
+    }
+    body.cosmic .nav-card:hover,
+    body.cosmic .subject-card:hover { background: #fff1f5 !important; border-color: #b83f60 !important; box-shadow: 2px 2px 0 #d85c7b !important; }
+    body.cosmic .nav-card > div:first-child,
+    body.cosmic .subject-card-title { color: #7b3046 !important; }
+    body.cosmic .nav-card p,
+    body.cosmic .subject-card-meta { color: #9b6574 !important; }
+    body.cosmic .subject-card-emoji { filter: saturate(.9); }
+    body.cosmic .subject-card-arrow { color: #d85c7b !important; }
+    body.cosmic .index-catalog { border-top-color: #d85c7b !important; }
+    body.cosmic .index-catalog-label { color: #a83f5b !important; }
+    body.cosmic .index-catalog-list span {
+      color: #8d4055 !important;
+      border-color: #e5a2b4 !important;
+      background: #ffffff !important;
+      box-shadow: 2px 2px 0 #f0cbd5 !important;
+    }
+    body.cosmic .index-catalog-list span:nth-child(3n+2) { color: #b44763 !important; border-color: #d85c7b !important; background: #fff0f4 !important; }
+    body.cosmic .study-widget {
+      border-color: #d85c7b !important;
+      background: #ffffff !important;
+      box-shadow: 4px 4px 0 #f0b7c6 !important;
+    }
+    body.cosmic .study-widget-kicker,
+    body.cosmic .study-widget-note { color: #9b6574 !important; }
+    body.cosmic .study-widget-title { color: #8d4055 !important; }
+    body.cosmic .study-widget-value { color: #c94f70 !important; }
+    body.cosmic .study-progress-track { border-color: #d85c7b !important; background: #fff0f4 !important; }
+    body.cosmic .study-progress-fill { background: #d85c7b !important; }
+    body.cosmic .study-widget-list div { color: #9b6574 !important; border-bottom-color: #f0cbd5 !important; }
+    body.cosmic .study-widget-list strong { color: #b44763 !important; }
+    body.cosmic .quick-action {
+      border-color: #d85c7b !important;
+      background: #ffffff !important;
+      color: #a83f5b !important;
+      box-shadow: 2px 2px 0 #f0b7c6 !important;
+    }
+    body.cosmic .quick-action:hover { background: #fff0f4 !important; border-color: #b83f60 !important; }
+    body.cosmic .subject-picker-kicker { color: #c94f70 !important; }
+    body.cosmic #subject-empty,
+    body.cosmic #quiz-panel > div:first-child,
+    body.cosmic #quiz-panel > div:nth-child(2),
+    body.cosmic #result-box,
+    body.cosmic #result-explain,
+    body.cosmic .book-detail-panel,
+    body.cosmic .notes-table-wrap {
+      border-color: #d85c7b !important;
+      box-shadow: 4px 4px 0 #f0b7c6 !important;
+      background: #ffffff !important;
+    }
+    body.cosmic .option-btn { border-color: #e5a2b4 !important; box-shadow: 2px 2px 0 #f0cbd5 !important; }
+    body.cosmic .option-btn:hover,
+    body.cosmic .option-btn.selected { background: #fff0f4 !important; border-color: #d85c7b !important; }
+    body.cosmic #submit-btn,
+    body.cosmic #wrong-practice-all,
+    body.cosmic #pwd-btn { border-color: #d85c7b !important; background: #d85c7b !important; color: #ffffff !important; box-shadow: 3px 3px 0 #a83f5b !important; }
+    body.cosmic #submit-btn:hover,
+    body.cosmic #wrong-practice-all:hover,
+    body.cosmic #pwd-btn:hover { background: #c94f70 !important; }
+    body.cosmic #login-layer { background: #fff3f7 !important; background-image: inherit !important; }
+    body.cosmic #login-layer > div { border-color: #d85c7b !important; box-shadow: 6px 6px 0 #f0b7c6 !important; background: #ffffff !important; }
+    @media (max-width: 760px) {
+      body.cosmic .nav-card,
+      body.cosmic .subject-card,
+      body.cosmic .study-widget { box-shadow: 4px 4px 0 #f0b7c6 !important; }
+    }
+
     /* ===== 读书笔记库：画册封面 + 索引表 ===== */
     .reading-library { padding-bottom: 40px; }
     .reading-library-head { border-bottom: 1px solid rgba(56,62,66,.16); padding-bottom: 18px; }
